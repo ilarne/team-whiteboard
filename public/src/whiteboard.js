@@ -23,4 +23,24 @@ Whiteboard.prototype.stopDrawing = function() {
   this.painting = false;
 }
 
+Whiteboard.prototype.redraw = function() {
+  this.context.lineJoin = "round";
+  this.context.lineWidth = 5;
+
+  for (var i=0; i < this.clickX.length; i++) {
+    this.context.beginPath();
+
+    if (this.clickDrag[i] && i) {
+      this.context.moveTo(this.clickX[i-1], this.clickY[i-1]);
+    } else {
+      this.context.moveTo(this.clickX[i]-1, this.clickY[i]);
+    }
+
+    this.context.lineTo(this.clickX[i], this.clickY[i]);
+    this.context.closePath();
+    this.context.strokeStyle = this.colour;
+    this.context.stroke();
+  }
+}
+
 module.exports = Whiteboard;
