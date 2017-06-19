@@ -26,7 +26,7 @@ describe('Canvas draws to page', function() {
     context.clear();
   });
 
-  it('draws based on user co-ordinates', function() {
+  it('redraw method draws based on user co-ordinates', function() {
     var context = document.getElementById('whiteboard').getContext('2d');
 
     whiteboard.clickX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

@@ -15,12 +15,21 @@ Whiteboard.prototype.addClick = function(x, y, drag) {
   this.clickDrag.push(drag)
 }
 
-Whiteboard.prototype.startDrawing = function() {
+Whiteboard.prototype.startDrawing = function(e, board) {
   this.painting = true;
+  this.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, false);
+  this.redraw();
 }
 
 Whiteboard.prototype.stopDrawing = function() {
   this.painting = false;
+}
+
+Whiteboard.prototype.keepDrawing = function(e, board) {
+  if (this.painting) {
+    this.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, true);
+    this.redraw();
+  }
 }
 
 Whiteboard.prototype.redraw = function() {

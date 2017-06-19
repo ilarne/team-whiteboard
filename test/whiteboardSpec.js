@@ -5,14 +5,21 @@ const Whiteboard = require('../public/src/whiteboard.js');
 
 describe('Whiteboard', function() {
   var whiteboard;
+  var fakeElement = {pageX: 3, pageY: 3};
+  var fakeBoard = {offsetLeft: 2, offsetTop: 2};
+  var fakeCanvas = {
+    lineJoin: 'round', strokeStyle: 'black', lineWidth: 5,
+    beginPath: function() {}, moveTo: () => {}, lineTo: function() {},
+    closePath: function() {}, stroke: function() {}
+  }
 
   beforeEach(function() {
-    whiteboard = new Whiteboard('a canvas');
+    whiteboard = new Whiteboard(fakeCanvas);
   })
 
   describe('Initialisation', function() {
     it('has a context variable', function() {
-      expect(whiteboard.context).equal('a canvas');
+      expect(whiteboard.context).equal(fakeCanvas);
     })
 
     it('has an empty x-axis array of clicks', function() {
@@ -55,14 +62,14 @@ describe('Whiteboard', function() {
 
   describe('#startDrawing', function() {
     it('sets the boolean value "painting" to true', function() {
-      whiteboard.startDrawing();
+      whiteboard.startDrawing(fakeElement, fakeBoard);
       expect(whiteboard.painting).equal(true);
     })
   })
 
   describe('#stopDrawing', function() {
     it('sets the boolean value from true to false with "painting"', function() {
-      whiteboard.startDrawing();
+      whiteboard.startDrawing(fakeElement, fakeBoard);
       whiteboard.stopDrawing();
       expect(whiteboard.painting).equal(false);
     })
