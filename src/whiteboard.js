@@ -1,3 +1,5 @@
+'use strict';
+
 function Whiteboard() {
   this.painting = false;
   this.clickX = new Array();
