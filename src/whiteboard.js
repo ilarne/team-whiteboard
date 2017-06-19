@@ -18,4 +18,8 @@ Whiteboard.prototype.startDrawing = function() {
   this.painting = true;
 }
 
+Whiteboard.prototype.stopDrawing = function() {
+  this.painting = false;
+}
+
 module.exports = Whiteboard;

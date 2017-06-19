@@ -9,10 +9,6 @@ describe('Whiteboard', function() {
     whiteboard = new Whiteboard();
   })
 
-  it('should be defined', function() {
-    expect(Whiteboard).isDefined;
-  })
-
   describe('Initialisation', function() {
 
     it('has an empty x-axis array of clicks', function() {
@@ -60,4 +56,12 @@ describe('Whiteboard', function() {
       expect(whiteboard.painting).equal(true)
     });
   });
+
+  describe('#stopDrawing', function() {
+    it('sets the boolean value from true to false with "painting"', function() {
+      whiteboard.startDrawing();
+      whiteboard.stopDrawing();
+      expect(whiteboard.painting).equal(false)
+    })
+  })
 });
