@@ -53,4 +53,11 @@ describe('Whiteboard', function() {
       expect(whiteboard.clickDrag[0]).equal(true)
     });
   });
+
+  describe('#startDrawing', function() {
+    it('sets the boolean value "painting" to true', function() {
+      whiteboard.startDrawing();
+      expect(whiteboard.painting).equal(true)
+    });
+  });
 });

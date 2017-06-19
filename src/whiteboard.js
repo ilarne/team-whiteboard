@@ -14,4 +14,8 @@ Whiteboard.prototype.addClick = function(x, y, drag) {
   this.clickDrag.push(drag)
 }
 
+Whiteboard.prototype.startDrawing = function() {
+  this.painting = true;
+}
+
 module.exports = Whiteboard;
