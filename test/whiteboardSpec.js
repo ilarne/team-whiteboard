@@ -36,4 +36,21 @@ describe('Whiteboard', function() {
     })
 
   });
+
+  describe('#addClick', function() {
+    it('adds clicks to the x-axis', function() {
+      whiteboard.addClick(1)
+      expect(whiteboard.clickX[0]).equal(1)
+    });
+
+    it('adds clicks to the y-axis', function() {
+      whiteboard.addClick(1, 2)
+      expect(whiteboard.clickY[0]).equal(2)
+    });
+
+    it('records whether it is a dragged click', function() {
+      whiteboard.addClick(1, 2, true)
+      expect(whiteboard.clickDrag[0]).equal(true)
+    });
+  });
 });
