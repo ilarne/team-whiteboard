@@ -1,5 +1,6 @@
 const chai = require('chai')
 const expect = chai.expect;
+const assert = chai.assert;
 const Whiteboard = require('../src/whiteboard.js');
 
 describe('Whiteboard', function() {
@@ -10,6 +11,9 @@ describe('Whiteboard', function() {
   })
 
   describe('Initialisation', function() {
+    // it('has a context variable', function() {
+    //   assert.isDefined(whiteboard.context);
+    // })
 
     it('has an empty x-axis array of clicks', function() {
       expect(whiteboard.clickX).empty;
@@ -30,38 +34,37 @@ describe('Whiteboard', function() {
     it('starts with the colour black', function() {
       expect(whiteboard.colour).equal('#000000');
     })
-
-  });
+  })
 
   describe('#addClick', function() {
     it('adds clicks to the x-axis', function() {
-      whiteboard.addClick(1)
-      expect(whiteboard.clickX[0]).equal(1)
-    });
+      whiteboard.addClick(1);
+      expect(whiteboard.clickX[0]).equal(1);
+    })
 
     it('adds clicks to the y-axis', function() {
-      whiteboard.addClick(1, 2)
-      expect(whiteboard.clickY[0]).equal(2)
-    });
+      whiteboard.addClick(1, 2);
+      expect(whiteboard.clickY[0]).equal(2);
+    })
 
     it('records whether it is a dragged click', function() {
-      whiteboard.addClick(1, 2, true)
-      expect(whiteboard.clickDrag[0]).equal(true)
-    });
-  });
+      whiteboard.addClick(1, 2, true);
+      expect(whiteboard.clickDrag[0]).equal(true);
+    })
+  })
 
   describe('#startDrawing', function() {
     it('sets the boolean value "painting" to true', function() {
       whiteboard.startDrawing();
-      expect(whiteboard.painting).equal(true)
-    });
-  });
+      expect(whiteboard.painting).equal(true);
+    })
+  })
 
   describe('#stopDrawing', function() {
     it('sets the boolean value from true to false with "painting"', function() {
       whiteboard.startDrawing();
       whiteboard.stopDrawing();
-      expect(whiteboard.painting).equal(false)
+      expect(whiteboard.painting).equal(false);
     })
   })
-});
+})

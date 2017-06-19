@@ -1,6 +1,7 @@
 'use strict';
 
 function Whiteboard() {
+  // this.context = document.getElementById('whiteboard').getContext('2d');
   this.painting = false;
   this.clickX = new Array();
   this.clickY = new Array();
