@@ -1,7 +1,7 @@
 const chai = require('chai')
 const expect = chai.expect;
 const assert = chai.assert;
-const Whiteboard = require('../src/whiteboard.js');
+const Whiteboard = require('../public/src/whiteboard.js');
 
 describe('Whiteboard', function() {
   var whiteboard;

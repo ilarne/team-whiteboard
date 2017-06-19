@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-// const whiteboard = require('whiteboard.js')
+
 app.use(express.static('public'))
 
 app.get('/', function (req, res) {
