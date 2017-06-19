@@ -18,7 +18,8 @@
   "homepage": "https://github.com/ilarne/team-whiteboard#readme",
   "devDependencies": {
     "chai": "^4.0.2",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "express": "^4.15.3"

@@ -7,13 +7,13 @@ describe('Whiteboard', function() {
   var whiteboard;
 
   beforeEach(function() {
-    whiteboard = new Whiteboard();
+    whiteboard = new Whiteboard('a canvas');
   })
 
   describe('Initialisation', function() {
-    // it('has a context variable', function() {
-    //   assert.isDefined(whiteboard.context);
-    // })
+    it('has a context variable', function() {
+      expect(whiteboard.context).equal('a canvas');
+    })
 
     it('has an empty x-axis array of clicks', function() {
       expect(whiteboard.clickX).empty;
