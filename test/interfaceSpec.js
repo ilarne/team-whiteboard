@@ -9,6 +9,6 @@ before(function(done){
 
 describe('User visits page', function() {
   it('displays test text', function() {
-      assert.equal(browser.text('h1'), "Aaaaaah it's working!");
+    assert.equal(browser.text('h1'), "Aaaaaah it's working!");
   })
 })

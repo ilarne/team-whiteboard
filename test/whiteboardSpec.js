@@ -9,8 +9,8 @@ describe('Whiteboard', function() {
   var fakeBoard = {offsetLeft: 2, offsetTop: 2};
   var fakeCanvas = {
     lineJoin: 'round', strokeStyle: 'black', lineWidth: 5,
-    beginPath: function() {}, moveTo: () => {}, lineTo: function() {},
-    closePath: function() {}, stroke: function() {}
+    beginPath: () => {}, moveTo: () => {}, lineTo: () => {},
+    closePath: () => {}, stroke: () => {}
   }
 
   beforeEach(function() {
@@ -68,6 +68,7 @@ describe('Whiteboard', function() {
   })
 
   describe('#stopDrawing', function() {
+
     it('sets the boolean value from true to false with "painting"', function() {
       whiteboard.startDrawing(fakeElement, fakeBoard);
       whiteboard.stopDrawing();
