@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,12 @@
     "jsdom": "^11.0.0",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
+    "should": "^11.2.1",
     "zombie": "^5.0.5"
   },
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3"
   }
 }
