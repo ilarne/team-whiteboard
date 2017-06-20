@@ -16,3 +16,15 @@ board.addEventListener('mouseup', function(element) {
 board.addEventListener('mouseleave', function(element) {
   whiteboard.stopDrawing();
 })
+
+document.addEventListener("DOMContentLoaded", function () {
+  var socket = io();
+  board.addEventListener("mousemove", function() {
+    socket.emit('paint', whiteboard.storedValue());
+    // whiteboard.storedValue();
+    // return false;
+  });
+  socket.on('paint', function(thing) {
+  whiteboard.drawUpdate(thing)
+  });
+});
