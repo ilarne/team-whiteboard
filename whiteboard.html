@@ -9,6 +9,10 @@
   <body>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
     <h1>Aaaaaah it's working!</h1>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+    </script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/eventListeners.js'></script>
   </body>
