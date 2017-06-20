@@ -53,15 +53,15 @@ Whiteboard.prototype.redraw = function() {
 }
 
 Whiteboard.prototype.drawUpdate = function(values) {
-  this.clickX = values[0]
-  this.clickY = values[1]
-  this.clickDrag = values[2]
+  this.clickX = values.clickX
+  this.clickY = values.clickY
+  this.clickDrag = values.clickDrag
 
   this.redraw();
 }
 
 Whiteboard.prototype.storedValue = function() {
-  return [this.clickX, this.clickY, this.clickDrag];
+  return {clickX: this.clickX, clickY: this.clickY, clickDrag: this.clickDrag};
 }
 
 module.exports = Whiteboard;

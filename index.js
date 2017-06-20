@@ -17,6 +17,8 @@ var boardSchema = new Schema({
   clickDrag: Array,
 })
 
+// var currentDrawing = require('./public/src/eventListeners.js')
+
 var Board = mongoose.model('Board', boardSchema);
 var currentBoard = new Board;
 
@@ -32,7 +34,13 @@ app.engine('.html', require('ejs').renderFile);
 app.use(express.static('public'))
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/whiteboard.html')
+  res.render(__dirname + '/whiteboard.html')
+})
+
+app.get('/test', function (req, res) {
+  res.render(__dirname + '/whiteboard.html', {
+    name: req.query.name
+  })
 })
 
 io.on('connection', function(socket){
