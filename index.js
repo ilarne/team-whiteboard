@@ -1,30 +1,29 @@
-const express = require('express')
+const express = require('express');
 var router = express.Router();
-const app = express()
-
+const app = express();
+var mongoose = require('mongoose');
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/testDB');
+
+var Schema = mongoose.Schema;
+mongoose.connect('localhost:27017/whiteboardDB')
+var db = mongoose.connection;
+
+var boardSchema = new Schema({
+  clickX: Array,
+  clickY: Array,
+  clickDrag: Array,
+})
+
+var Board = mongoose.model('Board', boardSchema);
+var currentBoard = new Board;
+
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({extended: true}));
+
+db.on('error', console.error.bind(console, 'connection error:'));
 
 app.engine('.html', require('ejs').renderFile);
-
-// Make our db accessible to our router
-app.use(function(req, res, next){
-  req.db = db;
-  next();
-});
-
-/* GET Userlist page. */
-app.get('/userlist', function(req, res) {
-  var db = req.db;
-  var collection = db.get('usercollection');
-  collection.find({},{},function(e, docs){}).then( function(info) {
-    res.render('testPage.html', {
-      bailey: info[0].name,
-      tim: info[1].name
-    });
-  })
-});
 
 app.use(express.static('public'))
 
@@ -33,5 +32,7 @@ app.get('/', function (req, res) {
 })
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+  console.log('App listening on port 3000!')
 })
+
+module.exports = currentBoard;

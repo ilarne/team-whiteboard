@@ -11,6 +11,7 @@ board.addEventListener('mousemove', function(element) {
 
 board.addEventListener('mouseup', function(element) {
   whiteboard.stopDrawing();
+  currentBoard
 })
 
 board.addEventListener('mouseleave', function(element) {
