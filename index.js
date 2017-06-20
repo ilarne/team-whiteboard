@@ -16,6 +16,16 @@ io.on('connection', function(socket){
   });
 });
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('connection name', function(user){
+    io.sockets.emit('new user', user.name + " has joined.")
+  })
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  })
+})
+
 http.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })

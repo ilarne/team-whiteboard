@@ -53,24 +53,11 @@ Whiteboard.prototype.redraw = function() {
 }
 
 Whiteboard.prototype.drawUpdate = function(values) {
-  var x = values[0]
-  var y = values[1]
-  var drag = values[2]
-  // var colour = values[3]
-  this.context.lineJoin = "round";
-  this.context.lineWidth = 5;
-  for (var i=0; i < x.length; i++) {
-    this.context.beginPath();
-    if (drag[i] && i) {
-      this.context.moveTo(x[i-1], y[i-1]);
-    } else {
-      this.context.moveTo(x[i]-1, y[i]);
-    }
-    this.context.lineTo(x[i], y[i]);
-    this.context.closePath();
-    // this.context.strokeStyle = colour[i];
-    this.context.stroke();
-  }
+  this.clickX = values[0]
+  this.clickY = values[1]
+  this.clickDrag = values[2]
+
+  this.redraw();
 }
 
 Whiteboard.prototype.storedValue = function() {
