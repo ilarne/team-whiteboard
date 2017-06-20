@@ -1,8 +1,11 @@
 const express = require('express');
-var router = express.Router();
+const router = express.Router();
 const app = express();
-var mongoose = require('mongoose');
-var mongo = require('mongodb');
+const mongoose = require('mongoose');
+const mongo = require('mongodb');
+
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 var Schema = mongoose.Schema;
 mongoose.connect('localhost:27017/whiteboardDB')
@@ -18,6 +21,7 @@ var Board = mongoose.model('Board', boardSchema);
 var currentBoard = new Board;
 
 var bodyParser = require('body-parser')
+
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -31,8 +35,22 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/whiteboard.html')
 })
 
-app.listen(3000, function () {
-  console.log('App listening on port 3000!')
+io.on('connection', function(socket){
+  socket.on('paint', function(msg){
+    io.emit('paint', msg);
+  })
 })
 
-module.exports = currentBoard;
+io.on('connection', function(socket) {
+  console.log('a user connected');
+  socket.on('connection name', function(user) {
+    io.sockets.emit('new user', user.name + " has joined.")
+  })
+  socket.on('disconnect', function() {
+    console.log('user disconnected');
+  })
+})
+
+http.listen(3000, function() {
+  console.log('Whiteboard App listening on port 3000!')
+})

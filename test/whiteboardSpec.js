@@ -68,7 +68,6 @@ describe('Whiteboard', function() {
   })
 
   describe('#stopDrawing', function() {
-
     it('sets the boolean value from true to false with "painting"', function() {
       whiteboard.startDrawing(fakeElement, fakeBoard);
       whiteboard.stopDrawing();
