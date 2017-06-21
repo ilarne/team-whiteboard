@@ -19,7 +19,7 @@ Whiteboard.prototype.stopDrawing = function() {
 
 Whiteboard.prototype.keepDrawing = function(e, board) {
   if (this.painting) {
-    this.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, true);
+    this.currentStroke.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, true);
     this.redraw();
   }
 }

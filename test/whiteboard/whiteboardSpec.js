@@ -41,6 +41,14 @@ describe('Whiteboard', function() {
     })
   })
 
+  describe('#keepDrawing', function() {
+    it('adds to currentStroke object', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      whiteboard.keepDrawing(fakeElement, fakeBoard);
+      expect(whiteboard.currentStroke.clickX.length).equal(2);
+    })
+  })
+
   describe('#stopDrawing', function() {
     it('sets the boolean value from true to false with "painting"', function() {
       whiteboard.startDrawing(fakeElement, fakeBoard);
