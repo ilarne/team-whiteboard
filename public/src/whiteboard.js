@@ -16,8 +16,9 @@ Whiteboard.prototype.addClick = function(x, y, drag) {
 }
 
 Whiteboard.prototype.startDrawing = function(e, board) {
+  this.currentStroke = new Stroke();
   this.painting = true;
-  this.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, false);
+  this.currentStroke.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, false);
   this.redraw();
 }
 
