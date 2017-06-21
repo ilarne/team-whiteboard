@@ -20,20 +20,8 @@ describe('Whiteboard', function() {
       expect(whiteboard.context).equal(fakeCanvas);
     })
 
-    it('has an empty x-axis array of clicks', function() {
-      expect(whiteboard.clickX).empty;
-    })
-
-    it('has an empty y-axis array of clicks', function() {
-      expect(whiteboard.clickY).empty;
-    })
-
     it('starts painting as false', function() {
       expect(whiteboard.painting).equal(false);
-    })
-
-    it('has an empty clickDrag array', function() {
-      expect(whiteboard.clickDrag).empty;
     })
 
     it('starts with the colour black', function() {
@@ -41,27 +29,15 @@ describe('Whiteboard', function() {
     })
   })
 
-  describe('#addClick', function() {
-    it('adds clicks to the x-axis', function() {
-      whiteboard.addClick(1);
-      expect(whiteboard.clickX[0]).equal(1);
-    })
-
-    it('adds clicks to the y-axis', function() {
-      whiteboard.addClick(1, 2);
-      expect(whiteboard.clickY[0]).equal(2);
-    })
-
-    it('records whether it is a dragged click', function() {
-      whiteboard.addClick(1, 2, true);
-      expect(whiteboard.clickDrag[0]).equal(true);
-    })
-  })
-
   describe('#startDrawing', function() {
     it('sets the boolean value "painting" to true', function() {
       whiteboard.startDrawing(fakeElement, fakeBoard);
       expect(whiteboard.painting).equal(true);
+    })
+
+    it('instansiates a new Stroke when called', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      expect(whiteboard.currentStroke.clickX[0]).equal(1);
     })
   })
 
