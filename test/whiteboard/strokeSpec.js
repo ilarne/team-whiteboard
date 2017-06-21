@@ -1,24 +1,23 @@
-
 describe('Stroke', function() {
   var stroke;
 
-beforeEach(function() {
-  stroke = new Stroke();
-})
-
-describe('Initialisation', function(){
-  it('starts with empty clickX array', function() {
-    expect(stroke.clickX).empty;
+  beforeEach(function() {
+    stroke = new Stroke();
   })
 
-  it('starts with empty clickY array', function() {
-    expect(stroke.clickY).empty;
-  })
+  describe('Initialisation', function(){
+    it('starts with empty clickX array', function() {
+      expect(stroke.clickX).empty;
+    })
 
-  it('starts with empty clickDrag array', function() {
-    expect(stroke.clickDrag).empty;
+    it('starts with empty clickY array', function() {
+      expect(stroke.clickY).empty;
+    })
+
+    it('starts with empty clickDrag array', function() {
+      expect(stroke.clickDrag).empty;
+    })
   })
-})
 
   describe('#addClick', function() {
     it('adds clicks to the x-axis', function() {
@@ -36,5 +35,4 @@ describe('Initialisation', function(){
       expect(stroke.clickDrag[0]).equal(true);
     })
   })
-
 })
