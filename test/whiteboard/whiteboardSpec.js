@@ -72,4 +72,11 @@ describe('Whiteboard', function() {
       expect(whiteboard.currentStroke).equal(null);
     })
   })
+
+  describe('#changeColour', function() {
+    it('changes the current stroke colour', function() {
+      whiteboard.changeColour('#00FF00');
+      expect(whiteboard.colour).equal('#00FF00');
+    })
+  })
 })

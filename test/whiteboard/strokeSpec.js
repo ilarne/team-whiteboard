@@ -1,8 +1,10 @@
 describe('Stroke', function() {
   var stroke;
+  var greenStroke;
 
   beforeEach(function() {
     stroke = new Stroke();
+    greenStroke = new Stroke('#00FF00');
   })
 
   describe('Initialisation', function(){
@@ -16,6 +18,14 @@ describe('Stroke', function() {
 
     it('starts with empty clickDrag array', function() {
       expect(stroke.clickDrag).empty;
+    })
+
+    it('can receive a new starting colour', function() {
+      expect(stroke.colour).equal('#000000')
+    })
+
+    it('can receive a new starting colour', function() {
+      expect(greenStroke.colour).equal('#00FF00')
     })
   })
 

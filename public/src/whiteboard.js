@@ -9,10 +9,14 @@ function Whiteboard(context) {
 }
 
 Whiteboard.prototype.startDrawing = function(e, board) {
-  this.currentStroke = new Stroke();
+  this.currentStroke = new Stroke(this.colour);
   this.painting = true;
   this.currentStroke.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, false);
   this.redraw();
+}
+
+Whiteboard.prototype.changeColour = function(colour) {
+  this.colour = colour;
 }
 
 Whiteboard.prototype.stopDrawing = function() {
@@ -49,7 +53,7 @@ Whiteboard.prototype.redraw = function(stroke) {
 
       this.context.lineTo(stroke.clickX[i], stroke.clickY[i]);
       this.context.closePath();
-      this.context.strokeStyle = this.colour;
+      this.context.strokeStyle = stroke.colour;
       this.context.stroke();
     }
   }
