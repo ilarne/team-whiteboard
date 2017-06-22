@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
 const app = express();
-const mongoose = require('mongoose');
-const mongo = require('mongodb');
-
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const port = process.env.PORT || 3000;
+
+const mongoose = require('mongoose');
+const mongo = require('mongodb');
 
 var Schema = mongoose.Schema;
 mongoose.connect('localhost:27017/whiteboardDB')
@@ -51,6 +51,6 @@ io.on('connection', function(socket) {
   })
 })
 
-http.listen(3000, function() {
+http.listen(port, function() {
   console.log('Whiteboard App listening on port 3000!')
 })

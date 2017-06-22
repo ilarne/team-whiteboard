@@ -1,7 +1,5 @@
-const chai = require('chai')
 const expect = chai.expect;
 const assert = chai.assert;
-const Whiteboard = require('../public/src/whiteboard.js');
 
 describe('Whiteboard', function() {
   var whiteboard;
@@ -22,48 +20,36 @@ describe('Whiteboard', function() {
       expect(whiteboard.context).equal(fakeCanvas);
     })
 
-    it('has an empty x-axis array of clicks', function() {
-      expect(whiteboard.clickX).empty;
-    })
-
-    it('has an empty y-axis array of clicks', function() {
-      expect(whiteboard.clickY).empty;
-    })
-
     it('starts painting as false', function() {
       expect(whiteboard.painting).equal(false);
-    })
-
-    it('has an empty clickDrag array', function() {
-      expect(whiteboard.clickDrag).empty;
     })
 
     it('starts with the colour black', function() {
       expect(whiteboard.colour).equal('#000000');
     })
-  })
 
-  describe('#addClick', function() {
-    it('adds clicks to the x-axis', function() {
-      whiteboard.addClick(1);
-      expect(whiteboard.clickX[0]).equal(1);
-    })
-
-    it('adds clicks to the y-axis', function() {
-      whiteboard.addClick(1, 2);
-      expect(whiteboard.clickY[0]).equal(2);
-    })
-
-    it('records whether it is a dragged click', function() {
-      whiteboard.addClick(1, 2, true);
-      expect(whiteboard.clickDrag[0]).equal(true);
-    })
+    it('starts with an empty array of strokes', function() {
+      expect(whiteboard.strokes).empty;
+    });
   })
 
   describe('#startDrawing', function() {
     it('sets the boolean value "painting" to true', function() {
       whiteboard.startDrawing(fakeElement, fakeBoard);
       expect(whiteboard.painting).equal(true);
+    })
+
+    it('instansiates a new Stroke when called', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      expect(whiteboard.currentStroke.clickX[0]).equal(1);
+    })
+  })
+
+  describe('#keepDrawing', function() {
+    it('adds to currentStroke object', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      whiteboard.keepDrawing(fakeElement, fakeBoard);
+      expect(whiteboard.currentStroke.clickX.length).equal(2);
     })
   })
 
@@ -72,6 +58,18 @@ describe('Whiteboard', function() {
       whiteboard.startDrawing(fakeElement, fakeBoard);
       whiteboard.stopDrawing();
       expect(whiteboard.painting).equal(false);
+    })
+
+    it('pushes a stroke object into the strokes array', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      whiteboard.stopDrawing();
+      expect(whiteboard.strokes.length).equal(1)
+    });
+
+    it('deletes currentStroke after being pushed into strokes', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      whiteboard.stopDrawing();
+      expect(whiteboard.currentStroke).equal(null);
     })
   })
 })
