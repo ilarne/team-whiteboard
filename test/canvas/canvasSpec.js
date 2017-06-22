@@ -29,9 +29,10 @@ describe('Canvas draws to page', function() {
 
   it('redraw method draws based on user co-ordinates', function() {
     // Add clicks as if user clicked
-    whiteboard.clickX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    whiteboard.clickY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    whiteboard.clickDrag = [false, true, true, true, true, true, true, true, true, false];
+    whiteboard.currentStroke = { clickX: [], clickY: [], clickDrag: [] }
+    whiteboard.currentStroke.clickX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    whiteboard.currentStroke.clickY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    whiteboard.currentStroke.clickDrag = [false, true, true, true, true, true, true, true, true, false];
 
     // Call the draw function
     whiteboard.redraw();
@@ -42,4 +43,10 @@ describe('Canvas draws to page', function() {
     // clear the stack
     whiteboard.context.clear();
   });
+
+  it('the canvas does not display any strokes if the current stroke is null', function() {
+    whiteboard.redraw(null);
+    var hash = whiteboard.context.hash();
+    expect(whiteboard.context.hash()).equal('e1379074ccd5bdcba17e9c3db5d92e8b'); // test passes
+  })
 })
