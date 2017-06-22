@@ -4,6 +4,7 @@ function Whiteboard(context) {
   this.context = context;
   this.painting = false;
   this.colour = "#000000"
+  this.strokes = [];
 }
 
 Whiteboard.prototype.startDrawing = function(e, board) {
@@ -15,6 +16,7 @@ Whiteboard.prototype.startDrawing = function(e, board) {
 
 Whiteboard.prototype.stopDrawing = function() {
   this.painting = false;
+  this.strokes.push(this.currentStroke);
 }
 
 Whiteboard.prototype.keepDrawing = function(e, board) {

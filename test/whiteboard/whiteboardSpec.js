@@ -27,6 +27,10 @@ describe('Whiteboard', function() {
     it('starts with the colour black', function() {
       expect(whiteboard.colour).equal('#000000');
     })
+
+    it('starts with an empty array of strokes', function() {
+      expect(whiteboard.strokes).empty;
+    });
   })
 
   describe('#startDrawing', function() {
@@ -55,5 +59,11 @@ describe('Whiteboard', function() {
       whiteboard.stopDrawing();
       expect(whiteboard.painting).equal(false);
     })
+
+    it('pushes a stroke object into the strokes array', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      whiteboard.stopDrawing();
+      expect(whiteboard.strokes.length).equal(1)
+    });
   })
 })
