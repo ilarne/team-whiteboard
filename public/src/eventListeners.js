@@ -12,7 +12,6 @@ board.addEventListener('mousemove', function(element) {
 board.addEventListener('mouseup', function(element) {
   $.post('/newstroke', {clickX: whiteboard.currentStroke.clickX,
                         clickY: whiteboard.currentStroke.clickY,
-                        clickDrag: whiteboard.currentStroke.clickDrag,
                         colour: whiteboard.currentStroke.colour,
                         fontSize: whiteboard.currentStroke.fontSize})
 

@@ -16,10 +16,6 @@ describe('Stroke', function() {
       expect(stroke.clickY).empty;
     })
 
-    it('starts with empty clickDrag array', function() {
-      expect(stroke.clickDrag).empty;
-    })
-
     it('has a default starting colour', function() {
       expect(stroke.colour).equal('#000000')
     })
@@ -46,11 +42,6 @@ describe('Stroke', function() {
     it('adds clicks to the y-axis', function() {
       stroke.addClick(1, 2);
       expect(stroke.clickY[0]).equal(2);
-    })
-
-    it('records whether it is a dragged click', function() {
-      stroke.addClick(1, 2, true);
-      expect(stroke.clickDrag[0]).equal(true);
     })
   })
 })
