@@ -20,9 +20,9 @@ board.addEventListener('mouseleave', function(element) {
 document.addEventListener("DOMContentLoaded", function () {
   var socket = io();
   board.addEventListener("mousemove", function() {
-    socket.emit('paint', whiteboard.storedValue());
+    socket.emit('paint', whiteboard.currentStroke);
   });
-  socket.on('paint', function(thing) {
-  whiteboard.drawUpdate(thing)
+  socket.on('paint', function(stroke) {
+  whiteboard.redraw(stroke)
   });
 });

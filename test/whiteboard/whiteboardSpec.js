@@ -65,5 +65,11 @@ describe('Whiteboard', function() {
       whiteboard.stopDrawing();
       expect(whiteboard.strokes.length).equal(1)
     });
+
+    it('deletes currentStroke after being pushed into strokes', function() {
+      whiteboard.startDrawing(fakeElement, fakeBoard);
+      whiteboard.stopDrawing();
+      expect(whiteboard.currentStroke).equal(null);
+    })
   })
 })
