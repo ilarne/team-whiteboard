@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
   $.get('/loadstroke')
     .done(function(data) {
-
+      data.forEach(function(stroke) {
+        whiteboard.redraw(stroke)
+      })
     })
 })
