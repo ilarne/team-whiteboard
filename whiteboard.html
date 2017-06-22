@@ -9,7 +9,7 @@
     <script>window.module = window.module || {}</script>
   </head>
   <body>
-    <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
+    <canvas class='whiteboard' id='whiteboard'></canvas>
 
     <div class="colour-button" id="red" data-value="#FF0000"></div>
     <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
@@ -21,7 +21,7 @@
     <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
 
     Marker Size: <input type="range" id="font" value="5" min="1" max="50">
-    
+
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>

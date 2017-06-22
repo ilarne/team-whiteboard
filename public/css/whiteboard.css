@@ -1,8 +1,10 @@
-body {
+html, body {
   cursor: url(/images/cursors/blackmarker.png), pointer;
+  overflow: hidden;
+  background-color: #eee;
 }
 
 .whiteboard {
-  border:1px solid black;
   float: left;
+  background-color: #fff;
 }
