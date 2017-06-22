@@ -4,14 +4,24 @@
     <meta charset='utf-8'>
     <title>Team Whiteboard App</title>
     <link rel="stylesheet" type="text/css" href="css/whiteboard.css">
+    <link rel="stylesheet" type="text/css" href="css/palette.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>window.module = window.module || {}</script>
   </head>
   <body>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
-    <h1>Aaaaaah it's working!</h1>
+    <div class="colour-button" data-value="#FF0000"></div>
+    <div class="colour-button" data-value="#FFFF00"></div>
+    <div class="colour-button" data-value="#0000FF"></div>
+    <div class="colour-button" data-value="#FF9900"></div>
+    <div class="colour-button" data-value="#00CC00"></div>
+    <div class="colour-button" data-value="#660099"></div>
+    <div class="colour-button" data-value="#000000"></div>
+    <div class="colour-button" data-value="#FFFFFF"></div>
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
     <script type='text/javascript' src='/src/eventListeners.js'></script>
+    <script type='text/javascript' src='/src/paletteEventListeners.js'></script>
   </body>
 </html>
