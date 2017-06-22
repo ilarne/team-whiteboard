@@ -15,6 +15,7 @@ var strokeSchema = new Schema({
   clickX: Array,
   clickY: Array,
   clickDrag: Array,
+  colour: String
 })
 
 var Stroke = mongoose.model('Stroke', strokeSchema);
@@ -36,7 +37,8 @@ app.post('/newstroke', function(req, res) {
   var stroke = new Stroke({
     clickX: req.body.clickX,
     clickY: req.body.clickY,
-    clickDrag: req.body.clickDrag
+    clickDrag: req.body.clickDrag,
+    colour: req.body.colour
   });
   stroke.save();
 })
