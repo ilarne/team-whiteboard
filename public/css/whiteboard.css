@@ -1,3 +1,7 @@
+body {
+  cursor: url(/images/cursors/blackmarker.png), pointer;
+}
+
 .whiteboard {
   border:1px solid black;
   float: left;
