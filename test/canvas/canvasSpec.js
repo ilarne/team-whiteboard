@@ -37,7 +37,7 @@ describe('Canvas draws to page', function() {
     whiteboard.redraw();
 
     var hash = whiteboard.context.hash();
-    expect(hash).equal('f3d47c6b75864dcc174089e89b4e76ce'); // test passes
+    expect(hash).equal('4d003c32d80a1cc3a1b2fcb0ee14f83d'); // test passes
 
     // clear the stack
     whiteboard.context.clear();
