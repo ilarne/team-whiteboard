@@ -9,10 +9,14 @@ function Whiteboard(context) {
 }
 
 Whiteboard.prototype.startDrawing = function(e, board) {
-  this.currentStroke = new Stroke();
+  this.currentStroke = new Stroke(this.colour);
   this.painting = true;
   this.currentStroke.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, false);
   this.redraw();
+}
+
+Whiteboard.prototype.changeColour = function(colour) {
+  this.colour = colour;
 }
 
 Whiteboard.prototype.stopDrawing = function() {

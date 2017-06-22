@@ -1,7 +1,8 @@
-function Stroke() {
+function Stroke(colour = '#000000') {
   this.clickX = []
   this.clickY = []
   this.clickDrag = []
+  this.colour = colour;
 }
 
 Stroke.prototype.addClick = function(x, y, drag) {
