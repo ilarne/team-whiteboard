@@ -14,7 +14,6 @@ var db = mongoose.connection;
 var strokeSchema = new Schema({
   clickX: Array,
   clickY: Array,
-  clickDrag: Array,
   colour: String,
   fontSize: Number
 })
@@ -38,7 +37,6 @@ app.post('/newstroke', function(req, res) {
   var stroke = new Stroke({
     clickX: req.body.clickX,
     clickY: req.body.clickY,
-    clickDrag: req.body.clickDrag,
     colour: req.body.colour,
     fontSize: req.body.fontSize
   });

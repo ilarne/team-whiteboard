@@ -29,10 +29,9 @@ describe('Canvas draws to page', function() {
 
   it('redraw method draws based on user co-ordinates', function() {
     // Add clicks as if user clicked
-    whiteboard.currentStroke = { clickX: [], clickY: [], clickDrag: [] }
+    whiteboard.currentStroke = { clickX: [], clickY: [] }
     whiteboard.currentStroke.clickX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     whiteboard.currentStroke.clickY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    whiteboard.currentStroke.clickDrag = [false, true, true, true, true, true, true, true, true, false];
 
     // Call the draw function
     whiteboard.redraw();
