@@ -13,7 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
       body.style.cursor = 'url(/images/cursors/' + colour.id + 'marker.png), pointer';
       if (colour.id === 'rubber') {
         body.style.cursor = 'url(/images/cursors/rubbermarker.png) 10 15, auto';
-      } 
+      }
     })
   })
 })
+
+var range = document.getElementById("font");
+
+range.addEventListener("change", function () {
+  var size = range.value;
+  whiteboard.adjustFontSize(size)
+});
