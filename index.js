@@ -41,6 +41,12 @@ app.post('/newstroke', function(req, res) {
   stroke.save();
 })
 
+app.get('/loadstroke', function(req, res) {
+  Stroke.find({}, function(e, data){} ).then( function(data) {
+    res.send(data)
+  })
+})
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);

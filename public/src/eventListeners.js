@@ -10,7 +10,7 @@ board.addEventListener('mousemove', function(element) {
 })
 
 board.addEventListener('mouseup', function(element) {
-  $.post('/newstroke', this.currentStroke)
+  $.post('/newstroke', {clickX: whiteboard.currentStroke.clickX, clickY: whiteboard.currentStroke.clickY, clickDrag: whiteboard.currentStroke.clickDrag})
 
   whiteboard.stopDrawing();
 })
@@ -30,4 +30,11 @@ document.addEventListener("DOMContentLoaded", function() {
   socket.on('paint', function(stroke) {
     whiteboard.redraw(stroke)
   });
+})
+
+document.addEventListener("DOMContentLoaded", function() {
+  $.get('/loadstroke')
+    .done(function(data) {
+
+    })
 })
