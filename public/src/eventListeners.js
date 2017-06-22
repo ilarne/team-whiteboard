@@ -10,6 +10,11 @@ board.addEventListener('mousemove', function(element) {
 })
 
 board.addEventListener('mouseup', function(element) {
+  $.post('/newstroke', {clickX: whiteboard.currentStroke.clickX,
+                        clickY: whiteboard.currentStroke.clickY,
+                        clickDrag: whiteboard.currentStroke.clickDrag,
+                        colour: whiteboard.currentStroke.colour})
+
   whiteboard.stopDrawing();
 })
 
@@ -17,7 +22,7 @@ board.addEventListener('mouseleave', function(element) {
   whiteboard.stopDrawing();
 })
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   var socket = io();
   board.addEventListener("mousemove", function() {
     socket.emit('paint', whiteboard.currentStroke);
@@ -26,6 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
     socket.emit('paint', whiteboard.currentStroke);
   });
   socket.on('paint', function(stroke) {
-  whiteboard.redraw(stroke)
+    whiteboard.redraw(stroke)
   });
-});
+})
+
+document.addEventListener("DOMContentLoaded", function() {
+  $.get('/loadstroke')
+    .done(function(data) {
+      data.forEach(function(stroke) {
+        whiteboard.redraw(stroke)
+      })
+    })
+})

@@ -3,13 +3,13 @@ var io = require('socket.io-client');
 
 var socketURL = 'http://0.0.0.0:3000';
 
-var options = {
+var options ={
   transports: ['websocket'],
-  'force new connection' : true
+  'force new connection': true
 };
 
-var boardUser1 = { 'name' : 'Izzy' }
-var boardUser2 = { 'name' : 'Tim' }
+var boardUser1 = {'name':'Izzy'}
+var boardUser2 = {'name':'Tim'}
 
 describe('Board user connections', function() {
   it('broadcasts a new user to all clients', function(done) {
