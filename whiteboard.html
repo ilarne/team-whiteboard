@@ -4,15 +4,17 @@
     <meta charset='utf-8'>
     <title>Team Whiteboard App</title>
     <link rel="stylesheet" type="text/css" href="css/whiteboard.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>window.module = window.module || {}</script>
   </head>
   <body>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
-    <button type="button" id="red" value="#FF0000">Red</button>
+    <button type="button" class="colour-button" value="#00FF00">Green</button>
+    <button type="button" class="colour-button" value="#FF0000">Red</button>
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
     <script type='text/javascript' src='/src/eventListeners.js'></script>
-      <script type='text/javascript' src='/src/colourEventListeners.js'></script>
+    <script type='text/javascript' src='/src/colourEventListeners.js'></script>
   </body>
 </html>
