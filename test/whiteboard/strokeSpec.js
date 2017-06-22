@@ -4,7 +4,7 @@ describe('Stroke', function() {
 
   beforeEach(function() {
     stroke = new Stroke();
-    greenStroke = new Stroke('#00FF00');
+    bigGreenStroke = new Stroke('#00FF00', 50);
   })
 
   describe('Initialisation', function(){
@@ -20,12 +20,20 @@ describe('Stroke', function() {
       expect(stroke.clickDrag).empty;
     })
 
-    it('can receive a new starting colour', function() {
+    it('has a default starting colour', function() {
       expect(stroke.colour).equal('#000000')
     })
 
     it('can receive a new starting colour', function() {
-      expect(greenStroke.colour).equal('#00FF00')
+      expect(bigGreenStroke.colour).equal('#00FF00')
+    })
+
+    it('has a default starting font size', function() {
+      expect(stroke.fontSize).equal(5)
+    })
+
+    it('can receive a new starting font size', function() {
+      expect(bigGreenStroke.fontSize).equal(50)
     })
   })
 

@@ -28,6 +28,10 @@ describe('Whiteboard', function() {
       expect(whiteboard.colour).equal('#000000');
     })
 
+    it('starts with a default fontSize', function() {
+      expect(whiteboard.fontSize).equal(5);
+    })
+
     it('starts with an empty array of strokes', function() {
       expect(whiteboard.strokes).empty;
     });
@@ -77,6 +81,13 @@ describe('Whiteboard', function() {
     it('changes the current stroke colour', function() {
       whiteboard.changeColour('#00FF00');
       expect(whiteboard.colour).equal('#00FF00');
+    })
+  })
+
+  describe('#adjustFontSize', function() {
+    it('changes the current stroke colour', function() {
+      whiteboard.adjustFontSize(30);
+      expect(whiteboard.fontSize).equal(30);
     })
   })
 })
