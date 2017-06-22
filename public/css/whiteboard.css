@@ -1,5 +1,5 @@
-body, html {
-  cursor: url(/images/redmarker2.png), pointer;
+body {
+  cursor: url(/images/cursors/blackmarker.png), pointer;
 }
 
 .whiteboard {
