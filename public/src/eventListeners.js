@@ -10,6 +10,8 @@ board.addEventListener('mousemove', function(element) {
 })
 
 board.addEventListener('mouseup', function(element) {
+  $.post('/newstroke', this.currentStroke)
+
   whiteboard.stopDrawing();
 })
 

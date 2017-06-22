@@ -18,21 +18,27 @@ var strokeSchema = new Schema({
 })
 
 var Stroke = mongoose.model('Stroke', strokeSchema);
-var currentStroke = new Stroke;
 
 var bodyParser = require('body-parser')
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true}));
 
-db.on('error', console.error.bind(console, 'connection error:'));
-
 app.engine('.html', require('ejs').renderFile);
 
 app.use(express.static('public'))
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
   res.render(__dirname + '/whiteboard.html')
+})
+
+app.post('/newstroke', function(req, res) {
+  var stroke = new Stroke({
+    clickX: req.body.clickX,
+    clickY: req.body.clickY,
+    clickDrag: req.body.clickDrag
+  });
+  stroke.save();
 })
 
 io.on('connection', function(socket){
