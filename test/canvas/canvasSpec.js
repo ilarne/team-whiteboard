@@ -38,7 +38,7 @@ describe('Canvas draws to page', function() {
     whiteboard.redraw();
 
     var hash = whiteboard.context.hash();
-    expect(hash).equal('3a8de8b8452500846a82fe7a6583accb'); // test passes
+    expect(hash).equal('f3d47c6b75864dcc174089e89b4e76ce'); // test passes
 
     // clear the stack
     whiteboard.context.clear();
@@ -47,6 +47,6 @@ describe('Canvas draws to page', function() {
   it('the canvas does not display any strokes if the current stroke is null', function() {
     whiteboard.redraw(null);
     var hash = whiteboard.context.hash();
-    expect(hash).equal('e1379074ccd5bdcba17e9c3db5d92e8b'); // test passes
+    expect(hash).equal('f2e68f183ea7408a9482646352fb3290'); // test passes
   })
 })
