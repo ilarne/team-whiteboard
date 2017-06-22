@@ -11,16 +11,14 @@ var Schema = mongoose.Schema;
 mongoose.connect('localhost:27017/whiteboardDB')
 var db = mongoose.connection;
 
-var boardSchema = new Schema({
+var strokeSchema = new Schema({
   clickX: Array,
   clickY: Array,
   clickDrag: Array,
 })
 
-// var currentDrawing = require('./public/src/eventListeners.js')
-
-var Board = mongoose.model('Board', boardSchema);
-var currentBoard = new Board;
+var Stroke = mongoose.model('Stroke', strokeSchema);
+var currentStroke = new Stroke;
 
 var bodyParser = require('body-parser')
 
@@ -35,12 +33,6 @@ app.use(express.static('public'))
 
 app.get('/', function (req, res) {
   res.render(__dirname + '/whiteboard.html')
-})
-
-app.get('/test', function (req, res) {
-  res.render(__dirname + '/whiteboard.html', {
-    name: req.query.name
-  })
 })
 
 io.on('connection', function(socket){

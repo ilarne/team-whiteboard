@@ -11,22 +11,6 @@ board.addEventListener('mousemove', function(element) {
 
 board.addEventListener('mouseup', function(element) {
   whiteboard.stopDrawing();
-  var testValue = 'this is working';
-
-  $.get( "/test", { name: "John" })
-    .done(function(data) {
-      console.log( "Data Loaded: " + data );
-  });
-
-  // $.ajax({
-  //     type: 'GET',
-  //     url: 'http://localhost:3000/test',
-  //     success: function(data) {
-  //       console.log(data);
-  //     }, error: function (data) {
-  //       alert('failed');
-  //     }
-  //   });
 })
 
 board.addEventListener('mouseleave', function(element) {
