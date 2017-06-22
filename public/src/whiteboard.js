@@ -31,32 +31,28 @@ Whiteboard.prototype.keepDrawing = function(e, board) {
   }
 }
 
-Whiteboard.prototype.redraw = function() {
+Whiteboard.prototype.redraw = function(stroke) {
+  var stroke = stroke || this.currentStroke;
+
   this.context.lineJoin = "round";
   this.context.lineWidth = 5;
 
-  for (var i=0; i < this.currentStroke.clickX.length; i++) {
-    this.context.beginPath();
+  if (stroke !== null) {
+    for (var i=0; i < stroke.clickX.length; i++) {
+      this.context.beginPath();
 
-    if (this.currentStroke.clickDrag[i] && i) {
-      this.context.moveTo(this.currentStroke.clickX[i-1], this.currentStroke.clickY[i-1]);
-    } else {
-      this.context.moveTo(this.currentStroke.clickX[i]-1, this.currentStroke.clickY[i]);
+      if (stroke.clickDrag[i] && i) {
+        this.context.moveTo(stroke.clickX[i-1], stroke.clickY[i-1]);
+      } else {
+        this.context.moveTo(stroke.clickX[i]-1, stroke.clickY[i]);
+      }
+
+      this.context.lineTo(stroke.clickX[i], stroke.clickY[i]);
+      this.context.closePath();
+      this.context.strokeStyle = this.colour;
+      this.context.stroke();
     }
-
-    this.context.lineTo(this.currentStroke.clickX[i], this.currentStroke.clickY[i]);
-    this.context.closePath();
-    this.context.strokeStyle = this.colour;
-    this.context.stroke();
   }
-}
-
-Whiteboard.prototype.drawUpdate = function(values) {
-  this.currentStroke.clickX = values[0]
-  this.currentStroke.clickY = values[1]
-  this.currentStroke.clickDrag = values[2]
-
-  this.redraw();
 }
 
 module.exports = Whiteboard;

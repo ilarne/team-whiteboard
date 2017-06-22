@@ -43,4 +43,10 @@ describe('Canvas draws to page', function() {
     // clear the stack
     whiteboard.context.clear();
   });
+
+  it('the canvas does not display any strokes if the current stroke is null', function() {
+    whiteboard.redraw(null);
+    var hash = whiteboard.context.hash();
+    expect(whiteboard.context.hash()).equal('e1379074ccd5bdcba17e9c3db5d92e8b'); // test passes
+  })
 })

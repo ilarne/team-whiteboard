@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
   board.addEventListener("mousemove", function() {
     socket.emit('paint', whiteboard.currentStroke);
   });
+  board.addEventListener("mousedown", function() {
+    socket.emit('paint', whiteboard.currentStroke);
+  });
   socket.on('paint', function(stroke) {
   whiteboard.redraw(stroke)
   });
