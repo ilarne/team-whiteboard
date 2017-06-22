@@ -53,7 +53,7 @@ Whiteboard.prototype.redraw = function(stroke) {
 
       this.context.lineTo(stroke.clickX[i], stroke.clickY[i]);
       this.context.closePath();
-      this.context.strokeStyle = this.colour;
+      this.context.strokeStyle = stroke.colour;
       this.context.stroke();
     }
   }
