@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
   colours.forEach(function(colour) {
     colour.style.backgroundColor = colour.getAttribute('data-value');
     colour.addEventListener('click', function() {
+
       body.style.cursor = 'url(/images/cursors/' + colour.id + 'marker.png), pointer';
+      if (colour.id === 'rubber') {
+        body.style.cursor = 'url(/images/cursors/rubbermarker.png) 10 15, auto';
+      } 
     })
   })
-
-
 })
