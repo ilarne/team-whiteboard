@@ -10,6 +10,7 @@
   </head>
   <body>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
+
     <div class="colour-button" id="red" data-value="#FF0000"></div>
     <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
     <div class="colour-button" id="blue" data-value="#0000FF"></div>
@@ -18,6 +19,18 @@
     <div class="colour-button" id="purple" data-value="#660099"></div>
     <div class="colour-button" id="black" data-value="#000000"></div>
     <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
+
+    Marker Size: <input type="range" id="font" value="5" min="1" max="50">
+
+    <script>
+      var range = document.getElementById("font");
+      range.addEventListener("change", function () {
+        var size = range.value;
+        console.log(size)
+        whiteboard.adjustFontSize(size)
+      });
+
+    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>

@@ -3,13 +3,14 @@
 function Whiteboard(context) {
   this.context = context;
   this.painting = false;
-  this.colour = "#000000"
+  this.colour = "#000000";
+  this.fontSize = 5;
   this.strokes = [];
   this.currentStroke = null;
 }
 
 Whiteboard.prototype.startDrawing = function(e, board) {
-  this.currentStroke = new Stroke(this.colour);
+  this.currentStroke = new Stroke(this.colour, this.fontSize);
   this.painting = true;
   this.currentStroke.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop, false);
   this.redraw();
@@ -17,6 +18,10 @@ Whiteboard.prototype.startDrawing = function(e, board) {
 
 Whiteboard.prototype.changeColour = function(colour) {
   this.colour = colour;
+}
+
+Whiteboard.prototype.adjustFontSize = function(size) {
+  this.fontSize = size;
 }
 
 Whiteboard.prototype.stopDrawing = function() {
@@ -39,9 +44,9 @@ Whiteboard.prototype.redraw = function(stroke) {
   var stroke = stroke || this.currentStroke;
 
   this.context.lineJoin = "round";
-  this.context.lineWidth = 5;
 
   if (stroke !== null) {
+    this.context.lineWidth = stroke.fontSize;
     for (var i=0; i < stroke.clickX.length; i++) {
       this.context.beginPath();
 
