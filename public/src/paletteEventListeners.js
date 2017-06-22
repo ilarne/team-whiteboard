@@ -4,10 +4,8 @@ $(".colour-button").click(function() {
 
 document.addEventListener("DOMContentLoaded", function () {
   var colours = document.querySelectorAll(".colour-button");
-  console.log(colours)
 
   colours.forEach(function(colour) {
     colour.style.backgroundColor = colour.getAttribute('data-value');
   })
-
 })
