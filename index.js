@@ -3,12 +3,13 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
+const config = require('./config.js').get(process.env.NODE_ENV);
 
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 
 var Schema = mongoose.Schema;
-mongoose.connect('localhost:27017/whiteboardDB')
+mongoose.connect(process.env.MONGOLAB_URI)
 var db = mongoose.connection;
 
 var strokeSchema = new Schema({
