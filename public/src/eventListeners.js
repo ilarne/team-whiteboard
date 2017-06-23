@@ -1,5 +1,6 @@
 var board = document.getElementById('whiteboard')
 var whiteboard = new Whiteboard(board.getContext('2d'));
+var whiteboardID = document.location.href.split('/').reverse()[0];
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);
@@ -13,7 +14,8 @@ board.addEventListener('mouseup', function(element) {
   $.post('/newstroke', {clickX: whiteboard.currentStroke.clickX,
                         clickY: whiteboard.currentStroke.clickY,
                         colour: whiteboard.currentStroke.colour,
-                        fontSize: whiteboard.currentStroke.fontSize})
+                        fontSize: whiteboard.currentStroke.fontSize,
+                        whiteboardID: whiteboardID})
 
   whiteboard.stopDrawing();
 })
@@ -36,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-  $.get('/loadstroke')
+  $.get('/loadstroke', { whiteboardID: whiteboardID })
     .done(function(data) {
       data.forEach(function(stroke) {
         whiteboard.redraw(stroke)

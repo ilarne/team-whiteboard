@@ -16,7 +16,8 @@ var strokeSchema = new Schema({
   clickX: Array,
   clickY: Array,
   colour: String,
-  fontSize: Number
+  fontSize: Number,
+  whiteboardID: String,
 })
 
 var Stroke = mongoose.model('Stroke', strokeSchema);
@@ -31,6 +32,11 @@ app.engine('.html', require('ejs').renderFile);
 app.use(express.static('public'))
 
 app.get('/', function(req, res) {
+  res.redirect('/board/home')
+})
+
+app.get('/board/:board', function(req, res) {
+  var board = req.params.board
   res.render(__dirname + '/whiteboard.html')
 })
 
@@ -39,13 +45,16 @@ app.post('/newstroke', function(req, res) {
     clickX: req.body.clickX,
     clickY: req.body.clickY,
     colour: req.body.colour,
-    fontSize: req.body.fontSize
+    fontSize: req.body.fontSize,
+    whiteboardID: req.body.whiteboardID
   });
   stroke.save();
+  res.send();
 })
 
 app.get('/loadstroke', function(req, res) {
-  Stroke.find({}, function(e, data){} ).then( function(data) {
+  var whiteboardID = req.query.whiteboardID
+  Stroke.find({ whiteboardID: whiteboardID }, function(e, data){} ).then( function(data) {
     res.send(data)
   })
 })
