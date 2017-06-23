@@ -3,18 +3,18 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
+const config = require('./config.js').get(process.env.NODE_ENV);
 
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 
 var Schema = mongoose.Schema;
-mongoose.connect('localhost:27017/whiteboardDB')
+mongoose.connect(config.database)
 var db = mongoose.connection;
 
 var strokeSchema = new Schema({
   clickX: Array,
   clickY: Array,
-  clickDrag: Array,
   colour: String,
   fontSize: Number
 })
@@ -38,7 +38,6 @@ app.post('/newstroke', function(req, res) {
   var stroke = new Stroke({
     clickX: req.body.clickX,
     clickY: req.body.clickY,
-    clickDrag: req.body.clickDrag,
     colour: req.body.colour,
     fontSize: req.body.fontSize
   });

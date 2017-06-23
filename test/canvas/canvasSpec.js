@@ -29,16 +29,15 @@ describe('Canvas draws to page', function() {
 
   it('redraw method draws based on user co-ordinates', function() {
     // Add clicks as if user clicked
-    whiteboard.currentStroke = { clickX: [], clickY: [], clickDrag: [] }
+    whiteboard.currentStroke = { clickX: [], clickY: [] }
     whiteboard.currentStroke.clickX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     whiteboard.currentStroke.clickY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    whiteboard.currentStroke.clickDrag = [false, true, true, true, true, true, true, true, true, false];
 
     // Call the draw function
     whiteboard.redraw();
 
     var hash = whiteboard.context.hash();
-    expect(hash).equal('f3d47c6b75864dcc174089e89b4e76ce'); // test passes
+    expect(hash).equal('4d003c32d80a1cc3a1b2fcb0ee14f83d'); // test passes
 
     // clear the stack
     whiteboard.context.clear();
