@@ -40,13 +40,17 @@ Whiteboard.prototype.keepDrawing = function(e, board) {
   }
 }
 
+Whiteboard.prototype.clear = function() {
+  this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+}
+
 Whiteboard.prototype.redraw = function(stroke) {
   var stroke = stroke || this.currentStroke;
 
   this.context.lineJoin = "round";
 
   if (stroke !== null) {
-    
+
     this.context.lineWidth = stroke.fontSize;
 
     for (var i=0; i < stroke.clickX.length; i++) {

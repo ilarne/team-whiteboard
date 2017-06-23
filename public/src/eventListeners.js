@@ -43,3 +43,11 @@ document.addEventListener("DOMContentLoaded", function() {
       })
     })
 })
+
+document.getElementById('clear-whiteboard').addEventListener('click', function() {
+  $.get('/clear-whiteboard')
+    .done(function(data) {
+      console.log(data)
+    })
+  whiteboard.clear();
+})

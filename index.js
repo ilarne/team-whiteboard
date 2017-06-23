@@ -44,6 +44,12 @@ app.post('/newstroke', function(req, res) {
   stroke.save();
 })
 
+app.get('/clear-whiteboard', function(req, res) {
+  Stroke.remove({}, function(e, data){} ).then( function(data) {
+    res.send('Whiteboard cleared!')
+  })
+});
+
 app.get('/loadstroke', function(req, res) {
   Stroke.find({}, function(e, data){} ).then( function(data) {
     res.send(data)
