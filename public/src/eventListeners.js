@@ -44,16 +44,27 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 })
 
-var clearSection = document.getElementById('clear-whiteboard')
+var clear = document.getElementById('clear-whiteboard')
+var undo = document.getElementById('undo')
 
-clearSection.addEventListener('click', function() {
+clear.addEventListener('click', function() {
   $.get('/clear-whiteboard')
     .done(function() {
       whiteboard.clear();
     })
 })
 
-clearSection.addEventListener('click', function() {
+undo.addEventListener('click', function() {
+  $.get('/undo')
+    .done(function(data) {
+      whiteboard.clear();
+      data.forEach(function(stroke) {
+        whiteboard.redraw(stroke)
+      })
+    })
+})
+
+clear.addEventListener('click', function() {
   socket.emit('clear-whiteboard', 'cleared');
 })
 socket.on('clear-whiteboard', function(clear){

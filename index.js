@@ -56,6 +56,12 @@ app.get('/clear-whiteboard', function(req, res) {
   })
 });
 
+app.get('/undo', function(req, res) {
+  Stroke.findOneAndRemove(Stroke.findOne().sort({_id:-1})).then( function(stroke) {
+    res.redirect('/loadstroke')
+  })
+})
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);
