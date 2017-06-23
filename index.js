@@ -50,9 +50,21 @@ app.get('/loadstroke', function(req, res) {
   })
 })
 
+app.get('/clear-whiteboard', function(req, res) {
+  Stroke.remove({}, function(){} ).then( function() {
+    res.send('Whiteboard cleared!')
+  })
+});
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);
+  })
+})
+
+io.on('connection', function(socket){
+  socket.on('clear-whiteboard', function(clear){
+    io.emit('clear-whiteboard', clear);
   })
 })
 

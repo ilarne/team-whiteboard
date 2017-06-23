@@ -48,6 +48,10 @@ Whiteboard.prototype.keepDrawing = function(e, board) {
   }
 }
 
+Whiteboard.prototype.clear = function() {
+  this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+}
+
 Whiteboard.prototype.redraw = function(stroke) {
   var stroke = stroke || this.currentStroke;
 
