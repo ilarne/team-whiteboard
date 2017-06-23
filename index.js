@@ -42,6 +42,8 @@ app.post('/newstroke', function(req, res) {
     fontSize: req.body.fontSize
   });
   stroke.save();
+  res.send();
+  // we should try to send events every 10 seconds or when the array gets to X length
 })
 
 app.get('/loadstroke', function(req, res) {
@@ -81,3 +83,10 @@ io.on('connection', function(socket) {
 http.listen(port, function() {
   console.log('Whiteboard App listening on port 3000!')
 })
+
+function findStrokes(boardName) {
+  Stroke.find({ whiteboardId: boardName }, function(e, data){
+  } ).then( function(data) {
+    res.send(data)
+  })
+}
