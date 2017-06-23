@@ -12,6 +12,13 @@ var Schema = mongoose.Schema;
 mongoose.connect(config.database)
 var db = mongoose.connection;
 
+var userSchema = new Schema({
+  name: String,
+  username: String,
+  email: String,
+  password: String
+})
+
 var strokeSchema = new Schema({
   clickX: Array,
   clickY: Array,
@@ -19,6 +26,7 @@ var strokeSchema = new Schema({
   fontSize: Number
 })
 
+var User = mongoose.model('User', userSchema)
 var Stroke = mongoose.model('Stroke', strokeSchema);
 
 var bodyParser = require('body-parser')
@@ -32,6 +40,22 @@ app.use(express.static('public'))
 
 app.get('/', function(req, res) {
   res.render(__dirname + '/whiteboard.html')
+})
+
+app.get('/signup', function(req, res) {
+  res.render('sign_up.html')
+})
+
+app.post('/new/user', function(req, res) {
+  var stroke = new Stroke({
+    name: req.body.name,
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  });
+  stroke.save();
+  res.send();
+  // we should try to send events every 10 seconds or when the array gets to X length
 })
 
 app.post('/newstroke', function(req, res) {
