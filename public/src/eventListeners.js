@@ -1,5 +1,6 @@
 var board = document.getElementById('whiteboard')
 var whiteboard = new Whiteboard(board.getContext('2d'));
+var socket = io();
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);
@@ -23,7 +24,6 @@ board.addEventListener('mouseleave', function(element) {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-  var socket = io();
   board.addEventListener("mousemove", function() {
     socket.emit('paint', whiteboard.currentStroke);
   });
@@ -51,4 +51,11 @@ clearSection.addEventListener('click', function() {
     .done(function() {
       whiteboard.clear();
     })
+})
+
+clearSection.addEventListener('click', function() {
+  socket.emit('clear-whiteboard', 'cleared');
+})
+socket.on('clear-whiteboard', function(clear){
+  whiteboard.clear(clear);
 })
