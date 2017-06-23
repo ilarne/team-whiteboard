@@ -29,6 +29,15 @@ Whiteboard.prototype.stopDrawing = function() {
 
   if (this.currentStroke) {
     this.strokes.push(this.currentStroke);
+
+    $.post('/newstroke', {
+      clickX: this.currentStroke.clickX,
+      clickY: this.currentStroke.clickY,
+      colour: this.currentStroke.colour,
+      fontSize: this.currentStroke.fontSize,
+      whiteboardID: document.location.href.split('/').reverse()[0]
+    })
+
     this.currentStroke = null;
   }
 }
@@ -40,13 +49,17 @@ Whiteboard.prototype.keepDrawing = function(e, board) {
   }
 }
 
+Whiteboard.prototype.clear = function() {
+  this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+}
+
 Whiteboard.prototype.redraw = function(stroke) {
   var stroke = stroke || this.currentStroke;
 
   this.context.lineJoin = "round";
 
   if (stroke !== null) {
-    
+
     this.context.lineWidth = stroke.fontSize;
 
     for (var i=0; i < stroke.clickX.length; i++) {

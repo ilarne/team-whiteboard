@@ -1,6 +1,7 @@
 var board = document.getElementById('whiteboard')
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
+var socket = io();
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);
@@ -11,12 +12,6 @@ board.addEventListener('mousemove', function(element) {
 })
 
 board.addEventListener('mouseup', function(element) {
-  $.post('/newstroke', {clickX: whiteboard.currentStroke.clickX,
-                        clickY: whiteboard.currentStroke.clickY,
-                        colour: whiteboard.currentStroke.colour,
-                        fontSize: whiteboard.currentStroke.fontSize,
-                        whiteboardID: whiteboardID})
-
   whiteboard.stopDrawing();
 })
 
@@ -25,7 +20,6 @@ board.addEventListener('mouseleave', function(element) {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-  var socket = io();
   board.addEventListener("mousemove", function() {
     socket.emit('paint', whiteboard.currentStroke);
   });
@@ -44,4 +38,20 @@ document.addEventListener("DOMContentLoaded", function() {
         whiteboard.redraw(stroke)
       })
     })
+})
+
+var clearSection = document.getElementById('clear-whiteboard')
+
+clearSection.addEventListener('click', function() {
+  $.get('/clear-whiteboard')
+    .done(function() {
+      whiteboard.clear();
+    })
+})
+
+clearSection.addEventListener('click', function() {
+  socket.emit('clear-whiteboard', 'cleared');
+})
+socket.on('clear-whiteboard', function(clear){
+  whiteboard.clear(clear);
 })

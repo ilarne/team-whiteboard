@@ -50,6 +50,9 @@ app.post('/newstroke', function(req, res) {
   });
   stroke.save();
   res.send();
+
+  // we should try to send events every 10 seconds or when the array gets to X length
+
 })
 
 app.get('/loadstroke', function(req, res) {
@@ -59,9 +62,21 @@ app.get('/loadstroke', function(req, res) {
   })
 })
 
+app.get('/clear-whiteboard', function(req, res) {
+  Stroke.remove({}, function(){} ).then( function() {
+    res.send('Whiteboard cleared!')
+  })
+});
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);
+  })
+})
+
+io.on('connection', function(socket){
+  socket.on('clear-whiteboard', function(clear){
+    io.emit('clear-whiteboard', clear);
   })
 })
 
@@ -78,3 +93,10 @@ io.on('connection', function(socket) {
 http.listen(port, function() {
   console.log('Whiteboard App listening on port 3000!')
 })
+
+function findStrokes(boardName) {
+  Stroke.find({ whiteboardId: boardName }, function(e, data){
+  } ).then( function(data) {
+    res.send(data)
+  })
+}
