@@ -29,6 +29,14 @@ Whiteboard.prototype.stopDrawing = function() {
 
   if (this.currentStroke) {
     this.strokes.push(this.currentStroke);
+
+    $.post('/newstroke', {
+      clickX: this.currentStroke.clickX,
+      clickY: this.currentStroke.clickY,
+      colour: this.currentStroke.colour,
+      fontSize: this.currentStroke.fontSize
+    })
+
     this.currentStroke = null;
   }
 }
@@ -46,7 +54,7 @@ Whiteboard.prototype.redraw = function(stroke) {
   this.context.lineJoin = "round";
 
   if (stroke !== null) {
-    
+
     this.context.lineWidth = stroke.fontSize;
 
     for (var i=0; i < stroke.clickX.length; i++) {
