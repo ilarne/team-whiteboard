@@ -57,7 +57,8 @@ app.get('/clear-whiteboard', function(req, res) {
 });
 
 app.get('/undo', function(req, res) {
-  Stroke.findOneAndRemove(Stroke.findOne().sort({_id:-1})).then( function(stroke) {
+  Stroke.findOneAndRemove({}, { sort: {_id:-1}}, function(err, stroke) {
+    if(err) { throw err; }
     res.redirect('/loadstroke')
   })
 })
