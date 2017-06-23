@@ -45,7 +45,7 @@ app.post('/newstroke', function(req, res) {
 })
 
 app.get('/clear-whiteboard', function(req, res) {
-  Stroke.remove({}, function(e, data){} ).then( function(data) {
+  Stroke.remove({}, function(){} ).then( function() {
     res.send('Whiteboard cleared!')
   })
 });
