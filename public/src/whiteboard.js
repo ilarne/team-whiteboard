@@ -34,7 +34,8 @@ Whiteboard.prototype.stopDrawing = function() {
       clickX: this.currentStroke.clickX,
       clickY: this.currentStroke.clickY,
       colour: this.currentStroke.colour,
-      fontSize: this.currentStroke.fontSize
+      fontSize: this.currentStroke.fontSize,
+      whiteboardID: document.location.href.split('/').reverse()[0]
     })
 
     this.currentStroke = null;

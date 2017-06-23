@@ -1,5 +1,6 @@
 var board = document.getElementById('whiteboard')
 var whiteboard = new Whiteboard(board.getContext('2d'));
+var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
 
 board.addEventListener('mousedown', function(element) {
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-  $.get('/loadstroke')
+  $.get('/loadstroke', { whiteboardID: whiteboardID })
     .done(function(data) {
       data.forEach(function(stroke) {
         whiteboard.redraw(stroke)
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 var clearSection = document.getElementById('clear-whiteboard')
 
 clearSection.addEventListener('click', function() {
-  $.get('/clear-whiteboard')
+  $.get('/clear-whiteboard', { board: whiteboardID })
     .done(function() {
       whiteboard.clear();
     })
