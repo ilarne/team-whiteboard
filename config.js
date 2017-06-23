@@ -4,7 +4,7 @@ var config = {
       key: 'the.express.session.id',
       secret: 'something.super.secret'
     },
-    database: 'mongodb://<user>:<pwd>@apollo.modulusmongo.net:27017/db',
+    database: process.env.MONGOLAB_URI,
   },
   default: {
     session: {

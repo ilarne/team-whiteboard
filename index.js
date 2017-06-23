@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const mongo = require('mongodb');
 
 var Schema = mongoose.Schema;
-mongoose.connect(process.env.MONGOLAB_URI)
+mongoose.connect(config.database)
 var db = mongoose.connection;
 
 var strokeSchema = new Schema({
