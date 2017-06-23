@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 var clearSection = document.getElementById('clear-whiteboard')
 
 clearSection.addEventListener('click', function() {
-  $.get('/clear-whiteboard')
+  $.get('/clear-whiteboard', { board: whiteboardID })
     .done(function() {
       whiteboard.clear();
     })

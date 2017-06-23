@@ -63,7 +63,7 @@ app.get('/loadstroke', function(req, res) {
 })
 
 app.get('/clear-whiteboard', function(req, res) {
-  Stroke.remove({}, function(){} ).then( function() {
+  Stroke.remove({ whiteboardID: req.query.board }, function(){} ).then( function() {
     res.send('Whiteboard cleared!')
   })
 });
