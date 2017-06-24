@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const mongo = require('mongodb');
 
 const session = require('client-sessions')
+const bcrypt = require('bcrypt-nodejs');
 
 var Schema = mongoose.Schema;
 mongoose.connect(config.database)
@@ -79,40 +80,31 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/user/login', function(req, res) {
+  var password = req.body.password;
+
   User.find({ username: req.body.username }, function(e, user) {
     user = user[0];
     if (user === undefined) {
       res.redirect('/signup')
     } else {
-      req.session.user = user;
-      res.redirect('/welcome')
+      var result = bcrypt.compareSync(password, user.password);
+      if (result == true) {
+        req.session.user = user
+        res.redirect('/welcome');
+      } else {
+        res.redirect('/signup');
+      };
     }
   });
-
-  // var password = req.body.password;
-  //
-  // User.find({ username: req.body.username }, function(e, user) {
-  //   user = user[0];
-  //   if (user === undefined) {
-  //     res.redirect('/signup')
-  //   } else {
-  //     var result = bcrypt.compareSync(password, user.password);
-  //     if (result == true) {
-  //       req.session.user = user
-  //       res.redirect('/welcome');
-  //     } else {
-  //       res.redirect('/signup');
-  //     };
-  //   }
-  // });
 });
 
 app.post('/user/new', function(req, res) {
+  var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
   var user = new User({
     name: req.body.name,
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    password: hash
   });
   req.session.user = user;
   user.save();
