@@ -5,7 +5,6 @@ function Whiteboard(context) {
   this.painting = false;
   this.colour = "#000000";
   this.fontSize = 5;
-  // this.strokes = [];
   this.currentStroke = null;
 }
 
@@ -28,7 +27,6 @@ Whiteboard.prototype.stopDrawing = function() {
   this.painting = false;
 
   if (this.currentStroke) {
-    // this.strokes.push(this.currentStroke);
 
     $.post('/newstroke', {
       clickX: this.currentStroke.clickX,
