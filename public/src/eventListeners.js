@@ -3,6 +3,8 @@ board.width = window.innerWidth;
 board.height = window.innerHeight - 50;
 
 var whiteboard = new Whiteboard(board.getContext('2d'));
+var whiteboardID = document.location.href.split('/').reverse()[0];
+var socket = io();
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);
@@ -21,7 +23,6 @@ board.addEventListener('mouseleave', function(element) {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-  var socket = io();
   board.addEventListener("mousemove", function() {
     socket.emit('paint', whiteboard.currentStroke);
   });
@@ -34,10 +35,26 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-  $.get('/loadstroke')
+  $.get('/loadstroke', { whiteboardID: whiteboardID })
     .done(function(data) {
       data.forEach(function(stroke) {
         whiteboard.redraw(stroke)
       })
     })
+})
+
+var clearSection = document.getElementById('clear-whiteboard')
+
+clearSection.addEventListener('click', function() {
+  $.get('/clear-whiteboard', { board: whiteboardID })
+    .done(function() {
+      whiteboard.clear();
+    })
+})
+
+clearSection.addEventListener('click', function() {
+  socket.emit('clear-whiteboard', 'cleared');
+})
+socket.on('clear-whiteboard', function(clear){
+  whiteboard.clear(clear);
 })

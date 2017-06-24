@@ -16,7 +16,8 @@ var strokeSchema = new Schema({
   clickX: Array,
   clickY: Array,
   colour: String,
-  fontSize: Number
+  fontSize: Number,
+  whiteboardID: String,
 })
 
 var Stroke = mongoose.model('Stroke', strokeSchema);
@@ -31,6 +32,11 @@ app.engine('.html', require('ejs').renderFile);
 app.use(express.static('public'))
 
 app.get('/', function(req, res) {
+  res.redirect('/board/home')
+})
+
+app.get('/board/:board', function(req, res) {
+  var board = req.params.board
   res.render(__dirname + '/whiteboard.html')
 })
 
@@ -39,20 +45,38 @@ app.post('/newstroke', function(req, res) {
     clickX: req.body.clickX,
     clickY: req.body.clickY,
     colour: req.body.colour,
-    fontSize: req.body.fontSize
+    fontSize: req.body.fontSize,
+    whiteboardID: req.body.whiteboardID
   });
   stroke.save();
+  res.send();
+
+  // we should try to send events every 10 seconds or when the array gets to X length
+
 })
 
 app.get('/loadstroke', function(req, res) {
-  Stroke.find({}, function(e, data){} ).then( function(data) {
+  var whiteboardID = req.query.whiteboardID
+  Stroke.find({ whiteboardID: whiteboardID }, function(e, data){} ).then( function(data) {
     res.send(data)
   })
 })
 
+app.get('/clear-whiteboard', function(req, res) {
+  Stroke.remove({ whiteboardID: req.query.board }, function(){} ).then( function() {
+    res.send('Whiteboard cleared!')
+  })
+});
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);
+  })
+})
+
+io.on('connection', function(socket){
+  socket.on('clear-whiteboard', function(clear){
+    io.emit('clear-whiteboard', clear);
   })
 })
 
@@ -69,3 +93,10 @@ io.on('connection', function(socket) {
 http.listen(port, function() {
   console.log('Whiteboard App listening on port 3000!')
 })
+
+function findStrokes(boardName) {
+  Stroke.find({ whiteboardId: boardName }, function(e, data){
+  } ).then( function(data) {
+    res.send(data)
+  })
+}

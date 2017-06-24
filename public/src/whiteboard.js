@@ -34,7 +34,8 @@ Whiteboard.prototype.stopDrawing = function() {
       clickX: this.currentStroke.clickX,
       clickY: this.currentStroke.clickY,
       colour: this.currentStroke.colour,
-      fontSize: this.currentStroke.fontSize
+      fontSize: this.currentStroke.fontSize,
+      whiteboardID: document.location.href.split('/').reverse()[0]
     })
 
     this.currentStroke = null;
@@ -46,6 +47,10 @@ Whiteboard.prototype.keepDrawing = function(e, board) {
     this.currentStroke.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop);
     this.redraw();
   }
+}
+
+Whiteboard.prototype.clear = function() {
+  this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
 }
 
 Whiteboard.prototype.redraw = function(stroke) {
