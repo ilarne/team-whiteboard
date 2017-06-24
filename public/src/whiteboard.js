@@ -5,7 +5,6 @@ function Whiteboard(context) {
   this.painting = false;
   this.colour = "#000000";
   this.fontSize = 5;
-  this.strokes = [];
   this.currentStroke = null;
 }
 
@@ -28,21 +27,20 @@ Whiteboard.prototype.stopDrawing = function() {
   this.painting = false;
 
   if (this.currentStroke) {
-    this.strokes.push(this.currentStroke);
-
-    $.post('/newstroke', {
-      clickX: this.currentStroke.clickX,
-      clickY: this.currentStroke.clickY,
-      colour: this.currentStroke.colour,
-      fontSize: this.currentStroke.fontSize
-    })
-
+    this.saveStroke();
     this.currentStroke = null;
   }
 }
 
 Whiteboard.prototype.keepDrawing = function(e, board) {
   if (this.painting) {
+
+    if (this.currentStroke.clickX.length >= 200) {
+      this.saveStroke();
+      this.redraw();
+      this.currentStroke = new Stroke(this.colour, this.fontSize);
+    }
+
     this.currentStroke.addClick(e.pageX - board.offsetLeft, e.pageY - board.offsetTop);
     this.redraw();
   }
@@ -50,6 +48,16 @@ Whiteboard.prototype.keepDrawing = function(e, board) {
 
 Whiteboard.prototype.clear = function() {
   this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+}
+
+Whiteboard.prototype.saveStroke = function() {
+  $.post('/newstroke', {
+    clickX: this.currentStroke.clickX,
+    clickY: this.currentStroke.clickY,
+    colour: this.currentStroke.colour,
+    fontSize: this.currentStroke.fontSize,
+    whiteboardID: document.location.href.split('/').reverse()[0]
+  })
 }
 
 Whiteboard.prototype.redraw = function(stroke) {
