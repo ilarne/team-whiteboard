@@ -8,6 +8,8 @@ const config = require('./config.js').get(process.env.NODE_ENV);
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 
+const session = require('client-sessions')
+
 var Schema = mongoose.Schema;
 mongoose.connect(config.database)
 var db = mongoose.connection;
@@ -26,6 +28,11 @@ var strokeSchema = new Schema({
   fontSize: Number,
   whiteboardID: String,
 })
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'super-secret'
+}))
 
 var User = mongoose.model('User', userSchema)
 var Stroke = mongoose.model('Stroke', strokeSchema);
@@ -52,16 +59,17 @@ app.get('/signup', function(req, res) {
   res.render('sign_up.html')
 })
 
-app.post('/new/user', function(req, res) {
-  var stroke = new Stroke({
+app.post('/user/new', function(req, res) {
+  var user = new User({
     name: req.body.name,
     username: req.body.username,
     email: req.body.email,
     password: req.body.password
   });
-  stroke.save();
-  res.send();
-  // we should try to send events every 10 seconds or when the array gets to X length
+  req.session.user = user;
+  console.log(user)
+  user.save();
+  res.redirect('/welcome');
 })
 
 app.post('/newstroke', function(req, res) {
@@ -74,9 +82,12 @@ app.post('/newstroke', function(req, res) {
   });
   stroke.save();
   res.send();
+})
 
-  // we should try to send events every 10 seconds or when the array gets to X length
-
+app.get('/welcome', function(req, res) {
+  res.render('welcome.html', {
+    name: req.session.user.name
+  })
 })
 
 app.get('/loadstroke', function(req, res) {
