@@ -59,10 +59,53 @@ app.get('/signup', function(req, res) {
   res.render('sign_up.html')
 })
 
+app.get('/welcome', function(req, res) {
+  res.render('welcome.html', {
+    name: req.session.user.name
+  })
+})
+
 app.get('/logout', function(req, res) {
   req.session.reset();
   res.redirect('/signup')
 })
+
+app.get('/login', function(req, res) {
+  if (req.session.user) {
+    res.redirect('/welcome');
+  } else {
+    res.render('login.html');
+  };
+});
+
+app.post('/user/login', function(req, res) {
+  User.find({ username: req.body.username }, function(e, user) {
+    user = user[0];
+    if (user === undefined) {
+      res.redirect('/signup')
+    } else {
+      req.session.user = user;
+      res.redirect('/welcome')
+    }
+  });
+
+  // var password = req.body.password;
+  //
+  // User.find({ username: req.body.username }, function(e, user) {
+  //   user = user[0];
+  //   if (user === undefined) {
+  //     res.redirect('/signup')
+  //   } else {
+  //     var result = bcrypt.compareSync(password, user.password);
+  //     if (result == true) {
+  //       req.session.user = user
+  //       res.redirect('/welcome');
+  //     } else {
+  //       res.redirect('/signup');
+  //     };
+  //   }
+  // });
+});
 
 app.post('/user/new', function(req, res) {
   var user = new User({
@@ -86,12 +129,6 @@ app.post('/newstroke', function(req, res) {
   });
   stroke.save();
   res.send();
-})
-
-app.get('/welcome', function(req, res) {
-  res.render('welcome.html', {
-    name: req.session.user.name
-  })
 })
 
 app.get('/loadstroke', function(req, res) {
