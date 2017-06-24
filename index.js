@@ -52,7 +52,6 @@ app.get('/', function(req, res) {
 })
 
 app.get('/board/:board', function(req, res) {
-  var board = req.params.board
   res.render(__dirname + '/whiteboard.html')
 })
 
@@ -99,16 +98,24 @@ app.post('/user/login', function(req, res) {
 });
 
 app.post('/user/new', function(req, res) {
-  var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-  var user = new User({
-    name: req.body.name,
-    username: req.body.username,
-    email: req.body.email,
-    password: hash
-  });
-  req.session.user = user;
-  user.save();
-  res.redirect('/welcome');
+  User.find(
+    {$or:[{'username': req.body.username}, {'email': req.body.email }]}
+  ).then( function(existingUser) {
+    if (existingUser[0]) {
+      res.redirect('/signup')
+    } else {
+      var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+      var user = new User({
+        name: req.body.name,
+        username: req.body.username,
+        email: req.body.email,
+        password: hash
+      });
+      req.session.user = user;
+      user.save();
+      res.redirect('/welcome');
+    }
+  })
 })
 
 app.post('/newstroke', function(req, res) {
