@@ -31,10 +31,6 @@ describe('Whiteboard', function() {
     it('starts with a default fontSize', function() {
       expect(whiteboard.fontSize).equal(5);
     })
-
-    it('starts with an empty array of strokes', function() {
-      expect(whiteboard.strokes).empty;
-    });
   })
 
   describe('#startDrawing', function() {
@@ -63,12 +59,6 @@ describe('Whiteboard', function() {
       whiteboard.stopDrawing();
       expect(whiteboard.painting).equal(false);
     })
-
-    it('pushes a stroke object into the strokes array', function() {
-      whiteboard.startDrawing(fakeElement, fakeBoard);
-      whiteboard.stopDrawing();
-      expect(whiteboard.strokes.length).equal(1)
-    });
 
     it('deletes currentStroke after being pushed into strokes', function() {
       whiteboard.startDrawing(fakeElement, fakeBoard);
