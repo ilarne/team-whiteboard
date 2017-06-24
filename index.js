@@ -50,9 +50,6 @@ app.post('/newstroke', function(req, res) {
   });
   stroke.save();
   res.send();
-
-  // we should try to send events every 10 seconds or when the array gets to X length
-
 })
 
 app.get('/loadstroke', function(req, res) {
@@ -83,6 +80,12 @@ io.on('connection', function(socket){
 io.on('connection', function(socket){
   socket.on('clear-whiteboard', function(clear){
     io.emit('clear-whiteboard', clear);
+  })
+})
+
+io.on('connection', function(socket){
+  socket.on('undo', function(undo){
+    io.emit('undo', undo);
   })
 })
 

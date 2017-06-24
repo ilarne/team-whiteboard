@@ -69,13 +69,25 @@ undo.addEventListener('click', function() {
         data.forEach(function(stroke) {
           whiteboard.redraw(stroke)
         })
+        socket.emit('undo', 'reverted changes');
       })
     })
+})
+
+socket.on('undo', function(undo) {
+  $.get('/loadstroke', { whiteboardID: whiteboardID })
+  .done(function(data) {
+    whiteboard.clear();
+    data.forEach(function(stroke) {
+      whiteboard.redraw(stroke)
+    })
+  })
 })
 
 clear.addEventListener('click', function() {
   socket.emit('clear-whiteboard', 'cleared');
 })
+
 socket.on('clear-whiteboard', function(clear){
   whiteboard.clear(clear);
 })
