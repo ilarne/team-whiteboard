@@ -1,6 +1,4 @@
 var board = document.getElementById('whiteboard')
-board.width = window.innerWidth;
-board.height = window.innerHeight - 50;
 
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
@@ -24,13 +22,21 @@ board.addEventListener('mouseleave', function(element) {
 
 document.addEventListener("DOMContentLoaded", function() {
   board.addEventListener("mousemove", function() {
-    socket.emit('paint', whiteboard.currentStroke);
+    socket.emit('paint', {
+      stroke: whiteboard.currentStroke,
+      whiteboardID: whiteboardID
+    });
   });
   board.addEventListener("mousedown", function() {
-    socket.emit('paint', whiteboard.currentStroke);
+    socket.emit('paint', {
+      stroke: whiteboard.currentStroke,
+      whiteboardID: whiteboardID
+    });
   });
-  socket.on('paint', function(stroke) {
-    whiteboard.redraw(stroke)
+  socket.on('paint', function(strokeObject) {
+    if (whiteboardID === strokeObject.whiteboardID) {
+      whiteboard.redraw(strokeObject.stroke)
+    }
   });
 })
 
@@ -53,8 +59,10 @@ clearSection.addEventListener('click', function() {
 })
 
 clearSection.addEventListener('click', function() {
-  socket.emit('clear-whiteboard', 'cleared');
+  socket.emit('clear-whiteboard', whiteboardID);
 })
-socket.on('clear-whiteboard', function(clear){
-  whiteboard.clear(clear);
-})
+socket.on('clear-whiteboard', function(id){
+  if (whiteboardID === id) {
+    whiteboard.clear(id);
+  }
+});
