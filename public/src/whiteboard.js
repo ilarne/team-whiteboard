@@ -29,6 +29,14 @@ Whiteboard.prototype.stopDrawing = function() {
 
   if (this.currentStroke) {
     this.strokes.push(this.currentStroke);
+
+    $.post('/newstroke', {
+      clickX: this.currentStroke.clickX,
+      clickY: this.currentStroke.clickY,
+      colour: this.currentStroke.colour,
+      fontSize: this.currentStroke.fontSize
+    })
+
     this.currentStroke = null;
   }
 }
