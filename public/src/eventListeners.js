@@ -1,8 +1,18 @@
 var board = document.getElementById('whiteboard')
-
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
+var clear = document.getElementById('clear-whiteboard')
+var undo = document.getElementById('undo')
+
+function loadStrokes() {
+  $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
+    whiteboard.clear();
+    data.forEach(function(stroke) {
+      whiteboard.redraw(stroke)
+    })
+  })
+}
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);
@@ -41,26 +51,39 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-  $.get('/loadstroke', { whiteboardID: whiteboardID })
-    .done(function(data) {
-      data.forEach(function(stroke) {
-        whiteboard.redraw(stroke)
-      })
-    })
+  loadStrokes();
 })
 
-var clearSection = document.getElementById('clear-whiteboard')
-
-clearSection.addEventListener('click', function() {
+clear.addEventListener('click', function() {
   $.get('/clear-whiteboard', { board: whiteboardID })
     .done(function() {
       whiteboard.clear();
     })
 })
 
-clearSection.addEventListener('click', function() {
+undo.addEventListener('click', function() {
+  $.get('/undo').done(function() {
+    loadStrokes();
+    socket.emit('undo', 'reverted changes');
+  })
+})
+
+socket.on('undo', function(undo) {
+  loadStrokes();
+})
+
+clear.addEventListener('click', function() {
+  socket.emit('clear-whiteboard', 'cleared');
+})
+
+socket.on('clear-whiteboard', function(clear){
+  whiteboard.clear(clear);
+})
+
+clear.addEventListener('click', function() {
   socket.emit('clear-whiteboard', whiteboardID);
 })
+
 socket.on('clear-whiteboard', function(id){
   if (whiteboardID === id) {
     whiteboard.clear(id);
