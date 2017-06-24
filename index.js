@@ -59,6 +59,11 @@ app.get('/signup', function(req, res) {
   res.render('sign_up.html')
 })
 
+app.get('/logout', function(req, res) {
+  req.session.reset();
+  res.redirect('/signup')
+})
+
 app.post('/user/new', function(req, res) {
   var user = new User({
     name: req.body.name,
@@ -67,7 +72,6 @@ app.post('/user/new', function(req, res) {
     password: req.body.password
   });
   req.session.user = user;
-  console.log(user)
   user.save();
   res.redirect('/welcome');
 })
