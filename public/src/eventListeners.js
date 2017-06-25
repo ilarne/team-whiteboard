@@ -16,7 +16,9 @@ function loadStrokes() {
 }
 
 board.addEventListener('mousedown', function(element) {
-  whiteboard.startDrawing(element, board);
+  if (user) {
+    whiteboard.startDrawing(element, board);
+  }
 })
 
 board.addEventListener('mousemove', function(element) {
