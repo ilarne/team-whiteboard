@@ -34,6 +34,7 @@
       <% } %>
     </div>
 
+    <!-- User login/signup forms -->
     <div class='form-background'>
       <div class='form-container'>
         <form class='form' id='login-form' action="/user/login" method="post">
@@ -59,31 +60,6 @@
       <button type='button' id='undo'>Undo</button>
     </div>
 
-    <script>
-      $('#signup-button').click( function() {
-        $('.form-background').fadeIn();
-        $('#signup-form').fadeIn();
-      })
-
-      $('#login-button').click( function() {
-        $('.form-background').fadeIn();
-        $('#login-form').fadeIn();
-      })
-
-      $('#logout-button').click( function(action) {
-        $.get('/logout')
-        location.reload();
-      })
-
-      $('.form-container').click( function(action) {
-        action.stopPropagation();
-      })
-
-      $('.form-background').click( function() {
-        $('.form-background').fadeOut();
-        $('.form').fadeOut();
-      })
-    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
