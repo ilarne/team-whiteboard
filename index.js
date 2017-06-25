@@ -52,7 +52,15 @@ app.get('/', function(req, res) {
 })
 
 app.get('/board/:board', function(req, res) {
-  res.render(__dirname + '/whiteboard.html')
+  if (req.session.user) {
+    res.render(__dirname + '/whiteboard.html', {
+      currentUser: req.session.user.username
+    })
+  } else {
+    res.render(__dirname + '/whiteboard.html', {
+      currentUser: null
+    })
+  }
 })
 
 app.get('/signup', function(req, res) {
@@ -67,7 +75,7 @@ app.get('/welcome', function(req, res) {
 
 app.get('/logout', function(req, res) {
   req.session.reset();
-  res.redirect('/signup')
+  res.redirect('/board/home')
 })
 
 app.get('/login', function(req, res) {
@@ -89,7 +97,7 @@ app.post('/user/login', function(req, res) {
       var result = bcrypt.compareSync(password, user.password);
       if (result == true) {
         req.session.user = user
-        res.redirect('/welcome');
+        res.redirect('/board/home');
       } else {
         res.redirect('/signup');
       };
@@ -113,7 +121,7 @@ app.post('/user/new', function(req, res) {
       });
       req.session.user = user;
       user.save();
-      res.redirect('/welcome');
+      res.redirect('/board/home');
     }
   })
 })

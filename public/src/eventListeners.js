@@ -1,5 +1,4 @@
-var board = document.getElementById('whiteboard')
-
+var board = document.getElementById('whiteboard');
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
