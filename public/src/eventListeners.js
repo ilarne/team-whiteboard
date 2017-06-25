@@ -1,9 +1,10 @@
-var board = document.getElementById('whiteboard')
+var board = document.getElementById('whiteboard');
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
+var user = document.getElementById('user').innerHTML;
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -62,7 +63,7 @@ clear.addEventListener('click', function() {
 })
 
 undo.addEventListener('click', function() {
-  $.get('/undo').done(function() {
+  $.get('/undo', {userID: user}).done(function() {
     loadStrokes();
     socket.emit('undo', 'reverted changes');
   })
@@ -89,3 +90,30 @@ socket.on('clear-whiteboard', function(id){
     whiteboard.clear(id);
   }
 });
+
+
+// User login display logic - should start thinking about extracting sections out
+// of here into separate files.
+$('#signup-button').click( function() {
+  $('.form-background').fadeIn();
+  $('#signup-form').fadeIn();
+})
+
+$('#login-button').click( function() {
+  $('.form-background').fadeIn();
+  $('#login-form').fadeIn();
+})
+
+$('#logout-button').click( function(action) {
+  $.get('/logout')
+  location.reload();
+})
+
+$('.form-container').click( function(action) {
+  action.stopPropagation();
+})
+
+$('.form-background').click( function() {
+  $('.form-background').fadeOut();
+  $('.form').fadeOut();
+})

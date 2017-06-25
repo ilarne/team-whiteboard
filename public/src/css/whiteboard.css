@@ -7,3 +7,32 @@ html, body {
   float: left;
   background-color: #fff;
 }
+
+.user-info-container {
+  background-color: #CCCCCC;
+}
+
+.form {
+  display: none;
+}
+
+.hidden {
+  display:none;
+}
+
+.form-background {
+  display: none;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0, 0, 0, 0.4);
+}
+
+.form-container {
+  background-color:white;
+  width:300px;
+  margin:0 auto;
+  text-align: center;
+}
