@@ -70,21 +70,15 @@ socket.on('clear-whiteboard', function(id){
   }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  $('#postit').data(new Postit())
-  // $("#postit").css({
-  //   top: postitObject.positionY,
-  //   left: postitObject.positionX,
-  //   position:'absolute'
-  // })
-})
-
 postitDiv.addEventListener('mouseup', function() {
   var position = $('#postit').position()
   postitObject.updatePosition(position.left, position.top);
 })
 
 document.getElementById('new-postit').addEventListener('click', function() {
-  $("#postit-container").append("<div class='draggable postit' id='sticky" + (postitNumber++) + "'></div>")
+  $("#postit-container").append("<div class='draggable postit' id='sticky" + postitNumber + "'></div>")
   $('.draggable').draggable()
+  eval("var sticky" + postitNumber + "= new Postit()");
+  $('#sticky' + postitNumber).data(sticky0);
+  postitNumber++
 })

@@ -1,6 +1,7 @@
 'use strict';
 
-function Postit() {
+function Postit(postitNumber) {
+  this.postitNumber = postitNumber
   this.text = "New sticky"
   this.positionX = 0
   this.positionY = 0
