@@ -133,6 +133,12 @@ app.get('/clear-whiteboard', function(req, res) {
   })
 });
 
+app.get('/undo', function(req, res) {
+   Stroke.findOneAndRemove(Stroke.findOne().sort({_id:-1})).then( function(stroke) {
+    res.send()
+   })
+ })
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);
@@ -142,6 +148,12 @@ io.on('connection', function(socket){
 io.on('connection', function(socket){
   socket.on('clear-whiteboard', function(clear){
     io.emit('clear-whiteboard', clear);
+  })
+})
+
+io.on('connection', function(socket){
+  socket.on('undo', function(undo){
+    io.emit('undo', undo);
   })
 })
 
