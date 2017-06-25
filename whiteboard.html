@@ -12,16 +12,23 @@
     <span class='hidden' id='user'><%= currentUser %></span>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
 
-    <div class="colour-button" id="red" data-value="#FF0000"></div>
-    <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
-    <div class="colour-button" id="blue" data-value="#0000FF"></div>
-    <div class="colour-button" id="orange" data-value="#FF9900"></div>
-    <div class="colour-button" id="green" data-value="#00CC00"></div>
-    <div class="colour-button" id="purple" data-value="#660099"></div>
-    <div class="colour-button" id="black" data-value="#000000"></div>
-    <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
+    <% if(!currentUser) { %> <div class='hidden'> <% } %>
+      <div class="colour-button" id="red" data-value="#FF0000"></div>
+      <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
+      <div class="colour-button" id="blue" data-value="#0000FF"></div>
+      <div class="colour-button" id="orange" data-value="#FF9900"></div>
+      <div class="colour-button" id="green" data-value="#00CC00"></div>
+      <div class="colour-button" id="purple" data-value="#660099"></div>
+      <div class="colour-button" id="black" data-value="#000000"></div>
+      <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
 
-    Marker Size: <input type="range" id="font" value="5" min="1" max="50">
+      Marker Size: <input type="range" id="font" value="5" min="1" max="50">
+
+      <div id='clear-whiteboard-container'>
+        <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
+        <button type='button' id='undo'>Undo</button>
+      </div>
+    <% if(!currentUser) { %> </div> <% } %>
 
     <div id='user-management' class='user-info-container'>
       <% if (currentUser) { %>
@@ -53,11 +60,6 @@
           <input type='submit' value='Submit'>
         </form>
       </div>
-    </div>
-
-    <div id='clear-whiteboard-container'>
-      <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
-      <button type='button' id='undo'>Undo</button>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
