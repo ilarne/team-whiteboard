@@ -14,7 +14,3 @@ Postit.prototype.updatePosition = function(x, y) {
   this.positionX = x
   this.positionY = y
 }
-
-$( function() {
-  $( "#postit" ).draggable();
-});

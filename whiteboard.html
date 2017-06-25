@@ -11,7 +11,11 @@
     <script>window.module = window.module || {}</script>
   </head>
   <body>
-    <div id='postit'></div>
+
+    <div id='postit-container'>
+      <div class='postit' id='postit'></div>
+    </div>
+
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
 
     <div class="colour-button" id="red" data-value="#FF0000"></div>
@@ -28,7 +32,9 @@
     <div id='clear-whiteboard-container'>
       <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
     </div>
-    
+
+    <button type='button' id='new-postit'>Make a Post-it!</button>
+
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
