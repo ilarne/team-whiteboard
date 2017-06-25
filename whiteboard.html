@@ -5,10 +5,13 @@
     <title>Team Whiteboard App</title>
     <link rel="stylesheet" type="text/css" href="/src/css/whiteboard.css">
     <link rel="stylesheet" type="text/css" href="/src/css/palette.css">
+    <link rel="stylesheet" type="text/css" href="/src/css/postit.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>window.module = window.module || {}</script>
   </head>
   <body>
+    <div id='postit'></div>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
 
     <div class="colour-button" id="red" data-value="#FF0000"></div>
@@ -25,10 +28,11 @@
     <div id='clear-whiteboard-container'>
       <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
     </div>
-
+    
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
+    <script type='text/javascript' src='/src/postit.js'></script>
     <script type='text/javascript' src='/src/eventListeners.js'></script>
     <script type='text/javascript' src='/src/paletteEventListeners.js'></script>
   </body>

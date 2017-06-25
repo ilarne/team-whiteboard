@@ -3,6 +3,8 @@ var board = document.getElementById('whiteboard')
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
+var postitDiv = document.getElementById('postit');
+var postitObject = new Postit();
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);
@@ -66,3 +68,17 @@ socket.on('clear-whiteboard', function(id){
     whiteboard.clear(id);
   }
 });
+
+
+postitDiv.addEventListener('mouseup', function() {
+  var position = $('#postit').position()
+  postitObject.updatePosition(position.left, position.top);
+})
+
+document.addEventListener("DOMContentLoaded", function() {
+  $("#postit").css({
+    top: postitObject.positionY,
+    left: postitObject.positionX,
+    position:'absolute'
+  })
+})
