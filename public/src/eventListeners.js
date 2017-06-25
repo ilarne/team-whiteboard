@@ -4,6 +4,7 @@ var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
+var user = document.getElementById('user').innerHTML;
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -62,7 +63,7 @@ clear.addEventListener('click', function() {
 })
 
 undo.addEventListener('click', function() {
-  $.get('/undo').done(function() {
+  $.get('/undo', {userID: user}).done(function() {
     loadStrokes();
     socket.emit('undo', 'reverted changes');
   })

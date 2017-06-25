@@ -28,6 +28,7 @@ var strokeSchema = new Schema({
   colour: String,
   fontSize: Number,
   whiteboardID: String,
+  userID: String
 })
 
 app.use(session({
@@ -114,7 +115,8 @@ app.post('/newstroke', function(req, res) {
     clickY: req.body.clickY,
     colour: req.body.colour,
     fontSize: req.body.fontSize,
-    whiteboardID: req.body.whiteboardID
+    whiteboardID: req.body.whiteboardID,
+    userID: req.session.user.username
   });
   stroke.save();
   res.send();
@@ -134,10 +136,10 @@ app.get('/clear-whiteboard', function(req, res) {
 });
 
 app.get('/undo', function(req, res) {
-   Stroke.findOneAndRemove(Stroke.findOne().sort({_id:-1})).then( function(stroke) {
+  Stroke.findOneAndRemove(Stroke.findOne({userID: req.query.userID}).sort({_id:-1})).then( function(stroke) {
     res.send()
-   })
- })
+  })
+})
 
 io.on('connection', function(socket){
   socket.on('paint', function(msg){

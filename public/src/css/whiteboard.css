@@ -16,6 +16,10 @@ html, body {
   display: none;
 }
 
+.hidden {
+  display:none;
+}
+
 .form-background {
   display: none;
   position:absolute;
