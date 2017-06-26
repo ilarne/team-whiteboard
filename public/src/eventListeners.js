@@ -117,7 +117,9 @@ postit.addEventListener("mouseup", function() {
 });
 
 socket.on('postit', function(postitObject) {
-  displayPostit(postitObject);
+  if (whiteboardID === postitObject.whiteboardID) {
+    displayPostit(postitObject);
+  }
 });
 
 postit.addEventListener('input', function() {
