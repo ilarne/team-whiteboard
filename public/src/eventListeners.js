@@ -1,10 +1,12 @@
-var board = document.getElementById('whiteboard');
+var board = document.getElementById('whiteboard')
+
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
 var postitDiv = document.getElementById('postit');
 var postitObject = new Postit();
 var postitNumber = 0;
+
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
@@ -118,6 +120,14 @@ function savePostit() {
 
 sticky0.addEventListener('click', function() {
   savePostit();
+})
+
+document.getElementById('new-postit').addEventListener('click', function() {
+  $("#postit-container").append("<div class='draggable postit' id='sticky" + postitNumber + "'></div>")
+  $('.draggable').draggable()
+  eval("var sticky" + postitNumber + "= new Postit()");
+  $('#sticky' + postitNumber).data(sticky0);
+  postitNumber++
 })
 
 // User login display logic - should start thinking about extracting sections out
