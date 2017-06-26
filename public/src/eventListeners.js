@@ -7,6 +7,7 @@ var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
 var menu = document.getElementById('menu-button')
 var addBoard = document.getElementById('add-board')
+var favourites = document.getElementById('favourites')
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -19,7 +20,9 @@ function loadStrokes() {
 
 menu.addEventListener('click', function() {
   $.get('/loadRelationships', { userID: user }).done(function(data) {
-    console.log(data)
+    data.forEach(function(link) {
+      document.getElementById('favourites').innerHTML += link.whiteboardID.link(link.whiteboardID) + "\n";
+    })
   })
 })
 

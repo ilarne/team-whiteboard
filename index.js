@@ -152,7 +152,6 @@ app.get('/clear-whiteboard', function(req, res) {
 
 app.get('/loadRelationships', function(req, res) {
   var userID = req.query.userID
-  console.log('working')
   Relationship.find({ userID: userID }, function(e, data){} ).then( function(data) {
     res.send(data);
   })
