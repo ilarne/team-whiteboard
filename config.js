@@ -18,7 +18,7 @@ var config = {
       key: 'the.express.session.id',
       secret: 'something.super.secret'
     },
-    database: 'localhost:27017/whiteboardDB',
+    database: 'localhost:27017/testDB',
   }
 }
 
