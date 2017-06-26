@@ -1,18 +1,11 @@
 var board = document.getElementById('whiteboard')
+
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
-var clear = document.getElementById('clear-whiteboard')
-var undo = document.getElementById('undo')
-
-function loadStrokes() {
-  $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
-    whiteboard.clear();
-    data.forEach(function(stroke) {
-      whiteboard.redraw(stroke)
-    })
-  })
-}
+var postitDiv = document.getElementById('postit');
+var postitObject = new Postit();
+var postitNumber = 0;
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);
@@ -89,3 +82,16 @@ socket.on('clear-whiteboard', function(id){
     whiteboard.clear(id);
   }
 });
+
+postitDiv.addEventListener('mouseup', function() {
+  var position = $('#postit').position()
+  postitObject.updatePosition(position.left, position.top);
+})
+
+document.getElementById('new-postit').addEventListener('click', function() {
+  $("#postit-container").append("<div class='draggable postit' id='sticky" + postitNumber + "'></div>")
+  $('.draggable').draggable()
+  eval("var sticky" + postitNumber + "= new Postit()");
+  $('#sticky' + postitNumber).data(sticky0);
+  postitNumber++
+})
