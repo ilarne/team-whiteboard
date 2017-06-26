@@ -5,6 +5,8 @@ var socket = io();
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
+var menu = document.getElementById('menu-button')
+var addBoard = document.getElementById('add-board')
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -14,6 +16,27 @@ function loadStrokes() {
     })
   })
 }
+
+menu.addEventListener('click', function() {
+  $.get('/loadRelationships', { userID: user }).done(function(data) {
+    console.log(data)
+  })
+})
+
+addBoard.addEventListener('click', function() {
+  whiteboard.addBoard();
+})
+
+// menu.addEventListener('click', function() {
+//   ctx = board.getContext('2d');
+//
+//   var backCanvas = document.createElement('canvas');
+//   backCanvas.width = board.width;
+//   backCanvas.height = board.height;
+//   var backCtx = backCanvas.getContext('2d');
+//
+//   backCtx.drawImage(board, 0, 0)
+// })
 
 board.addEventListener('mousedown', function(element) {
   if (user) {

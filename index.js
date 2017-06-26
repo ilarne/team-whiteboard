@@ -31,6 +31,11 @@ var strokeSchema = new Schema({
   userID: String
 })
 
+var relationshipSchema = new Schema({
+  userID: String,
+  whiteboardID: String
+})
+
 app.use(session({
   cookieName: 'session',
   secret: 'super-secret'
@@ -38,6 +43,7 @@ app.use(session({
 
 var User = mongoose.model('User', userSchema)
 var Stroke = mongoose.model('Stroke', strokeSchema);
+var Relationship = mongoose.model('Relationship', relationshipSchema);
 
 var bodyParser = require('body-parser')
 
@@ -122,6 +128,15 @@ app.post('/newstroke', function(req, res) {
   res.send();
 })
 
+app.post('/addboard', function(req, res) {
+  var relationship = new Relationship({
+    whiteboardID: req.body.whiteboardID,
+    userID: req.session.user.username
+  })
+  relationship.save();
+  res.send();
+})
+
 app.get('/loadstroke', function(req, res) {
   var whiteboardID = req.query.whiteboardID
   Stroke.find({ whiteboardID: whiteboardID }, function(e, data){} ).then( function(data) {
@@ -135,8 +150,17 @@ app.get('/clear-whiteboard', function(req, res) {
   })
 });
 
+app.get('/loadRelationships', function(req, res) {
+  var userID = req.query.userID
+  console.log('working')
+  Relationship.find({ userID: userID }, function(e, data){} ).then( function(data) {
+    res.send(data);
+  })
+})
+
 app.get('/undo', function(req, res) {
-  Stroke.findOneAndRemove(Stroke.findOne({userID: req.query.userID}).sort({_id:-1})).then( function(stroke) {
+  userID: req.query.userID
+  Stroke.findOneAndRemove(Stroke.findOne({userID: userID }).sort({_id:-1})).then( function(stroke) {
     res.send()
   })
 })
