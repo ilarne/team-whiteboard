@@ -111,6 +111,11 @@ $('#logout-button').click( function(action) {
   location.reload();
 })
 
+$('#menu-button').click( function() {
+  $('.form-background').fadeIn();
+  $('#menu-container').fadeIn();
+})
+
 $('.form-container').click( function(action) {
   action.stopPropagation();
 })
