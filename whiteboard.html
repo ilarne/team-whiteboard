@@ -6,18 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/src/css/whiteboard.css">
     <link rel="stylesheet" type="text/css" href="/src/css/palette.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-      var featureTestObject = {
-        clearRect: () => {},
-        beginPath: () => {},
-        moveTo: () => {},
-        lineTo: () => {},
-        closePath: () => {},
-        stroke: () => {},
-        canvas: {width: 10, height: 10}
-      }
-      window.module = window.module || {}
-    </script>
+    <script>window.module = window.module || {}</script>
   </head>
   <body>
     <span class='hidden' id='user'><%= currentUser %></span>

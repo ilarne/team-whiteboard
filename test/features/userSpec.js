@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 import { Selector } from 'testcafe';
-const db = require('./dbConfig.js')
+const db = require('../../dbConfig.js')
 
 db.User.remove({}, function(){}) // Empty test database of users before start
 
@@ -24,6 +24,28 @@ fixture `Page renders successfully`
     .expect(Selector('#purple').getStyleProperty('background-color')).eql('rgb(102, 0, 153)')
     .expect(Selector('#rubber').getStyleProperty('background-color')).eql('rgb(255, 255, 255)')
   });
+
+  test('Login form does not display by default', async time => {
+    await time
+    .expect(Selector('#login-form').getStyleProperty('display')).eql('none')
+  })
+
+  test('Login form displays after clicking to log in', async time => {
+    await time
+    .click('#login-button')
+    .expect(Selector('#login-form').getStyleProperty('display')).eql('block')
+  })
+
+  test('Sign up form does not display by default', async time => {
+    await time
+    .expect(Selector('#signup-form').getStyleProperty('display')).eql('none')
+  })
+
+  test('Signup form displays after clicking to sign up', async time => {
+    await time
+    .click('#signup-button')
+    .expect(Selector('#signup-form').getStyleProperty('display')).eql('block')
+  })
 
 fixture `Signing up`
   .page('http://localhost:3000/board/home');
@@ -119,5 +141,15 @@ fixture `Logging in`
       .typeText('#login-username', 'Fake')
       .typeText('#login-password', '123')
       .click('#login-submit')
+      .expect(Selector('#user').innerText).eql('');
+  });
+
+  test('Can log out successfully', async time => {
+    await time
+      .click('#login-button')
+      .typeText('#login-username', 'JSmith')
+      .typeText('#login-password', '123')
+      .click('#login-submit')
+      .click('#logout-button')
       .expect(Selector('#user').innerText).eql('');
   });

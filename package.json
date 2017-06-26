@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "testcafe chrome test/features/userSpec.js && mocha",
     "start": "node index.js"
   },
   "repository": {
