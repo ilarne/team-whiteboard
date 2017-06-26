@@ -101,12 +101,23 @@ postitDiv.addEventListener('mouseup', function() {
   postitObject.updatePosition(position.left, position.top);
 })
 
-document.getElementById('new-postit').addEventListener('click', function() {
-  $("#postit-container").append("<div class='draggable postit' id='sticky" + postitNumber + "'></div>")
-  $('.draggable').draggable()
-  eval("var sticky" + postitNumber + "= new Postit()");
-  $('#sticky' + postitNumber).data(sticky0);
-  postitNumber++
+// document.getElementById('new-postit').addEventListener('click', function() {
+//   $("#postit-container").append("<div class='draggable postit' id='sticky" + postitNumber + "'></div>")
+//   $('.draggable').draggable()
+//   eval("var sticky" + postitNumber + "= new Postit()");
+//   postitNumber++
+// })
+
+$(function() {
+  $('.postit').draggable()
+});
+
+function savePostit() {
+  postitObject.text = document.getElementById('sticky0').innerHTML;
+}
+
+sticky0.addEventListener('click', function() {
+  savePostit();
 })
 
 // User login display logic - should start thinking about extracting sections out
