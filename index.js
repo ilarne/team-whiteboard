@@ -8,9 +8,19 @@ const config = require('./config.js').get(process.env.NODE_ENV);
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 
+const session = require('client-sessions')
+const bcrypt = require('bcrypt-nodejs');
+
 var Schema = mongoose.Schema;
 mongoose.connect(config.database)
 var db = mongoose.connection;
+
+var userSchema = new Schema({
+  name: String,
+  username: String,
+  email: String,
+  password: String
+})
 
 var strokeSchema = new Schema({
   clickX: Array,
@@ -18,8 +28,15 @@ var strokeSchema = new Schema({
   colour: String,
   fontSize: Number,
   whiteboardID: String,
+  userID: String
 })
 
+app.use(session({
+  cookieName: 'session',
+  secret: 'super-secret'
+}))
+
+var User = mongoose.model('User', userSchema)
 var Stroke = mongoose.model('Stroke', strokeSchema);
 
 var bodyParser = require('body-parser')
@@ -36,8 +53,60 @@ app.get('/', function(req, res) {
 })
 
 app.get('/board/:board', function(req, res) {
-  var board = req.params.board
-  res.render(__dirname + '/whiteboard.html')
+  if (req.session.user) {
+    res.render(__dirname + '/whiteboard.html', {
+      currentUser: req.session.user.username
+    })
+  } else {
+    res.render(__dirname + '/whiteboard.html', {
+      currentUser: null
+    })
+  }
+})
+
+app.get('/logout', function(req, res) {
+  req.session.reset();
+  res.redirect('/')
+})
+
+app.post('/user/login', function(req, res) {
+  var password = req.body.password;
+
+  User.find({ username: req.body.username }, function(e, user) {
+    user = user[0];
+    if (user === undefined) {
+      res.redirect('/')
+    } else {
+      var result = bcrypt.compareSync(password, user.password);
+      if (result == true) {
+        req.session.user = user
+        res.redirect('/');
+      } else {
+        res.redirect('/');
+      };
+    }
+  });
+});
+
+app.post('/user/new', function(req, res) {
+  User.find(
+    {$or:[{'username': req.body.username}, {'email': req.body.email }]}
+  ).then( function(existingUser) {
+    if (existingUser[0]) {
+      res.redirect('/')
+    } else {
+      var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+      var user = new User({
+        name: req.body.name,
+        username: req.body.username,
+        email: req.body.email,
+        password: hash
+      });
+      req.session.user = user;
+      user.save();
+      res.redirect('/');
+    }
+  })
 })
 
 app.post('/newstroke', function(req, res) {
@@ -46,13 +115,11 @@ app.post('/newstroke', function(req, res) {
     clickY: req.body.clickY,
     colour: req.body.colour,
     fontSize: req.body.fontSize,
-    whiteboardID: req.body.whiteboardID
+    whiteboardID: req.body.whiteboardID,
+    userID: req.session.user.username
   });
   stroke.save();
   res.send();
-
-  // we should try to send events every 10 seconds or when the array gets to X length
-
 })
 
 app.get('/loadstroke', function(req, res) {
@@ -68,6 +135,12 @@ app.get('/clear-whiteboard', function(req, res) {
   })
 });
 
+app.get('/undo', function(req, res) {
+  Stroke.findOneAndRemove(Stroke.findOne({userID: req.query.userID}).sort({_id:-1})).then( function(stroke) {
+    res.send()
+  })
+})
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);
@@ -77,6 +150,12 @@ io.on('connection', function(socket){
 io.on('connection', function(socket){
   socket.on('clear-whiteboard', function(clear){
     io.emit('clear-whiteboard', clear);
+  })
+})
+
+io.on('connection', function(socket){
+  socket.on('undo', function(undo){
+    io.emit('undo', undo);
   })
 })
 
