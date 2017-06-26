@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function() {
   loadStrokes();
+  loadPostits();
 })
 
 clear.addEventListener('click', function() {
@@ -108,13 +109,7 @@ postit.addEventListener("mouseup", function() {
 });
 
 socket.on('postit', function(postitObject) {
-  console.log(postitObject)
-  var currentPostit = document.getElementById('sticky0')
-
-  currentPostit.innerHTML = postitObject.postit.text
-  currentPostit.style.position = "absolute"
-  currentPostit.style.left = postitObject.postit.positionX + 'px'
-  currentPostit.style.top = postitObject.postit.positionY + 'px'
+  displayPostit(postitObject);
 });
 
 postit.addEventListener('input', function() {
@@ -125,15 +120,29 @@ function savePostit() {
   postitObject.text = document.getElementById('sticky0').innerHTML;
   var position = $('#sticky0').position()
   postitObject.updatePosition(position.left, position.top);
+  postitObject.saveToDB();
 }
 
-// document.getElementById('new-postit').addEventListener('click', function() {
-//   $("#postit-container").append("<div class='draggable postit' id='sticky" + postitNumber + "'></div>")
-//   $('.draggable').draggable()
-//   eval("var sticky" + postitNumber + "= new Postit()");
-//   $('#sticky' + postitNumber).data(sticky0);
-//   postitNumber++
-// })
+function displayPostit(postitObject) {
+  var currentPostit = document.getElementById('sticky0')
+
+  currentPostit.innerHTML = postitObject.postit.text
+  currentPostit.style.position = "absolute"
+  currentPostit.style.left = postitObject.postit.positionX + 'px'
+  currentPostit.style.top = postitObject.postit.positionY + 'px'
+}
+
+function loadPostits() {
+  $.get('/loadpostit', { whiteboardID: whiteboardID } ).done(function(data) {
+    var currentPostit = document.getElementById('sticky0')
+    data.forEach(function(postit) {
+      currentPostit.innerHTML = postit.text,
+      currentPostit.style.position = "absolute",
+      currentPostit.style.left = postit.positionX + "px"
+      currentPostit.style.top = postit.positionY + "px"
+    })
+  })
+}
 
 // User login display logic - should start thinking about extracting sections out
 // of here into separate files.

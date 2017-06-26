@@ -31,6 +31,14 @@ var strokeSchema = new Schema({
   userID: String
 })
 
+var postitSchema = new Schema({
+  postitid: Number,
+  text: String,
+  positionX: String,
+  positionY: String,
+  whiteboardID: String
+})
+
 app.use(session({
   cookieName: 'session',
   secret: 'super-secret'
@@ -38,6 +46,7 @@ app.use(session({
 
 var User = mongoose.model('User', userSchema)
 var Stroke = mongoose.model('Stroke', strokeSchema);
+var Postit = mongoose.model('Postit', postitSchema);
 
 var bodyParser = require('body-parser')
 
@@ -138,6 +147,25 @@ app.get('/clear-whiteboard', function(req, res) {
 app.get('/undo', function(req, res) {
   Stroke.findOneAndRemove(Stroke.findOne({userID: req.query.userID}).sort({_id:-1})).then( function(stroke) {
     res.send()
+  })
+})
+
+app.post('/newpostit', function(req, res) {
+  var postit = new Postit({
+    postitid: req.body.postitid,
+    text: req.body.text,
+    positionX: req.body.positionX,
+    positionY: req.body.positionY,
+    whiteboardID: req.body.whiteboardID
+  });
+  postit.save();
+  res.send();
+})
+
+app.get('/loadpostit', function(req, res) {
+  var whiteboardID = req.query.whiteboardID
+  Postit.find({ whiteboardID: whiteboardID }, function(e, data){} ).then( function(data) {
+    res.send(data)
   })
 })
 

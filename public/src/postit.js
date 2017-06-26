@@ -16,12 +16,16 @@ Postit.prototype.updatePosition = function(x, y) {
   this.positionY = y
 }
 
-Postit.prototype.repost = function() {
-  var currentPostit = document.getElementById('sticky0')
-
-  currentPostit.style.position = "absolute"
-  currentPostit.style.left = this.positionX
-  currentPostit.style.top = this.positionY
+Postit.prototype.saveToDB = function() {
+  console.log('before saving to db')
+  $.post('/newpostit', {
+    postitid: 0,
+    text: this.text,
+    positionX: this.positionX,
+    positionY: this.positionY,
+    whiteboardID: document.location.href.split('/').reverse()[0]
+  })
+  console.log('after saving to db')
 }
 
 module.exports = Postit;
