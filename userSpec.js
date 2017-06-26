@@ -5,7 +5,7 @@ const db = require('./dbConfig.js')
 
 db.User.remove({}, function(){}) // Empty test database of users before start
 
-fixture `User Account Management`
+fixture `Signing up`
     .page('http://localhost:3000/board/home');
 
   test('User name is blank when not logged in', async time => {
@@ -40,11 +40,65 @@ fixture `User Account Management`
       .expect(Selector('.user-message').innerText).eql('Logged in as TestUser');
   });
 
+  test('Cannot sign up with an existing username', async time => {
+    await time
+      .click('#signup-button')
+      .typeText('#signup-name', 'Jack Smith')
+      .typeText('#signup-username', 'JSmith')
+      .typeText('#signup-email', 'jack@gmail.com')
+      .typeText('#signup-password', '123')
+      .click('#create-account')
+      .expect(Selector('#user').innerText).eql('');
+  });
+
+  test('Cannot sign up with an existing email', async time => {
+    await time
+      .click('#signup-button')
+      .typeText('#signup-name', 'Jack Smith')
+      .typeText('#signup-username', 'Jack_Smith_1')
+      .typeText('#signup-email', 'smith@gmail.com')
+      .typeText('#signup-password', '123')
+      .click('#create-account')
+      .expect(Selector('#user').innerText).eql('');
+  });
+
+
+fixture `Logging in`
+    .page('http://localhost:3000/board/home');
+
+  test('Cannot log into a non-existent account', async time => {
+    await time
+    .click('#login-button')
+    .typeText('#login-username', 'fakeAccount')
+    .typeText('#login-password', 'fakePassword')
+    .click('#login-submit')
+    .expect(Selector('#user').innerText).eql('');
+  });
+
   test('Can log in to an existing account', async time => {
     await time
       .click('#login-button')
       .typeText('#login-username', 'JSmith')
       .typeText('#login-password', '123')
       .click('#login-submit')
-      .expect(Selector('.user-message').innerText).eql('Logged in as JSmith');
+      .expect(Selector('#user').innerText).eql('JSmith');
+  });
+
+
+  test('Cannot log in with a bad password', async time => {
+    await time
+      .click('#login-button')
+      .typeText('#login-username', 'JSmith')
+      .typeText('#login-password', 'badPassword')
+      .click('#login-submit')
+      .expect(Selector('#user').innerText).eql('');
+  });
+
+  test('Cannot log in with a non-existent username', async time => {
+    await time
+      .click('#login-button')
+      .typeText('#login-username', 'Fake')
+      .typeText('#login-password', '123')
+      .click('#login-submit')
+      .expect(Selector('#user').innerText).eql('');
   });
