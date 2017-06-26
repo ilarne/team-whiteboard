@@ -100,6 +100,14 @@ $(function() {
   $('.postit').draggable()
 });
 
+postit.addEventListener('mousemove', function() {
+  savePostit();
+  socket.emit('postit', {
+    postit: postitObject,
+    whiteboardID: whiteboardID
+  });
+})
+
 postit.addEventListener("mouseup", function() {
   savePostit();
   socket.emit('postit', {

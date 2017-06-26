@@ -3,4 +3,16 @@
   width:200px;
   height:200px;
   position:absolute;
+  min-height:150px;
+  border-left:3px double rgba(238, 150, 122, .75);
+  margin-left:30px;
+  padding:5px;
+  -moz-appearance: textfield-multiline;
+  -webkit-appearance: textarea;
+  border: 1px solid gray;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  overflow: auto;
+  padding: 2px;
+  resize: both;
 }
