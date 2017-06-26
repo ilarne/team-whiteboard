@@ -129,12 +129,22 @@ app.post('/newstroke', function(req, res) {
 })
 
 app.post('/addboard', function(req, res) {
-  var relationship = new Relationship({
-    whiteboardID: req.body.whiteboardID,
-    userID: req.session.user.username
+  Relationship.find({ $and:
+    [{ userID: req.session.user.username },
+    { whiteboardID: req.body.whiteboardID }]
+  }).then( function(existingFavourite) {
+    if (existingFavourite[0]) {
+      res.send('Already a favourite!')
+    } else {
+      var relationship = new Relationship({
+        whiteboardID: req.body.whiteboardID,
+        userID: req.session.user.username
+      })
+      relationship.save();
+      res.send();
+    }
   })
-  relationship.save();
-  res.send();
+
 })
 
 app.get('/loadstroke', function(req, res) {
