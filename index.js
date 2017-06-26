@@ -160,8 +160,8 @@ io.on('connection', function(socket){
 })
 
 io.on('connection', function(socket){
-  socket.on('postit', function(postitObject){
-    io.emit('postit', postitObject);
+  socket.on('postit', function(postit){
+    io.emit('postit', postit);
   })
 })
 

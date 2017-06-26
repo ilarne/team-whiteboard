@@ -99,16 +99,23 @@ $(function() {
   $('.postit').draggable()
 });
 
-postit.addEventListener('mouseup', function() {
+postit.addEventListener("mouseup", function() {
   savePostit();
   socket.emit('postit', {
     postit: postitObject,
     whiteboardID: whiteboardID
   });
-})
+});
 
-socket.on()
+socket.on('postit', function(postitObject) {
+  console.log(postitObject)
+  var currentPostit = document.getElementById('sticky0')
 
+  currentPostit.innerHTML = postitObject.postit.text
+  currentPostit.style.position = "absolute"
+  currentPostit.style.left = postitObject.postit.positionX + 'px'
+  currentPostit.style.top = postitObject.postit.positionY + 'px'
+});
 
 postit.addEventListener('input', function() {
   savePostit();
