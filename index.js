@@ -134,7 +134,7 @@ app.post('/addboard', function(req, res) {
     { whiteboardID: req.body.whiteboardID }]
   }).then( function(existingFavourite) {
     if (existingFavourite[0]) {
-      res.send('Already a favourite!')
+      res.send()
     } else {
       var relationship = new Relationship({
         whiteboardID: req.body.whiteboardID,

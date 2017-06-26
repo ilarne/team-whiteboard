@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/src/css/whiteboard.css">
     <link rel="stylesheet" type="text/css" href="/src/css/palette.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type='rext/javascript' src='http://futtta.be/squeezeFrame/squeezeFrame.js'></script>
     <script>window.module = window.module || {}</script>
   </head>
   <body>
@@ -27,6 +28,7 @@
       <div id='clear-whiteboard-container'>
         <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
         <button type='button' id='undo'>Undo</button>
+        <iframe style='pointer-events: none;' src="http://localhost:3000/board/doglover"></iframe>
       </div>
     <% if(!currentUser) { %> </div> <% } %>
 

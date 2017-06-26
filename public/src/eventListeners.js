@@ -23,7 +23,7 @@ function loadRelationships() {
   $.get('/loadRelationships', { userID: user }).done(function(data) {
     favourites.innerHTML = '';
     data.forEach(function(link) {
-      favourites.innerHTML += link.whiteboardID.link(link.whiteboardID) + "\n";
+      favourites.innerHTML += '' + link.whiteboardID.link(link.whiteboardID) + "\n";
     })
   })
 }
@@ -37,7 +37,9 @@ addBoard.addEventListener('click', function() {
     whiteboardID: document.location.href.split('/').reverse()[0],
     userID: user
   })
-  loadRelationships();
+  .done(function() {
+    loadRelationships();
+  })
 })
 
 clearBoards.addEventListener('click', function() {
