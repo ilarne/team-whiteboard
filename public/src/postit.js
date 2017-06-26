@@ -1,7 +1,7 @@
 'use strict';
 
-function Postit(postitNumber) {
-  this.postitNumber = postitNumber
+function Postit() {
+  this.postitID = null
   this.text = "New sticky"
   this.positionX = 0
   this.positionY = 0
@@ -18,7 +18,7 @@ Postit.prototype.updatePosition = function(x, y) {
 
 Postit.prototype.saveToDB = function() {
   $.post('/newpostit', {
-    postitid: 0,
+    postitid: this.postitID,
     text: this.text,
     positionX: this.positionX,
     positionY: this.positionY,

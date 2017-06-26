@@ -9,8 +9,12 @@ var postitNumber = 0;
 
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
-var postit = document.getElementById('sticky0')
 var user = document.getElementById('user').innerHTML;
+
+$('div').on('click', function () {
+  savePostit(this.id);
+  var postit = document.getElementById(this.id)
+});
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -123,18 +127,19 @@ socket.on('postit', function(postitObject) {
 });
 
 postit.addEventListener('input', function() {
-  savePostit();
+  savePostit(this.id);
 })
 
-function savePostit() {
-  postitObject.text = document.getElementById('sticky0').innerHTML;
-  var position = $('#sticky0').position()
+function savePostit(divID) {
+  postitObject.postitID = divID
+  postitObject.text = document.getElementById(divID).innerHTML;
+  var position = $('#' + divID).position()
   postitObject.updatePosition(position.left, position.top);
   postitObject.saveToDB();
 }
 
 function displayPostit(postitObject) {
-  var currentPostit = document.getElementById('sticky0')
+  var currentPostit = document.getElementById('sticky' + postitObject.postitID)
 
   currentPostit.innerHTML = postitObject.postit.text
   currentPostit.style.position = "absolute"
@@ -144,12 +149,27 @@ function displayPostit(postitObject) {
 
 function loadPostits() {
   $.get('/loadpostit', { whiteboardID: whiteboardID } ).done(function(data) {
-    var currentPostit = document.getElementById('sticky0')
+    // var currentPostit = document.getElementById('sticky0')
+    // data.forEach(function(postit) {
+    //   currentPostit.innerHTML = postit.text,
+    //   currentPostit.style.position = "absolute",
+    //   currentPostit.style.left = postit.positionX + "px"
+    //   currentPostit.style.top = postit.positionY + "px"
+    // })
     data.forEach(function(postit) {
-      currentPostit.innerHTML = postit.text,
-      currentPostit.style.position = "absolute",
-      currentPostit.style.left = postit.positionX + "px"
-      currentPostit.style.top = postit.positionY + "px"
+      if (postit.postitid === 'sticky0') {
+        var currentPostit = document.getElementById('sticky0')
+        currentPostit.innerHTML = postit.text,
+        currentPostit.style.position = "absolute",
+        currentPostit.style.left = postit.positionX + "px"
+        currentPostit.style.top = postit.positionY + "px"
+      } else {
+        var currentPostit = document.getElementById('sticky1')
+        currentPostit.innerHTML = postit.text,
+        currentPostit.style.position = "absolute",
+        currentPostit.style.left = postit.positionX + "px"
+        currentPostit.style.top = postit.positionY + "px"
+      }
     })
   })
 }

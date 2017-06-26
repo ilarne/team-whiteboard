@@ -32,7 +32,7 @@ var strokeSchema = new Schema({
 })
 
 var postitSchema = new Schema({
-  postitid: Number,
+  postitid: String,
   text: String,
   positionX: String,
   positionY: String,
