@@ -1,22 +1,12 @@
+process.env.NODE_ENV = 'test';
+
 import { Selector } from 'testcafe';
-const config = require('./config.js').get(process.env.NODE_ENV);
+const db = require('./dbConfig.js')
+const User = db.User;
 
-const mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-mongoose.connect(config.database)
-var db = mongoose.connection;
-
-var userSchema = new Schema({
-  name: String,
-  username: String,
-  email: String,
-  password: String
-})
-
-var User = mongoose.model('User', userSchema)
 User.remove({}, function(){})
 
-fixture `Getting Started`
+fixture `User Account Management`
     .page('http://localhost:3000/board/home');
 
   test('User name is blank when not logged in', async time => {
@@ -24,7 +14,7 @@ fixture `Getting Started`
     .expect(Selector('#user').innerText).eql('');
   });
 
-  test('Logs in succesfully', async time => {
+  test('User name is recorded succesfully', async time => {
     await time
       .click('#signup-button')
       .typeText('#signup-name', 'bark')
