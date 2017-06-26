@@ -56,7 +56,8 @@ Whiteboard.prototype.saveStroke = function() {
     clickY: this.currentStroke.clickY,
     colour: this.currentStroke.colour,
     fontSize: this.currentStroke.fontSize,
-    whiteboardID: document.location.href.split('/').reverse()[0]
+    whiteboardID: document.location.href.split('/').reverse()[0],
+    userID: document.getElementById('user').innerHTML
   })
 }
 

@@ -7,8 +7,23 @@ var postitDiv = document.getElementById('postit');
 var postitObject = new Postit();
 var postitNumber = 0;
 
+var clear = document.getElementById('clear-whiteboard')
+var undo = document.getElementById('undo')
+var user = document.getElementById('user').innerHTML;
+
+function loadStrokes() {
+  $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
+    whiteboard.clear();
+    data.forEach(function(stroke) {
+      whiteboard.redraw(stroke)
+    })
+  })
+}
+
 board.addEventListener('mousedown', function(element) {
-  whiteboard.startDrawing(element, board);
+  if (user) {
+    whiteboard.startDrawing(element, board);
+  }
 })
 
 board.addEventListener('mousemove', function(element) {
@@ -55,7 +70,7 @@ clear.addEventListener('click', function() {
 })
 
 undo.addEventListener('click', function() {
-  $.get('/undo').done(function() {
+  $.get('/undo', {userID: user}).done(function() {
     loadStrokes();
     socket.emit('undo', 'reverted changes');
   })
@@ -83,6 +98,7 @@ socket.on('clear-whiteboard', function(id){
   }
 });
 
+<<<<<<< HEAD
 postitDiv.addEventListener('mouseup', function() {
   var position = $('#postit').position()
   postitObject.updatePosition(position.left, position.top);
@@ -94,4 +110,31 @@ document.getElementById('new-postit').addEventListener('click', function() {
   eval("var sticky" + postitNumber + "= new Postit()");
   $('#sticky' + postitNumber).data(sticky0);
   postitNumber++
+=======
+
+// User login display logic - should start thinking about extracting sections out
+// of here into separate files.
+$('#signup-button').click( function() {
+  $('.form-background').fadeIn();
+  $('#signup-form').fadeIn();
+})
+
+$('#login-button').click( function() {
+  $('.form-background').fadeIn();
+  $('#login-form').fadeIn();
+})
+
+$('#logout-button').click( function(action) {
+  $.get('/logout')
+  location.reload();
+})
+
+$('.form-container').click( function(action) {
+  action.stopPropagation();
+})
+
+$('.form-background').click( function() {
+  $('.form-background').fadeOut();
+  $('.form').fadeOut();
+>>>>>>> master
 })

@@ -11,27 +11,65 @@
     <script>window.module = window.module || {}</script>
   </head>
   <body>
+<<<<<<< HEAD
 
     <div id='postit-container'>
       <div class='postitPad' id='postit'></div>
     </div>
 
+=======
+    <span class='hidden' id='user'><%= currentUser %></span>
+>>>>>>> master
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
 
-    <div class="colour-button" id="red" data-value="#FF0000"></div>
-    <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
-    <div class="colour-button" id="blue" data-value="#0000FF"></div>
-    <div class="colour-button" id="orange" data-value="#FF9900"></div>
-    <div class="colour-button" id="green" data-value="#00CC00"></div>
-    <div class="colour-button" id="purple" data-value="#660099"></div>
-    <div class="colour-button" id="black" data-value="#000000"></div>
-    <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
+    <% if(!currentUser) { %> <div class='hidden'> <% } %>
+      <div class="colour-button" id="red" data-value="#FF0000"></div>
+      <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
+      <div class="colour-button" id="blue" data-value="#0000FF"></div>
+      <div class="colour-button" id="orange" data-value="#FF9900"></div>
+      <div class="colour-button" id="green" data-value="#00CC00"></div>
+      <div class="colour-button" id="purple" data-value="#660099"></div>
+      <div class="colour-button" id="black" data-value="#000000"></div>
+      <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
 
-    Marker Size: <input type="range" id="font" value="5" min="1" max="50">
+      Marker Size: <input type="range" id="font" value="5" min="1" max="50">
 
-    <div id='clear-whiteboard-container'>
-      <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
-      <button type='button' id='undo'>Undo</button>
+      <div id='clear-whiteboard-container'>
+        <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
+        <button type='button' id='undo'>Undo</button>
+      </div>
+    <% if(!currentUser) { %> </div> <% } %>
+
+    <div id='user-management' class='user-info-container'>
+      <% if (currentUser) { %>
+        <button type='button' id='logout-button'>Log out</button>
+        Logged in as <%= currentUser %>
+      <% } else { %>
+        <button type='button' id='signup-button'>Sign up</button>
+        <button type='button' id='login-button'>Log in</button>
+        Sign up to Onbord!
+      <% } %>
+    </div>
+
+    <!-- User login/signup forms -->
+    <div class='form-background'>
+      <div class='form-container'>
+        <form class='form' id='login-form' action="/user/login" method="post">
+          <h3>Log in</h3>
+          <input type="text" name="username" placeholder="Username" required>
+          <input type="password" name="password" placeholder="Password" required>
+          <input class ="button" type="submit" value="Log In">
+        </form>
+
+        <form class='form' id='signup-form' method='post' action='/user/new'>
+          <h3>Sign up</h3>
+          NAME: <input name='name' type='text' required><br />
+          USERNAME: <input name='username' type='text' required><br />
+          EMAIL: <input name='email' type='email' required><br />
+          PASSWORD: <input name='password' type='password' required><br />
+          <input type='submit' value='Submit'>
+        </form>
+      </div>
     </div>
 
     <button type='button' id='new-postit'>Make a Post-it!</button>
