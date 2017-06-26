@@ -44,11 +44,11 @@
     <div id='user-management' class='user-info-container'>
       <% if (currentUser) { %>
         <button type='button' id='logout-button'>Log out</button>
-        Logged in as <%= currentUser %>
+        <p class='user-message'>Logged in as <%= currentUser %></p>
       <% } else { %>
         <button type='button' id='signup-button'>Sign up</button>
         <button type='button' id='login-button'>Log in</button>
-        Sign up to Onbord!
+        <p class='user-message'>Sign up to Onbord!</p>
       <% } %>
     </div>
 
@@ -64,11 +64,11 @@
 
         <form class='form' id='signup-form' method='post' action='/user/new'>
           <h3>Sign up</h3>
-          NAME: <input name='name' type='text' required><br />
-          USERNAME: <input name='username' type='text' required><br />
-          EMAIL: <input name='email' type='email' required><br />
-          PASSWORD: <input name='password' type='password' required><br />
-          <input type='submit' value='Submit'>
+          NAME: <input id='signup-name' name='name' type='text' required><br />
+          USERNAME: <input id='signup-username' name='username' type='text' required><br />
+          EMAIL: <input id='signup-email' name='email' type='email' required><br />
+          PASSWORD: <input id='signup-password' name='password' type='password' required><br />
+          <input id='create-account' type='submit' value='Submit'>
         </form>
       </div>
     </div>
