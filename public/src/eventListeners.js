@@ -7,6 +7,7 @@ var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
 var menu = document.getElementById('menu-button')
 var addBoard = document.getElementById('add-board')
+var clearBoards = document.getElementById('clear-boards')
 var favourites = document.getElementById('favourites')
 
 function loadStrokes() {
@@ -20,7 +21,7 @@ function loadStrokes() {
 
 function loadRelationships() {
   $.get('/loadRelationships', { userID: user }).done(function(data) {
-    favourites.innerHTML = ""
+    favourites.innerHTML = '';
     data.forEach(function(link) {
       favourites.innerHTML += link.whiteboardID.link(link.whiteboardID) + "\n";
     })
@@ -34,8 +35,13 @@ menu.addEventListener('click', function() {
 addBoard.addEventListener('click', function() {
   $.post('/addboard', {
     whiteboardID: document.location.href.split('/').reverse()[0],
-    userID: document.getElementById('user').innerHTML
+    userID: user
   })
+  loadRelationships();
+})
+
+clearBoards.addEventListener('click', function() {
+  $.get('/clearboards', { userID: user })
   loadRelationships();
 })
 

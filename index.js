@@ -157,6 +157,12 @@ app.get('/loadRelationships', function(req, res) {
   })
 })
 
+app.get('/clearBoards', function(req, res) {
+  Relationship.remove({ userID: req.query.userID }, function(){} ).then( function() {
+    res.send('Favourites cleared!')
+  })
+})
+
 app.get('/undo', function(req, res) {
   userID: req.query.userID
   Stroke.findOneAndRemove(Stroke.findOne({userID: userID }).sort({_id:-1})).then( function(stroke) {

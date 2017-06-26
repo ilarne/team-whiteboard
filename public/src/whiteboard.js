@@ -61,13 +61,6 @@ Whiteboard.prototype.saveStroke = function() {
   })
 }
 
-Whiteboard.prototype.addBoard = function() {
-  $.post('/addboard', {
-    whiteboardID: document.location.href.split('/').reverse()[0],
-    userID: document.getElementById('user').innerHTML
-  })
-}
-
 Whiteboard.prototype.redraw = function(stroke) {
   var stroke = stroke || this.currentStroke;
 
