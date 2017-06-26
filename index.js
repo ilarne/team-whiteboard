@@ -159,6 +159,12 @@ io.on('connection', function(socket){
   })
 })
 
+io.on('connection', function(socket){
+  socket.on('postit', function(postitObject){
+    io.emit('postit', postitObject);
+  })
+})
+
 io.on('connection', function(socket) {
   console.log('a user connected');
   socket.on('connection name', function(user) {

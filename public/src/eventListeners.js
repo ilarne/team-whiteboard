@@ -9,6 +9,7 @@ var postitNumber = 0;
 
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
+var postit = document.getElementById('sticky0')
 var user = document.getElementById('user').innerHTML;
 
 function loadStrokes() {
@@ -84,10 +85,6 @@ clear.addEventListener('click', function() {
   socket.emit('clear-whiteboard', 'cleared');
 })
 
-socket.on('clear-whiteboard', function(clear){
-  whiteboard.clear(clear);
-})
-
 clear.addEventListener('click', function() {
   socket.emit('clear-whiteboard', whiteboardID);
 })
@@ -98,23 +95,30 @@ socket.on('clear-whiteboard', function(id){
   }
 });
 
-sticky0.addEventListener('mouseup', function() {
-  var position = $('#sticky0').position()
-  postitObject.updatePosition(position.left, position.top);
-})
-
 $(function() {
   $('.postit').draggable()
 });
 
-function savePostit() {
-  postitObject.text = document.getElementById('sticky0').innerHTML;
-}
+postit.addEventListener('mouseup', function() {
+  savePostit();
+  socket.emit('postit', {
+    postit: postitObject,
+    whiteboardID: whiteboardID
+  });
+})
 
-sticky0.addEventListener('input', function() {
+socket.on()
+
+
+postit.addEventListener('input', function() {
   savePostit();
 })
 
+function savePostit() {
+  postitObject.text = document.getElementById('sticky0').innerHTML;
+  var position = $('#sticky0').position()
+  postitObject.updatePosition(position.left, position.top);
+}
 
 // document.getElementById('new-postit').addEventListener('click', function() {
 //   $("#postit-container").append("<div class='draggable postit' id='sticky" + postitNumber + "'></div>")
