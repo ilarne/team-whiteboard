@@ -18,28 +18,26 @@ function loadStrokes() {
   })
 }
 
-menu.addEventListener('click', function() {
+function loadRelationships() {
   $.get('/loadRelationships', { userID: user }).done(function(data) {
+    favourites.innerHTML = ""
     data.forEach(function(link) {
-      document.getElementById('favourites').innerHTML += link.whiteboardID.link(link.whiteboardID) + "\n";
+      favourites.innerHTML += link.whiteboardID.link(link.whiteboardID) + "\n";
     })
   })
+}
+
+menu.addEventListener('click', function() {
+  loadRelationships();
 })
 
 addBoard.addEventListener('click', function() {
-  whiteboard.addBoard();
+  $.post('/addboard', {
+    whiteboardID: document.location.href.split('/').reverse()[0],
+    userID: document.getElementById('user').innerHTML
+  })
+  loadRelationships();
 })
-
-// menu.addEventListener('click', function() {
-//   ctx = board.getContext('2d');
-//
-//   var backCanvas = document.createElement('canvas');
-//   backCanvas.width = board.width;
-//   backCanvas.height = board.height;
-//   var backCtx = backCanvas.getContext('2d');
-//
-//   backCtx.drawImage(board, 0, 0)
-// })
 
 board.addEventListener('mousedown', function(element) {
   if (user) {
