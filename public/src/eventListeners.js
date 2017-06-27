@@ -24,7 +24,7 @@ function loadRelationships() {
     favourites.innerHTML = '';
     data.forEach(function(link) {
       $('#favourites').append(
-        $('<div class="wrap"><iframe class="frame" style="pointer-events: none;" src="/board/' + link.whiteboardID + '"></iframe></div>')
+        $(`<div class="wrap">${link.whiteboardID}<iframe class="frame" style="pointer-events: none;" src="/board/${link.whiteboardID}"></iframe></div>`)
       )
     })
   })
