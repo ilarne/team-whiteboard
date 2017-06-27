@@ -23,10 +23,17 @@ function loadRelationships() {
   $.get('/loadRelationships', { userID: user }).done(function(data) {
     favourites.innerHTML = '';
     data.forEach(function(link) {
-      favourites.innerHTML += '' + link.whiteboardID.link(link.whiteboardID) + "\n";
+      $('#favourites').append(
+        $(`<div class="wrap">${link.whiteboardID}<iframe class="frame" style="pointer-events: none;" src="/board/${link.whiteboardID}"></iframe></div>`)
+      )
     })
   })
 }
+
+$('#favourites').on('click', '.wrap', function() {
+  document.location.href = $(this).children().attr('src')
+})
+
 
 menu.addEventListener('click', function() {
   loadRelationships();
@@ -34,7 +41,7 @@ menu.addEventListener('click', function() {
 
 addBoard.addEventListener('click', function() {
   $.post('/addboard', {
-    whiteboardID: document.location.href.split('/').reverse()[0],
+    whiteboardID: whiteboardID,
     userID: user
   })
   .done(function() {
@@ -124,7 +131,6 @@ socket.on('clear-whiteboard', function(id){
     whiteboard.clear(id);
   }
 });
-
 
 // User login display logic - should start thinking about extracting sections out
 // of here into separate files.

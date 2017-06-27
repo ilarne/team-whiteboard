@@ -29,6 +29,15 @@
         <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
         <button type='button' id='undo'>Undo</button>
       </div>
+
+      <div id='iframes-container'>
+        <div class='wrap'>
+        </div>
+      </div>
+
+      <div id='menu-management'>
+        <button type='button' id='menu-button'>Menu</button>
+      </div>
     <% if(!currentUser) { %> </div> <% } %>
 
     <div id='user-management' class='user-info-container'>
@@ -40,10 +49,6 @@
         <button type='button' id='login-button'>Log in</button>
         <p class='user-message'>Sign up to Onbord!</p>
       <% } %>
-    </div>
-
-    <div id='menu-management'>
-      <button type='button' id='menu-button'>Menu</button>
     </div>
 
     <!-- User login/signup forms -->
