@@ -144,7 +144,7 @@ app.get('/clearBoards', function(req, res) {
 })
 
 app.get('/undo', function(req, res) {
-  userID: req.query.userID
+  var userID = req.query.userID
   Stroke.findOneAndRemove(Stroke.findOne({userID: userID }).sort({_id:-1})).then( function(stroke) {
     res.send()
   })
