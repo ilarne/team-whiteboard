@@ -12,10 +12,8 @@
     <script>window.module = window.module || {}</script>
   </head>
   <body>
-    <span class='hidden' id='user'><%= currentUser %></span>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
 
-    <% if(!currentUser) { %> <div class='hidden'> <% } %>
       <div id="control-panel-container">
 
         <div id="colour-button-container-1">
@@ -52,17 +50,8 @@
         </div>
       </div>
 
-    <% if(!currentUser) { %> </div> <% } %>
-
     <div id='user-management' class='user-info-container'>
-      <% if (currentUser) { %>
-        <button type='button' id='logout-button'>Log out</button>
-        <p class='user-message'>Logged in as <%= currentUser %></p>
-      <% } else { %>
-        <button type='button' id='signup-button'>Sign up</button>
-        <button type='button' id='login-button'>Log in</button>
-        <p class='user-message'>Sign up to Onbord!</p>
-      <% } %>
+
     </div>
 
     <!-- User login/signup forms -->
@@ -99,11 +88,8 @@
       </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
-    <script type='text/javascript' src='/src/eventListeners.js'></script>
-    <script type='text/javascript' src='/src/formDisplay.js'></script>
+    <script type='text/javascript' src='/src/welcomeWhiteboard.js'></script>
     <script type='text/javascript' src='/src/paletteEventListeners.js'></script>
   </body>
 </html>

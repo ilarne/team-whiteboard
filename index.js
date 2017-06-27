@@ -28,6 +28,10 @@ app.get('/', function(req, res) {
   res.redirect('/board/home')
 })
 
+app.get('/welcome', function(req, res) {
+  res.render('index.html')
+})
+
 app.get('/board/:board', function(req, res) {
   if (req.session.user) {
     res.render(__dirname + '/whiteboard.html', {
