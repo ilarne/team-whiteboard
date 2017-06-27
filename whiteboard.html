@@ -16,31 +16,42 @@
 
     <% if(!currentUser) { %> <div class='hidden'> <% } %>
       <div id="control-panel-container">
+        
         <div id="colour-button-container-1">
           <div class="colour-button" id="red" data-value="#FF0000"></div>
           <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
         </div>
+        
         <div id="colour-button-container-2">
           <div class="colour-button" id="blue" data-value="#0000FF"></div>
           <div class="colour-button" id="orange" data-value="#FF9900"></div>
         </div>
+        
         <div id="colour-button-container-3">
           <div class="colour-button" id="green" data-value="#00CC00"></div>
           <div class="colour-button" id="purple" data-value="#660099"></div>
         </div>
+        
         <div id="colour-button-container-4">
           <div class="colour-button" id="black" data-value="#000000"></div>
           <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
         </div>
+        
         <div id="range-container">
           <input type="range" id="font" value="5" min="1" max="50">
         </div>
+        
         <div id='clear-whiteboard-container'>
           <button class="palette-button" type='button' id='clear-whiteboard'>Clear Whiteboard</button>
           <button class="palette-button" type='button' id='undo'>Undo</button>
-      <% if(!currentUser) { %> </div> <% } %>
+        </div>
+        
+        <div id='menu-management'>
+          <button type='button' id='menu-button'>Menu</button>
+        </div>
       </div>
-    </div>
+        
+    <% if(!currentUser) { %> </div> <% } %>
 
     <div id='user-management' class='user-info-container'>
       <% if (currentUser) { %>
@@ -51,10 +62,6 @@
         <button type='button' id='login-button'>Log in</button>
         <p class='user-message'>Sign up to Onbord!</p>
       <% } %>
-    </div>
-
-    <div id='menu-management'>
-      <button type='button' id='menu-button'>Menu</button>
     </div>
 
     <!-- User login/signup forms -->

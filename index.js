@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt-nodejs');
 const db = require('./dbConfig.js')
 const User = db.User;
 const Stroke = db.Stroke;
-const UserWhiteboardRelationshipSchema = db.UserWhiteboardRelationshipSchema;
+const UserWhiteboardRelationship = db.UserWhiteboardRelationship;
 
 app.use(session({
   cookieName: 'session',
@@ -99,14 +99,14 @@ app.post('/newstroke', function(req, res) {
 })
 
 app.post('/addboard', function(req, res) {
-  Relationship.find({ $and:
+  UserWhiteboardRelationship.find({ $and:
     [{ userID: req.session.user.username },
     { whiteboardID: req.body.whiteboardID }]
   }).then( function(existingFavourite) {
     if (existingFavourite[0]) {
       res.send()
     } else {
-      var relationship = new Relationship({
+      var relationship = new UserWhiteboardRelationship({
         whiteboardID: req.body.whiteboardID,
         userID: req.session.user.username
       })
@@ -132,19 +132,19 @@ app.get('/clear-whiteboard', function(req, res) {
 
 app.get('/loadRelationships', function(req, res) {
   var userID = req.query.userID
-  Relationship.find({ userID: userID }, function(e, data){} ).then( function(data) {
+  UserWhiteboardRelationship.find({ userID: userID }, function(e, data){} ).then( function(data) {
     res.send(data);
   })
 })
 
 app.get('/clearBoards', function(req, res) {
-  Relationship.remove({ userID: req.query.userID }, function(){} ).then( function() {
+  UserWhiteboardRelationship.remove({ userID: req.query.userID }, function(){} ).then( function() {
     res.send('Favourites cleared!')
   })
 })
 
 app.get('/undo', function(req, res) {
-  userID: req.query.userID
+  var userID = req.query.userID
   Stroke.findOneAndRemove(Stroke.findOne({userID: userID }).sort({_id:-1})).then( function(stroke) {
     res.send()
   })
