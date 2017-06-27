@@ -51,7 +51,9 @@
       </div>
 
     <div id='user-management' class='user-info-container'>
-
+        <button type='button' id='signup-button'>Sign up</button>
+        <button type='button' id='login-button'>Log in</button>
+        <p class='user-message'>Sign up to Onbord!</p>
     </div>
 
     <!-- User login/signup forms -->
@@ -88,8 +90,10 @@
       </div>
     </div>
 
+    <script src="/socket.io/socket.io.js"></script>
+    <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
-    <script type='text/javascript' src='/src/welcomeWhiteboard.js'></script>
+    <script type='text/javascript' src='/src/eventListeners.js'></script>
     <script type='text/javascript' src='/src/paletteEventListeners.js'></script>
   </body>
 </html>

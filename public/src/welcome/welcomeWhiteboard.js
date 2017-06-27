@@ -67,3 +67,5 @@ Whiteboard.prototype.redraw = function(stroke) {
     }
   }
 }
+
+var whiteboard = new Whiteboard()
