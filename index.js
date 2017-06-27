@@ -157,24 +157,22 @@ app.get('/loadpostit', function(req, res) {
 })
 
 app.post('/createorupdatepostit', function(req, res) {
-  // Postit.findOne({ postitid: req.body.postitid }).then( function(postit) {
-  //   if (postit) {
-  //     Postit.findOneAndUpdate({ positid: req.body.postitid }, {
-  //       text: req.body.text,
-  //       positionX: req.body.positionX,
-  //       positionY: req.body.positionY,
-  //       whiteboardID: req.body.whiteboardID
-  //     }, { upsert: true, new: true, setDefaultsOnInsert: true })
-  //   } else {
+  Postit.findOne({ postitid: req.body.postitid }).then( function(postit) {
+    if (!postit) {
       Postit.create({
         postitid: req.body.postitid,
         text: req.body.text,
         positionX: req.body.positionX,
         positionY: req.body.positionY,
         whiteboardID: req.body.whiteboardID
-      // })
-    // }
-  }).then( function(data) {
+      })
+    } else {
+        postit.text = req.body.text,
+        postit.positionX = req.body.positionX,
+        postit.positionY = req.body.positionY,
+        postit.save();
+      }
+    }).then( function(data) {
     res.send();
   })
 })
