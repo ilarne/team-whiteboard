@@ -110,15 +110,26 @@ pad.addEventListener('click', function() {
 
 // When the user refreshes the page, the postits matching
 // the relevant whiteboardIDs are created
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
   loadPostits();
 })
 
 // The newly created postits (either in session on on load)
 // save their text and co-ords when clicked
-$(document.body).on('click mouseup input', '.postit', function() {
+$(document.body).on('click mouseup', '.postit', function() {
+  savePostit(this.id);
+  socket.emit('postit', {
+    whiteboardID: whiteboardID
+  });
+})
+
+$(document.body).on('input', '.postit', function() {
   savePostit(this.id);
 })
+
+socket.on('postit', function() {
+  loadPostits();
+});
 
 // createPostit creates postit divs using the id passed to it
 // either in session (brand new) on on page load (from DB)
@@ -156,31 +167,6 @@ function loadPostits() {
   })
 }
 
-//
-// var postits = document.querySelectorAll('postit');
-// for (var i = 0; i < postits.length; i++) {
-//   postits[i].addEventListener('mouseup', savePostit($(this).attr('id')))
-// }
-
-//
-// $('postit').on('click', function() {
-//   console.log('before')
-//   savePostit($(this).attr('id'));
-//   console.log('after')
-//
-// })
-
-// $('body').on('click', 'a.postit', function() {
-//   savePostit(this.id)
-// })
-
-
-// $(function(){
-//   $('.postit').click( function() {
-//     savePostit(this.id)
-//   })
-// })
-
 // function displayPostit(postitArray) {
 //   for (i = 0; i < postitArray.length; i++) {
 //     var currentPostitId = 'postit' + postitArray[i]
@@ -196,44 +182,6 @@ function loadPostits() {
 //     currentPostit.style.top = data.positionY + 'px'
 //   }
 // }
-
-// socket.on('postit', function(postitObject) {
-//   if (whiteboardID === postitObject.whiteboardID) {
-//     displayPostit(postitObject);
-//   }
-// });
-//
-// postit.addEventListener('mousemove', function() {
-//   savePostit();
-//   socket.emit('postit', {
-//     postit: postitObject,
-//     whiteboardID: whiteboardID
-//   });
-// })
-
-
-// postit.addEventListener('mouseup', function() {
-//   savePostit();
-//   socket.emit('postit', {
-//     postit: postitObject,
-//     whiteboardID: whiteboardID
-//   });
-// });
-//
-// postit.addEventListener('input', function() {
-//   savePostit(this.id);
-// })
-//
-// $('div').on('click', function() {
-//   savePostit(this.id);
-//   var postit = document.getElementById(this.id)
-// });
-//
-//
-//
-//
-
-
 
 
 // User login display logic - should start thinking about extracting sections out
