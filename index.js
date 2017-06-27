@@ -58,7 +58,7 @@ app.get('/', function(req, res) {
   res.redirect('/board/home')
 })
 
-app.get('/board/:board', function(req, res) {
+app.get('/board/home', function(req, res) {
   if (req.session.user) {
     res.render(__dirname + '/whiteboard.html', {
       currentUser: req.session.user.username
@@ -67,6 +67,16 @@ app.get('/board/:board', function(req, res) {
     res.render(__dirname + '/whiteboard.html', {
       currentUser: null
     })
+  }
+})
+
+app.get('/board/:board', function(req, res) {
+  if (req.session.user) {
+    res.render(__dirname + '/whiteboard.html', {
+      currentUser: req.session.user.username
+    })
+  } else {
+    res.redirect('/board/home')
   }
 })
 
