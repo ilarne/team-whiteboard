@@ -91,18 +91,16 @@ socket.on('clear-whiteboard', function(id){
   }
 });
 
-
-
 // When the user refreshes the page, the postits matching
 // the relevant whiteboardIDs are created
 document.addEventListener('DOMContentLoaded', function() {
   loadPostits();
 })
 
-var pad = document.getElementById('pad');
-
 // When user clicks the pad, a postit with a unique id
 // is created and saved to the DB
+var pad = document.getElementById('pad');
+
 pad.addEventListener('click', function() {
   var id = 'postit' + +new Date();
   createPostit(id);
@@ -111,33 +109,49 @@ pad.addEventListener('click', function() {
 
 // The newly created postits (either in session on on load)
 // save their text and co-ords when clicked
-$(document.body).on('click mouseup', '.postit', function() {
+$(document.body).on('click mousemove mouseup', '.postit', function() {
   savePostit(this.id);
-  // socket.emit('postit', {
-  //   whiteboardID: whiteboardID
-  // });
+  var position = $('#' + this.id).position()
+  socket.emit('postit', {
+    postitid: this.id,
+    text: document.getElementById(this.id).value,
+    positionX: position.left,
+    positionY: position.top,
+    whiteboardID: whiteboardID
+  });
 })
 
-$(document.body).on('input', '.postit', function() {
-  savePostit(this.id);
-})
-
-// socket.on('postit', function() {
-//   loadPostits();
-// });
+socket.on('postit', function(p) {
+  if (whiteboardID === whiteboardID) {
+    postit = document.getElementById(p.postitid)
+    if (postit === null) {
+      createPostit(p.postitid)
+    }
+    postit.value = p.text
+    postit.style.left = p.positionX + 'px'
+    postit.style.top = p.positionY + 'px'
+  }
+});
 
 // createPostit creates postit divs using the id passed to it
 // either in session (brand new) on on page load (from DB)
 function createPostit(postitId, x, y, text) {
   var text = text || 'write on me!';
-  var $newPostit = $('<div>', {
+  var $newPostit = $('<textarea>', {
     id: postitId,
     'class': 'postit',
     'contenteditable': 'true',
     'style': 'left: ' + x + 'px; top: ' + y + 'px;'
   });
-  $($newPostit).prependTo(document.body).draggable();
-  document.getElementById(postitId).innerHTML = text
+  $($newPostit).prependTo(document.body).draggable({
+    snap: true,
+    cursor: "move",
+    delay: 100,
+    scroll: false,
+    cancel: "text",
+    containment: "parent"
+  });
+  document.getElementById(postitId).value = text
 }
 
 // savePostit saves a postit's text and co-ords to the relevant
@@ -146,7 +160,7 @@ function savePostit(divID) {
   var position = $('#' + divID).position()
   $.post('/createorupdatepostit', {
     postitid: divID,
-    text: document.getElementById(divID).innerHTML,
+    text: document.getElementById(divID).value,
     positionX: position.left,
     positionY: position.top,
     whiteboardID: whiteboardID
