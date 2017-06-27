@@ -169,6 +169,37 @@ app.get('/loadpostit', function(req, res) {
   })
 })
 
+app.post('/createorupdatepostit', function(req, res) {
+  Postit.findOne({ postitid: req.body.postitid }).then( function(postit) {
+    if (!postit) {
+      Postit.create({
+        postitid: req.body.postitid,
+        text: req.body.text,
+        positionX: req.body.positionX,
+        positionY: req.body.positionY,
+        whiteboardID: req.body.whiteboardID
+      })
+    } else {
+      Postit.update({
+        text: req.body.text,
+        positionX: req.body.positionX,
+        positionY: req.body.positionY,
+      })
+    }
+  }).then( function(data) {
+    res.send()
+  })
+})
+
+app.post('/updatepostit', function(req, res) {
+  Postit.update({ postitid: req.body.postitid }, { $set: {
+    text: req.body.text,
+    positionX: req.body.positionX,
+    positionY: req.body.positionY }
+  });
+  res.send();
+})
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);

@@ -94,7 +94,6 @@ socket.on('clear-whiteboard', function(id){
 
 
 
-
 var pad = document.getElementById('pad');
 
 // When user clicks the pad, a postit with a unique id
@@ -118,24 +117,25 @@ document.addEventListener('DOMContentLoaded', function() {
 // save their text and co-ords when clicked
 $(document.body).on('click mouseup', '.postit', function() {
   savePostit(this.id);
-  socket.emit('postit', {
-    whiteboardID: whiteboardID
-  });
+  // socket.emit('postit', {
+  //   whiteboardID: whiteboardID
+  // });
 })
 
 $(document.body).on('input', '.postit', function() {
   savePostit(this.id);
 })
 
-socket.on('postit', function() {
-  loadPostits();
-});
+// socket.on('postit', function() {
+//   loadPostits();
+// });
 
 // createPostit creates postit divs using the id passed to it
 // either in session (brand new) on on page load (from DB)
 function createPostit(postitId) {
   var $newPostit = $('<div>', { id: postitId, 'class': 'postit', 'contenteditable': 'true'});
-  $("#pad").append($newPostit);
+  $($newPostit).prependTo(document.body).draggable();
+  // $('#pad').append($newPostit);
 }
 
 // savePostit saves a postit's text and co-ords to the relevant
@@ -143,10 +143,20 @@ function createPostit(postitId) {
 function savePostit(divID) {
   var postitObject = new Postit();
   postitObject.postitID = divID
+  console.log(postitObject)
+  console.log(postitObject.text)
   postitObject.text = document.getElementById(divID).innerHTML;
   var position = $('#' + divID).position()
+  console.log(position)
   postitObject.updatePosition(position.left, position.top);
-  postitObject.saveToDB();
+  console.log(postitObject.positionX)
+  $.post('/createorupdatepostit', {
+    postitid: divID,
+    text: postitObject.text,
+    positionX: postitObject.positionX,
+    positionY: postitObject.positionY,
+    whiteboardID: whiteboardID
+  })
 }
 
 // loadPostits gets the postits that match the current board's
@@ -160,29 +170,12 @@ function loadPostits() {
       currentPostit.style.position = 'absolute'
       currentPostit.style.left = postit.positionX + 'px'
       currentPostit.style.top = postit.positionY + 'px'
-      $(function() {
-        $('#' + postit.postitid).draggable()
-      });
+      // $(function() {
+      //   $('#' + postit.postitid).draggable()
+      // });
     })
   })
 }
-
-// function displayPostit(postitArray) {
-//   for (i = 0; i < postitArray.length; i++) {
-//     var currentPostitId = 'postit' + postitArray[i]
-//     var currentPostit = document.getElementById(currentPostit)
-//
-//     Postit.find({ postitid: currentPostitId }, function(e, data){} ).then( function(data) {
-//       res.send(data)
-//     })
-//
-//     currentPostit.innerHTML = data.text
-//     currentPostit.style.position = "absolute"
-//     currentPostit.style.left = data.positionX + 'px'
-//     currentPostit.style.top = data.positionY + 'px'
-//   }
-// }
-
 
 // User login display logic - should start thinking about extracting sections out
 // of here into separate files.

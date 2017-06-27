@@ -26,4 +26,14 @@ Postit.prototype.saveToDB = function() {
   })
 }
 
+// Postit.prototype.update = function() {
+//   $.post('/updatepostit', {
+//     postitid: this.postitID,
+//     text: this.text,
+//     positionX: this.positionX,
+//     positionY: this.positionY,
+//     whiteboardID: document.location.href.split('/').reverse()[0]
+//   })
+// }
+
 module.exports = Postit;
