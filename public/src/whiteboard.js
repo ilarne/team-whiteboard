@@ -1,7 +1,7 @@
 'use strict';
 
 function Whiteboard(context) {
-  this.context = context;
+  this.context = context || featureTestObject;
   this.painting = false;
   this.colour = "#000000";
   this.fontSize = 5;
@@ -87,4 +87,4 @@ Whiteboard.prototype.redraw = function(stroke) {
   }
 }
 
-module.exports = Whiteboard;
+// module.exports = Whiteboard;
