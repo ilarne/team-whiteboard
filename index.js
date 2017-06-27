@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt-nodejs');
 const db = require('./dbConfig.js')
 const User = db.User;
 const Stroke = db.Stroke;
-const UserWhiteboardRelationshipSchema = db.UserWhiteboardRelationshipSchema;
+const Relationship = db.Relationship;
 
 app.use(session({
   cookieName: 'session',

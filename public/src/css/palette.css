@@ -17,7 +17,7 @@
 
 #control-panel-container {
   background-color: white;
-  border: solid 3px black;
+  box-shadow: 5px 5px 5px #888888;
   border-radius: 25px;
   position: absolute;
   width: 100px;

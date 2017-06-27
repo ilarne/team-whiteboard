@@ -23,17 +23,17 @@ const strokeSchema = new Schema({
   userID: String
 })
 
-const userWhiteboardRelationshipSchema = new Schema({
+const relationshipSchema = new Schema({
   userID: String,
   whiteboardID: String
 })
 
 const User = mongoose.model('User', userSchema)
 const Stroke = mongoose.model('Stroke', strokeSchema);
-const UserWhiteboardRelationshipSchema = mongoose.model('UserWhiteboardRelationshipSchema', userWhiteboardRelationshipSchema);
+const Relationship = mongoose.model('Relationsip', relationshipSchema);
 
 module.exports = {
   User: User,
-  Stroke: Stroke
-  UserWhiteboardRelationshipSchema: UserWhiteboardRelationshipSchema
+  Stroke: Stroke,
+  Relationship: Relationship
 }
