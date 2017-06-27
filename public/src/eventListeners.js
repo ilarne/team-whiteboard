@@ -128,20 +128,21 @@ $(document.body).on('input', '.postit', function() {
 
 // createPostit creates postit divs using the id passed to it
 // either in session (brand new) on on page load (from DB)
-function createPostit(postitId) {
-  var $newPostit = $('<div>', { id: postitId, 'class': 'postit', 'contenteditable': 'true'});
+function createPostit(postitId, x, y, text) {
+  var text = text || 'write on me!';
+  var $newPostit = $('<div>', {
+    id: postitId,
+    'class': 'postit',
+    'contenteditable': 'true',
+    'style': 'left: ' + x + 'px; top: ' + y + 'px;'
+  });
   $($newPostit).prependTo(document.body).draggable();
+  document.getElementById(postitId).innerHTML = text
 }
 
 // savePostit saves a postit's text and co-ords to the relevant
 // postitObject, as either passed to it or created from scratch
 function savePostit(divID) {
-  // var postitObject = new Postit();
-  // postitObject.postitID = divID
-  // postitObject.text = document.getElementById(divID).innerHTML;
-  // var position = $('#' + divID).position()
-  // postitObject.updatePosition(position.left, position.top);
-  console.log(document.getElementById(divID).innerHTML)
   var position = $('#' + divID).position()
   $.post('/createorupdatepostit', {
     postitid: divID,
@@ -156,20 +157,8 @@ function savePostit(divID) {
 // whiteboardID, creates and fills the corresponding divs on page load
 function loadPostits() {
   $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
-    data.forEach(function(postit) {
-      createPostit(postit.postitid);
-      // $(function() {
-      //   $('#' + postit.postitid).draggable()
-      // });
-    })
-  })
-  $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
-    data.forEach(function(postit) {
-      var postit = document.getElementById(postit.postitid)
-      postit.innerHTML = postit.text
-      postit.style.position = 'absolute'
-      postit.style.left = postit.positionX + 'px'
-      postit.style.top = postit.positionY + 'px'
+    data.forEach(function(p) {
+      createPostit(p.postitid, p.positionX, p.positionY, p.text)
     })
   })
 }
