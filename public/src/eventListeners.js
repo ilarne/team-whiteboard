@@ -4,13 +4,6 @@ var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
 
-// post-its
-// var postitDiv = document.getElementById('postit');
-// var postitObject = new Postit();
-// var postitNumber = 0;
-// post-its
-
-
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
@@ -64,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function() {
   loadStrokes();
-  loadPostits();
 })
 
 clear.addEventListener('click', function() {
@@ -103,11 +95,10 @@ socket.on('clear-whiteboard', function(id){
 
 
 
-
-// post-its
-
 var pad = document.getElementById('pad');
 
+// When user clicks the pad, a postit with a unique id
+// is created and saved to the DB
 pad.addEventListener('click', function() {
   var id = 'postit' + +new Date();
   createPostit(id)
@@ -116,14 +107,28 @@ pad.addEventListener('click', function() {
     $('#' + id).draggable()
   });
 })
-//
-// postitIds.forEach(function(id) {
-//   var postit = document.getElementById(id)
-//   postit.addEventListener('mousemove', function() {
-//     savePostit(id)
-//   })
-// })
 
+// When the user refreshes the page, the postits matching
+// the relevant whiteboardIDs are created
+document.addEventListener("DOMContentLoaded", function() {
+  loadPostits();
+})
+
+// The newly created postits (either in session on on load)
+// save their text and co-ords when clicked
+$(document.body).on('click mouseup input', '.postit', function() {
+  savePostit(this.id);
+})
+
+// createPostit creates postit divs using the id passed to it
+// either in session (brand new) on on page load (from DB)
+function createPostit(postitId) {
+  var $newPostit = $('<div>', { id: postitId, 'class': 'postit', 'contenteditable': 'true'});
+  $("#pad").append($newPostit);
+}
+
+// savePostit saves a postit's text and co-ords to the relevant
+// postitObject, as either passed to it or created from scratch
 function savePostit(divID) {
   var postitObject = new Postit();
   postitObject.postitID = divID
@@ -133,8 +138,10 @@ function savePostit(divID) {
   postitObject.saveToDB();
 }
 
+// loadPostits gets the postits that match the current board's
+// whiteboardID, creates and fills the corresponding divs on page load
 function loadPostits() {
-  $.get('/loadpostit', { whiteboardID: whiteboardID } ).done(function(data) {
+  $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
     data.forEach(function(postit) {
       createPostit(postit.postitid);
       var currentPostit = document.getElementById(postit.postitid);
@@ -142,14 +149,13 @@ function loadPostits() {
       currentPostit.style.position = 'absolute'
       currentPostit.style.left = postit.positionX + 'px'
       currentPostit.style.top = postit.positionY + 'px'
+      $(function() {
+        $('#' + postit.postitid).draggable()
+      });
     })
   })
 }
 
-function createPostit(postitId) {
-  var $newPostit = $('<div>', { id: postitId, 'class': 'postit', 'contenteditable': 'true'});
-  $("#pad").append($newPostit);
-}
 //
 // var postits = document.querySelectorAll('postit');
 // for (var i = 0; i < postits.length; i++) {
@@ -228,10 +234,6 @@ function createPostit(postitId) {
 //
 
 
-
-
-
-// post-its
 
 
 // User login display logic - should start thinking about extracting sections out
