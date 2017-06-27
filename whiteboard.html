@@ -11,12 +11,7 @@
     <script>window.module = window.module || {}</script>
   </head>
   <body>
-
-    <div id='postit-container'>
-      <div class='postitPad' id='postit'></div>
-      <div class='draggable postit' id='sticky0' contenteditable="true"></div>
-      <div class='draggable postit' id='sticky1' contenteditable="true"></div>
-    </div>
+    <div class='postit-pad' id='pad'></div>
 
     <span class='hidden' id='user'><%= currentUser %></span>
 
@@ -72,7 +67,7 @@
       </div>
     </div>
 
-    <button type='button' id='new-postit'>Make a Post-it!</button>
+    <!-- <button type='button' id='new-postit'>Make a Post-it!</button> -->
 
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>

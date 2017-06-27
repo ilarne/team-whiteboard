@@ -3,18 +3,17 @@ var board = document.getElementById('whiteboard')
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
-var postitDiv = document.getElementById('postit');
-var postitObject = new Postit();
-var postitNumber = 0;
+
+// post-its
+// var postitDiv = document.getElementById('postit');
+// var postitObject = new Postit();
+// var postitNumber = 0;
+// post-its
+
 
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
-
-$('div').on('click', function () {
-  savePostit(this.id);
-  var postit = document.getElementById(this.id)
-});
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -100,37 +99,33 @@ socket.on('clear-whiteboard', function(id){
   }
 });
 
-$(function() {
-  $('.postit').draggable()
-});
 
-postit.addEventListener('mousemove', function() {
-  savePostit();
-  socket.emit('postit', {
-    postit: postitObject,
-    whiteboardID: whiteboardID
+
+
+
+
+// post-its
+
+var pad = document.getElementById('pad');
+
+pad.addEventListener('click', function() {
+  var id = 'postit' + +new Date();
+  createPostit(id)
+  savePostit(id);
+  $(function() {
+    $('#' + id).draggable()
   });
 })
-
-postit.addEventListener("mouseup", function() {
-  savePostit();
-  socket.emit('postit', {
-    postit: postitObject,
-    whiteboardID: whiteboardID
-  });
-});
-
-socket.on('postit', function(postitObject) {
-  if (whiteboardID === postitObject.whiteboardID) {
-    displayPostit(postitObject);
-  }
-});
-
-postit.addEventListener('input', function() {
-  savePostit(this.id);
-})
+//
+// postitIds.forEach(function(id) {
+//   var postit = document.getElementById(id)
+//   postit.addEventListener('mousemove', function() {
+//     savePostit(id)
+//   })
+// })
 
 function savePostit(divID) {
+  var postitObject = new Postit();
   postitObject.postitID = divID
   postitObject.text = document.getElementById(divID).innerHTML;
   var position = $('#' + divID).position()
@@ -138,41 +133,106 @@ function savePostit(divID) {
   postitObject.saveToDB();
 }
 
-function displayPostit(postitObject) {
-  var currentPostit = document.getElementById('sticky' + postitObject.postitID)
-
-  currentPostit.innerHTML = postitObject.postit.text
-  currentPostit.style.position = "absolute"
-  currentPostit.style.left = postitObject.postit.positionX + 'px'
-  currentPostit.style.top = postitObject.postit.positionY + 'px'
-}
-
 function loadPostits() {
   $.get('/loadpostit', { whiteboardID: whiteboardID } ).done(function(data) {
-    // var currentPostit = document.getElementById('sticky0')
-    // data.forEach(function(postit) {
-    //   currentPostit.innerHTML = postit.text,
-    //   currentPostit.style.position = "absolute",
-    //   currentPostit.style.left = postit.positionX + "px"
-    //   currentPostit.style.top = postit.positionY + "px"
-    // })
     data.forEach(function(postit) {
-      if (postit.postitid === 'sticky0') {
-        var currentPostit = document.getElementById('sticky0')
-        currentPostit.innerHTML = postit.text,
-        currentPostit.style.position = "absolute",
-        currentPostit.style.left = postit.positionX + "px"
-        currentPostit.style.top = postit.positionY + "px"
-      } else {
-        var currentPostit = document.getElementById('sticky1')
-        currentPostit.innerHTML = postit.text,
-        currentPostit.style.position = "absolute",
-        currentPostit.style.left = postit.positionX + "px"
-        currentPostit.style.top = postit.positionY + "px"
-      }
+      createPostit(postit.postitid);
+      var currentPostit = document.getElementById(postit.postitid);
+      currentPostit.innerHTML = postit.text
+      currentPostit.style.position = 'absolute'
+      currentPostit.style.left = postit.positionX + 'px'
+      currentPostit.style.top = postit.positionY + 'px'
     })
   })
 }
+
+function createPostit(postitId) {
+  var $newPostit = $('<div>', { id: postitId, 'class': 'postit', 'contenteditable': 'true'});
+  $("#pad").append($newPostit);
+}
+//
+// var postits = document.querySelectorAll('postit');
+// for (var i = 0; i < postits.length; i++) {
+//   postits[i].addEventListener('mouseup', savePostit($(this).attr('id')))
+// }
+
+//
+// $('postit').on('click', function() {
+//   console.log('before')
+//   savePostit($(this).attr('id'));
+//   console.log('after')
+//
+// })
+
+// $('body').on('click', 'a.postit', function() {
+//   savePostit(this.id)
+// })
+
+
+// $(function(){
+//   $('.postit').click( function() {
+//     savePostit(this.id)
+//   })
+// })
+
+// function displayPostit(postitArray) {
+//   for (i = 0; i < postitArray.length; i++) {
+//     var currentPostitId = 'postit' + postitArray[i]
+//     var currentPostit = document.getElementById(currentPostit)
+//
+//     Postit.find({ postitid: currentPostitId }, function(e, data){} ).then( function(data) {
+//       res.send(data)
+//     })
+//
+//     currentPostit.innerHTML = data.text
+//     currentPostit.style.position = "absolute"
+//     currentPostit.style.left = data.positionX + 'px'
+//     currentPostit.style.top = data.positionY + 'px'
+//   }
+// }
+
+// socket.on('postit', function(postitObject) {
+//   if (whiteboardID === postitObject.whiteboardID) {
+//     displayPostit(postitObject);
+//   }
+// });
+//
+// postit.addEventListener('mousemove', function() {
+//   savePostit();
+//   socket.emit('postit', {
+//     postit: postitObject,
+//     whiteboardID: whiteboardID
+//   });
+// })
+
+
+// postit.addEventListener('mouseup', function() {
+//   savePostit();
+//   socket.emit('postit', {
+//     postit: postitObject,
+//     whiteboardID: whiteboardID
+//   });
+// });
+//
+// postit.addEventListener('input', function() {
+//   savePostit(this.id);
+// })
+//
+// $('div').on('click', function() {
+//   savePostit(this.id);
+//   var postit = document.getElementById(this.id)
+// });
+//
+//
+//
+//
+
+
+
+
+
+// post-its
+
 
 // User login display logic - should start thinking about extracting sections out
 // of here into separate files.
