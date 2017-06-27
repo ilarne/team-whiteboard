@@ -58,11 +58,15 @@ app.get('/', function(req, res) {
   res.redirect('/board/home')
 })
 
+function viewHomepage(req, res) {
+  res.render(__dirname + '/whiteboard.html', {
+    currentUser: req.session.user.username
+  })
+}
+
 app.get('/board/home', function(req, res) {
   if (req.session.user) {
-    res.render(__dirname + '/whiteboard.html', {
-      currentUser: req.session.user.username
-    })
+    viewHomepage(req, res)
   } else {
     res.render(__dirname + '/whiteboard.html', {
       currentUser: null
@@ -72,9 +76,7 @@ app.get('/board/home', function(req, res) {
 
 app.get('/board/:board', function(req, res) {
   if (req.session.user) {
-    res.render(__dirname + '/whiteboard.html', {
-      currentUser: req.session.user.username
-    })
+    viewHomepage(req, res)
   } else {
     res.redirect('/board/home')
   }
