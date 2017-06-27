@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "testcafe chrome test/features/userSpec.js && mocha",
     "start": "node index.js"
   },
   "repository": {
@@ -23,7 +23,7 @@
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "should": "^11.2.1",
-    "zombie": "^5.0.5"
+    "testcafe": "^0.16.1"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

@@ -3,47 +3,17 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
-const config = require('./config.js').get(process.env.NODE_ENV);
-
-const mongoose = require('mongoose');
-const mongo = require('mongodb');
-
 const session = require('client-sessions')
 const bcrypt = require('bcrypt-nodejs');
-
-var Schema = mongoose.Schema;
-mongoose.connect(config.database)
-var db = mongoose.connection;
-
-var userSchema = new Schema({
-  name: String,
-  username: String,
-  email: String,
-  password: String
-})
-
-var strokeSchema = new Schema({
-  clickX: Array,
-  clickY: Array,
-  colour: String,
-  fontSize: Number,
-  whiteboardID: String,
-  userID: String
-})
-
-var relationshipSchema = new Schema({
-  userID: String,
-  whiteboardID: String
-})
+const db = require('./dbConfig.js')
+const User = db.User;
+const Stroke = db.Stroke;
+const UserWhiteboardRelationshipSchema = db.UserWhiteboardRelationshipSchema;
 
 app.use(session({
   cookieName: 'session',
   secret: 'super-secret'
 }))
-
-var User = mongoose.model('User', userSchema)
-var Stroke = mongoose.model('Stroke', strokeSchema);
-var Relationship = mongoose.model('Relationship', relationshipSchema);
 
 var bodyParser = require('body-parser')
 
