@@ -5,3 +5,40 @@
   border: solid 1px black;
   float: left;
 }
+
+
+#control-panel-container {
+  background-color: blue;
+  position: absolute;
+  width: 80px;
+  height: 400px;
+}
+
+#colour-button-container-1 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#colour-button-container-2 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+#colour-button-container-3 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+#colour-button-container-4 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+#font {
+  transform: rotate(-90deg);
+}
