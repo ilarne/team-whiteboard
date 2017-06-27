@@ -28,7 +28,11 @@
       <div id='clear-whiteboard-container'>
         <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
         <button type='button' id='undo'>Undo</button>
-        <iframe style='pointer-events: none;' src="http://localhost:3000/board/doglover"></iframe>
+        <div id='iframes-container'>
+          <div class='wrap'>
+            <!-- <iframe class='frame' style='pointer-events: none;' src="http://localhost:3000/board/doglover"></iframe> -->
+          </div>
+        </div>
       </div>
     <% if(!currentUser) { %> </div> <% } %>
 

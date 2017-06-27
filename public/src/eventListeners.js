@@ -8,7 +8,7 @@ var user = document.getElementById('user').innerHTML;
 var menu = document.getElementById('menu-button')
 var addBoard = document.getElementById('add-board')
 var clearBoards = document.getElementById('clear-boards')
-var favourites = document.getElementById('favourites')
+var favourites = document.getElementById('iframes-container')
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -23,7 +23,13 @@ function loadRelationships() {
   $.get('/loadRelationships', { userID: user }).done(function(data) {
     favourites.innerHTML = '';
     data.forEach(function(link) {
-      favourites.innerHTML += '' + link.whiteboardID.link(link.whiteboardID) + "\n";
+      $('#iframes-container').append(
+        $('<div class="wrap">').append(
+          $('<iframe class="frame" style="pointer-events: none;" src="http://localhost:3000/board/' + link.whiteboardID + '"></iframe>')
+        ).append(
+          $('</div>')
+        )
+      )
     })
   })
 }
@@ -34,7 +40,7 @@ menu.addEventListener('click', function() {
 
 addBoard.addEventListener('click', function() {
   $.post('/addboard', {
-    whiteboardID: document.location.href.split('/').reverse()[0],
+    whiteboardID: whiteboardID,
     userID: user
   })
   .done(function() {
@@ -124,7 +130,6 @@ socket.on('clear-whiteboard', function(id){
     whiteboard.clear(id);
   }
 });
-
 
 // User login display logic - should start thinking about extracting sections out
 // of here into separate files.
