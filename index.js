@@ -28,19 +28,29 @@ app.get('/', function(req, res) {
   res.redirect('/board/home')
 })
 
+function viewHomepage(req, res) {
+  res.render(__dirname + '/whiteboard.html', {
+    currentUser: req.session.user.username
+  })
+}
+
 app.get('/welcome', function(req, res) {
   res.render('index.html')
 })
 
+app.get('/board/home', function(req, res) {
+  if (req.session.user) {
+    viewHomepage(req, res)
+  } else {
+    res.redirect('/welcome')
+  }
+})
+
 app.get('/board/:board', function(req, res) {
   if (req.session.user) {
-    res.render(__dirname + '/whiteboard.html', {
-      currentUser: req.session.user.username
-    })
+    viewHomepage(req, res)
   } else {
-    res.render(__dirname + '/whiteboard.html', {
-      currentUser: null
-    })
+    res.redirect('/welcome')
   }
 })
 
