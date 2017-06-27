@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/src/css/whiteboard.css">
     <link rel="stylesheet" type="text/css" href="/src/css/palette.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type='rext/javascript' src='http://futtta.be/squeezeFrame/squeezeFrame.js'></script>
     <script>window.module = window.module || {}</script>
   </head>
   <body>
@@ -27,6 +28,7 @@
       <div id='clear-whiteboard-container'>
         <button type='button' id='clear-whiteboard'>Clear Whiteboard</button>
         <button type='button' id='undo'>Undo</button>
+        <iframe style='pointer-events: none;' src="http://localhost:3000/board/doglover"></iframe>
       </div>
     <% if(!currentUser) { %> </div> <% } %>
 
@@ -39,6 +41,10 @@
         <button type='button' id='login-button'>Log in</button>
         <p class='user-message'>Sign up to Onbord!</p>
       <% } %>
+    </div>
+
+    <div id='menu-management'>
+      <button type='button' id='menu-button'>Menu</button>
     </div>
 
     <!-- User login/signup forms -->
@@ -59,6 +65,15 @@
           PASSWORD: <input id='signup-password' name='password' type='password' required><br />
           <input id='create-account' type='submit' value='Submit'>
         </form>
+
+        <!-- Board Menu -->
+        <div class='menu-container'>
+          <h3>MENU</h3>
+          <button type='button' id='add-board'>Add Board to Favourites</button>
+          <button type='button' id='clear-boards'>Clear Favourites</button>
+          <div class='favourites' id='favourites'>
+          <div>
+        </div>
       </div>
     </div>
 
