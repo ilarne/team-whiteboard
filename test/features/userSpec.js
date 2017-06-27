@@ -47,14 +47,6 @@ fixture `Page renders successfully`
     .expect(Selector('#signup-form').getStyleProperty('display')).eql('block')
   })
 
-fixture `Anonymous Users`
-  .page('http://localhost:3000/board/fakeboard')
-
-  test('User name is blank when not logged in', async time => {
-    await time
-    .expect(Selector('#user').innerText).eql('');
-  });
-
 fixture `Signing up`
   .page('http://localhost:3000/board/home');
 
