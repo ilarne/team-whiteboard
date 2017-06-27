@@ -117,7 +117,6 @@ app.post('/addboard', function(req, res) {
 })
 
 app.post('/search', function(req, res) {
-  console.log(req.body.search)
   res.redirect('/board/' + req.body.search);
 })
 
