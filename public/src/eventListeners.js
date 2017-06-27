@@ -24,15 +24,16 @@ function loadRelationships() {
     favourites.innerHTML = '';
     data.forEach(function(link) {
       $('#iframes-container').append(
-        $('<div class="wrap">').append(
-          $('<iframe class="frame" style="pointer-events: none;" src="http://localhost:3000/board/' + link.whiteboardID + '"></iframe>')
-        ).append(
-          $('</div>')
-        )
+        $('<div class="wrap"><iframe class="frame" style="pointer-events: none;" src="/board/' + link.whiteboardID + '"></iframe></div>')
       )
     })
   })
 }
+
+$('#iframes-container').on('click', '.wrap', function() {
+  document.location.href = $(this).children().attr('src')
+})
+
 
 menu.addEventListener('click', function() {
   loadRelationships();
