@@ -114,7 +114,10 @@ app.post('/addboard', function(req, res) {
       res.send();
     }
   })
+})
 
+app.post('/search', function(req, res) {
+  res.redirect('/board/' + req.body.search);
 })
 
 app.get('/loadstroke', function(req, res) {

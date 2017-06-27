@@ -9,6 +9,7 @@ var menu = document.getElementById('menu-button')
 var addBoard = document.getElementById('add-board')
 var clearBoards = document.getElementById('clear-boards')
 var favourites = document.getElementById('favourites')
+var search = document.getElementById('searchButton')
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {

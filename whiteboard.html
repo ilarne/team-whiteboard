@@ -6,8 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/src/css/whiteboard.css">
     <link rel="stylesheet" type="text/css" href="/src/css/palette.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type='text/javascript' src='http://futtta.be/squeezeFrame/squeezeFrame.js'></script>
+
     <script>window.module = window.module || {}</script>
   </head>
   <body>
@@ -86,6 +87,10 @@
         <!-- Board Menu -->
         <div class='menu-container'>
           <h3>MENU</h3>
+          <form class="search" id='search-form' method='post' action='/search' >
+            SEARCH: <input id='search-term' name='search' type='text' required>
+            <input id='create-account' type='submit' value='Submit'>
+          </form>
           <button type='button' id='add-board'>Add Board to Favourites</button>
           <button type='button' id='clear-boards'>Clear Favourites</button>
           <div class='favourites' id='favourites'>
