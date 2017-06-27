@@ -49,13 +49,13 @@ html, body {
 
 .menu-container {
   background-color:white;
-  width:300px;
+  padding: 10px;
   margin:0 auto;
   text-align: center;
 }
 
 .wrap {
-    width: 320px;
+    /*width: 320px;*/
     height: 192px;
     padding: 0;
     overflow: hidden;

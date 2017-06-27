@@ -8,7 +8,7 @@ var user = document.getElementById('user').innerHTML;
 var menu = document.getElementById('menu-button')
 var addBoard = document.getElementById('add-board')
 var clearBoards = document.getElementById('clear-boards')
-var favourites = document.getElementById('iframes-container')
+var favourites = document.getElementById('favourites')
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -23,14 +23,14 @@ function loadRelationships() {
   $.get('/loadRelationships', { userID: user }).done(function(data) {
     favourites.innerHTML = '';
     data.forEach(function(link) {
-      $('#iframes-container').append(
+      $('#favourites').append(
         $('<div class="wrap"><iframe class="frame" style="pointer-events: none;" src="/board/' + link.whiteboardID + '"></iframe></div>')
       )
     })
   })
 }
 
-$('#iframes-container').on('click', '.wrap', function() {
+$('#favourites').on('click', '.wrap', function() {
   document.location.href = $(this).children().attr('src')
 })
 
