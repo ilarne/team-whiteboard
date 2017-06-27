@@ -23,3 +23,7 @@ range.addEventListener("change", function () {
   var size = range.value;
   whiteboard.adjustFontSize(size)
 });
+
+  $(function() {
+    $( "#control-panel-container" ).draggable();
+  });
