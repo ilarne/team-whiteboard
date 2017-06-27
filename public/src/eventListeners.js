@@ -93,6 +93,11 @@ socket.on('clear-whiteboard', function(id){
 
 
 
+// When the user refreshes the page, the postits matching
+// the relevant whiteboardIDs are created
+document.addEventListener('DOMContentLoaded', function() {
+  loadPostits();
+})
 
 var pad = document.getElementById('pad');
 
@@ -100,17 +105,8 @@ var pad = document.getElementById('pad');
 // is created and saved to the DB
 pad.addEventListener('click', function() {
   var id = 'postit' + +new Date();
-  createPostit(id)
+  createPostit(id);
   savePostit(id);
-  $(function() {
-    $('#' + id).draggable()
-  });
-})
-
-// When the user refreshes the page, the postits matching
-// the relevant whiteboardIDs are created
-document.addEventListener('DOMContentLoaded', function() {
-  loadPostits();
 })
 
 // The newly created postits (either in session on on load)
@@ -135,26 +131,23 @@ $(document.body).on('input', '.postit', function() {
 function createPostit(postitId) {
   var $newPostit = $('<div>', { id: postitId, 'class': 'postit', 'contenteditable': 'true'});
   $($newPostit).prependTo(document.body).draggable();
-  // $('#pad').append($newPostit);
 }
 
 // savePostit saves a postit's text and co-ords to the relevant
 // postitObject, as either passed to it or created from scratch
 function savePostit(divID) {
-  var postitObject = new Postit();
-  postitObject.postitID = divID
-  console.log(postitObject)
-  console.log(postitObject.text)
-  postitObject.text = document.getElementById(divID).innerHTML;
+  // var postitObject = new Postit();
+  // postitObject.postitID = divID
+  // postitObject.text = document.getElementById(divID).innerHTML;
+  // var position = $('#' + divID).position()
+  // postitObject.updatePosition(position.left, position.top);
+  console.log(document.getElementById(divID).innerHTML)
   var position = $('#' + divID).position()
-  console.log(position)
-  postitObject.updatePosition(position.left, position.top);
-  console.log(postitObject.positionX)
   $.post('/createorupdatepostit', {
     postitid: divID,
-    text: postitObject.text,
-    positionX: postitObject.positionX,
-    positionY: postitObject.positionY,
+    text: document.getElementById(divID).innerHTML,
+    positionX: position.left,
+    positionY: position.top,
     whiteboardID: whiteboardID
   })
 }
@@ -165,14 +158,18 @@ function loadPostits() {
   $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
     data.forEach(function(postit) {
       createPostit(postit.postitid);
-      var currentPostit = document.getElementById(postit.postitid);
-      currentPostit.innerHTML = postit.text
-      currentPostit.style.position = 'absolute'
-      currentPostit.style.left = postit.positionX + 'px'
-      currentPostit.style.top = postit.positionY + 'px'
       // $(function() {
       //   $('#' + postit.postitid).draggable()
       // });
+    })
+  })
+  $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
+    data.forEach(function(postit) {
+      var postit = document.getElementById(postit.postitid)
+      postit.innerHTML = postit.text
+      postit.style.position = 'absolute'
+      postit.style.left = postit.positionX + 'px'
+      postit.style.top = postit.positionY + 'px'
     })
   })
 }

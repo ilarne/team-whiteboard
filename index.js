@@ -150,22 +150,9 @@ app.get('/undo', function(req, res) {
   })
 })
 
-app.post('/newpostit', function(req, res) {
-  var postit = new Postit({
-    postitid: req.body.postitid,
-    text: req.body.text,
-    positionX: req.body.positionX,
-    positionY: req.body.positionY,
-    whiteboardID: req.body.whiteboardID
-  });
-  postit.save();
-  res.send();
-})
-
 app.get('/loadpostit', function(req, res) {
-  var whiteboardID = req.query.whiteboardID
-  Postit.find({ whiteboardID: whiteboardID }, function(e, data){} ).then( function(data) {
-    res.send(data)
+  Postit.find({ whiteboardID: req.query.whiteboardID }, function(e, data){} ).then( function(data) {
+    res.send(data);
   })
 })
 
@@ -187,17 +174,8 @@ app.post('/createorupdatepostit', function(req, res) {
       })
     }
   }).then( function(data) {
-    res.send()
+    res.send();
   })
-})
-
-app.post('/updatepostit', function(req, res) {
-  Postit.update({ postitid: req.body.postitid }, { $set: {
-    text: req.body.text,
-    positionX: req.body.positionX,
-    positionY: req.body.positionY }
-  });
-  res.send();
 })
 
 io.on('connection', function(socket){
