@@ -25,8 +25,25 @@ html, body {
   background-color: #96C7D4;
   box-shadow: 5px 5px 5px #438ea3;
   border-radius: 25px;
-  position: fixed;
+  position: relative;
   top: 20px;
+  right: 20px;
+  float: right;
+  text-align: center;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
+  display:inline;
+  padding:15px;
+}
+
+#welcome-message {
+  background-color: #96C7D4;
+  box-shadow: 5px 5px 5px #438ea3;
+  border-radius: 25px;
+  position: fixed;
+  top: 100px;
   right: 20px;
   float: right;
   margin-left: 500px;
