@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt-nodejs');
 const db = require('./dbConfig.js')
 const User = db.User;
 const Stroke = db.Stroke;
+const Postit = db.Postit;
 const UserWhiteboardRelationship = db.UserWhiteboardRelationship;
 
 app.use(session({
@@ -143,7 +144,10 @@ app.get('/loadstroke', function(req, res) {
 
 app.get('/clear-whiteboard', function(req, res) {
   Stroke.remove({ whiteboardID: req.query.board }, function(){} ).then( function() {
-    res.send('Whiteboard cleared!')
+    res.send('Strokes cleared!')
+  })
+  Postit.remove({ whiteboardID: req.query.board }, function(){}).then( function() {
+    res.send('Postits cleared!')
   })
 });
 
@@ -167,6 +171,34 @@ app.get('/undo', function(req, res) {
   })
 })
 
+app.get('/loadpostit', function(req, res) {
+  Postit.find({ whiteboardID: req.query.whiteboardID }, function(e, data){} ).then( function(data) {
+    res.send(data);
+  })
+})
+
+app.post('/createorupdatepostit', function(req, res) {
+  Postit.findOne({ postitid: req.body.postitid }).then( function(postit) {
+    if (!postit) {
+      Postit.create({
+        postitid: req.body.postitid,
+        text: req.body.text,
+        positionX: req.body.positionX,
+        positionY: req.body.positionY,
+        whiteboardID: req.body.whiteboardID,
+        postitclass: req.body.postitClass
+      })
+    } else {
+        postit.text = req.body.text,
+        postit.positionX = req.body.positionX,
+        postit.positionY = req.body.positionY,
+        postit.save();
+      }
+    }).then( function(data) {
+    res.send();
+  })
+})
+
 io.on('connection', function(socket){
   socket.on('paint', function(msg){
     io.emit('paint', msg);
@@ -182,6 +214,12 @@ io.on('connection', function(socket){
 io.on('connection', function(socket){
   socket.on('undo', function(undo){
     io.emit('undo', undo);
+  })
+})
+
+io.on('connection', function(socket){
+  socket.on('postit', function(postit){
+    io.emit('postit', postit);
   })
 })
 

@@ -23,17 +23,28 @@ const strokeSchema = new Schema({
   userID: String
 })
 
+const postitSchema = new Schema({
+  postitid: String,
+  text: String,
+  positionX: String,
+  positionY: String,
+  whiteboardID: String,
+  postitclass: String
+})
+
 const userWhiteboardRelationshipSchema = new Schema({
   userID: String,
   whiteboardID: String
 })
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema);
 const Stroke = mongoose.model('Stroke', strokeSchema);
+const Postit = mongoose.model('Postit', postitSchema);
 const UserWhiteboardRelationship = mongoose.model('UserWhiteboardRelationship', userWhiteboardRelationshipSchema);
 
 module.exports = {
   User: User,
   Stroke: Stroke,
+  Postit: Postit,
   UserWhiteboardRelationship: UserWhiteboardRelationship
 }
