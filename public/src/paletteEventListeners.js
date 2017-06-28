@@ -19,15 +19,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var range = document.getElementById("font");
 
-range.addEventListener("change", function () {
+range.addEventListener("mousemove", function () {
   var size = range.value;
-  whiteboard.adjustFontSize(size)
+  whiteboard.adjustFontSize(size);
+  $('.range').attr('value', this.value);
+  var styleElement = document.querySelector('#forslider')
+
+  if (this.value > 24) {
+    var size = 50 * (this.value / 130)
+  } else if (this.value > 4) {
+    var size = 10
+  } else {
+    var size = 8
+  }
+  styleElement.innerHTML = "input[type='range']::-webkit-slider-thumb { height: " + size + "px; width: " + size + "px; }";
 });
 
-  $(function() {
-    $( "#control-panel-container" ).draggable();
-  });
 
-  $(function() {
-    $( ".user-info-container" ).draggable();
-  });
+$(function() {
+  $( "#control-panel-container" ).draggable();
+});
+
+$(function() {
+  $( ".user-info-container" ).draggable();
+});
