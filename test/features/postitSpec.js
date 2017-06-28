@@ -1,10 +1,10 @@
 process.env.NODE_ENV = 'test';
 
 import { Selector } from 'testcafe';
-const db = require('../../dbConfig.js')
+const db = require('../../app/config/database.js')
 
-db.Postit.remove({}, function(){})
-db.User.remove({}, function(){})
+db.Postit.remove({}, function(){}) // Empty test database of postits before start
+db.User.remove({}, function(){}) // Empty test database of postits before start
 
 fixture `Postit Creation`
     .page('http://localhost:3000/board/home');
@@ -35,7 +35,7 @@ fixture `Postit Creation`
     .typeText('#login-username', 'JS')
     .typeText('#login-password', '123')
     .click('#login-submit')
-    .drag('#control-panel-container', 180, 0, { offsetX: 20, offsetY: 0 })
+    .drag('.postit', 180, 0, { offsetX: 20, offsetY: 0 })
     .typeText('.postit', 'Hello I am typing on a postit go team')
     .expect(Selector('.postit').value).eql('Hello I am typing on a postit go team')
   });
@@ -46,9 +46,9 @@ fixture `Postit Creation`
       .typeText('#login-username', 'JS')
       .typeText('#login-password', '123')
       .click('#login-submit')
-      .expect(Selector('.postit').getStyleProperty('left')).eql('8px')
+      .click('.postit')
       .drag('.postit', 180, 0, { offsetX: 20, offsetY: 0 })
-      .expect(Selector('.postit').getStyleProperty('left')).eql('188px')
+      .expect(Selector('.postit').getStyleProperty('left')).eql('368px')
   });
 
   test('User can create multiple postits', async time => {
