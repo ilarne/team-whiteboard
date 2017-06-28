@@ -8,6 +8,7 @@ html, body {
   float: left;
   background-color: #fff;
   border-radius: 10px;
+  border: solid 2px #438ea3;
 }
 
 .user-info-container {
