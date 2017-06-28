@@ -35,6 +35,7 @@ fixture `Postit Creation`
     .typeText('#login-username', 'JS')
     .typeText('#login-password', '123')
     .click('#login-submit')
+    .drag('#control-panel-container', 180, 0, { offsetX: 20, offsetY: 0 })
     .typeText('.postit', 'Hello I am typing on a postit go team')
     .expect(Selector('.postit').value).eql('Hello I am typing on a postit go team')
   });
@@ -58,5 +59,5 @@ fixture `Postit Creation`
     .click('#login-submit')
     .click('#pad')
     .click('#pad')
-    .expect(Selector('.postit').count).eql(2)
+    .expect(Selector('.postit').count).eql(3)
   });

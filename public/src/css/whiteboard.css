@@ -111,8 +111,9 @@ html, body {
 .frame {
   width: 1280px;
   height: 786px;
-  border: 0;
-  border-radius: 10px;
+  border: 0px;
+  overflow: hidden;
+  border-radius: 30px;
   -ms-transform: scale(0.25);
   -moz-transform: scale(0.25);
   -o-transform: scale(0.25);
