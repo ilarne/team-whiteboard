@@ -1,6 +1,7 @@
 function viewHomepage(req, res) {
   res.render('whiteboard.html', {
-    currentUser: req.session.user.username
+    currentUser: req.session.user.username,
+    message: req.flash('info')
   })
 }
 

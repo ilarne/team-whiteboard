@@ -24,6 +24,7 @@ module.exports = (app, User) => {
         });
         req.session.user = user;
         user.save();
+        req.flash('info', 'Welcome to your board!')
         res.redirect('/board/' + user.username);
       }
     })
