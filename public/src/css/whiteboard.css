@@ -28,8 +28,6 @@ html, body {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 225px;
-  height: 100px;
   float: right;
   margin-left: 500px;
   text-align: center;
@@ -37,6 +35,9 @@ html, body {
   font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   color: #438ea3;
+  display:inline;
+  padding:15px;
+  clear: left;
 }
 
 .form {
