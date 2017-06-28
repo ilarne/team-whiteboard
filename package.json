@@ -33,6 +33,7 @@
     "express": "^4.15.3",
     "mongodb": "^2.2.29",
     "mongoose": "^4.10.7",
+    "randomstring": "^1.1.5",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3"
   }

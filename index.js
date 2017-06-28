@@ -10,6 +10,7 @@ const User = db.User;
 const Stroke = db.Stroke;
 const Postit = db.Postit;
 const UserWhiteboardRelationship = db.UserWhiteboardRelationship;
+const randomstring = require("randomstring");
 
 app.use(session({
   cookieName: 'session',
@@ -95,7 +96,7 @@ app.post('/user/new', function(req, res) {
       });
       req.session.user = user;
       user.save();
-      res.redirect('/');
+      res.redirect('/board/' + randomstring.generate(7));
     }
   })
 })
