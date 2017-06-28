@@ -9,21 +9,15 @@
 }
 
 .palette-button {
-  border-radius: 25%;
-  width: 90px;
+  width: 30px;
   height: 20px;
-  border: solid 1px black;
   float: left;
   background: none;
   border: none;
   font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   color: #438ea3;
-}
-
-#clear-whiteboard {
-  width: 40px;
-  margin-left: 5px;
+  outline: none;
 }
 
 .user-message {
