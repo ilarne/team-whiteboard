@@ -1,3 +1,7 @@
+const session = require('client-sessions');
+const flash = require('connect-flash');
+const bcrypt = require('bcrypt-nodejs');
+
 module.exports = (app, User) => {
   app.get('/', function(req, res) {
     res.redirect('/board/home')
@@ -20,7 +24,7 @@ module.exports = (app, User) => {
         });
         req.session.user = user;
         user.save();
-        res.redirect('/board/' + randomstring.generate(7));
+        res.redirect('/board/' + user.username);
       }
     })
   })
