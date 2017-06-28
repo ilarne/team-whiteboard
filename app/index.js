@@ -3,15 +3,16 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
-const session = require('client-sessions')
+const session = require('client-sessions');
 const flash = require('connect-flash');
 const bcrypt = require('bcrypt-nodejs');
-const db = require('./config/database.js')
+const bodyParser = require('body-parser');
+const randomstring = require("randomstring");
+const db = require('./config/database.js');
 const User = db.User;
 const Stroke = db.Stroke;
 const Postit = db.Postit;
 const UserWhiteboardRelationship = db.UserWhiteboardRelationship;
-const randomstring = require("randomstring");
 
 app.use(session({
   cookieName: 'session',
@@ -19,15 +20,10 @@ app.use(session({
 }))
 
 app.use(flash());
-
-var bodyParser = require('body-parser')
-
-app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
 app.engine('.html', require('ejs').renderFile);
-
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 require('./sockets.js')(io);
 require('./routes/account.js')(app, User);
@@ -46,12 +42,5 @@ app.get('/welcome', function(req, res) {
 })
 
 http.listen(port, function() {
-  console.log('Whiteboard App listening on port 3000!')
+  console.log('Get Onbord!')
 })
-
-function findStrokes(boardName) {
-  Stroke.find({ whiteboardId: boardName }, function(e, data){
-  } ).then( function(data) {
-    res.send(data)
-  })
-}
