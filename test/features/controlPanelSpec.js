@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 import { Selector } from 'testcafe';
-const db = require('../../dbConfig.js')
+const db = require('../../app/config/database.js')
 
 db.Postit.remove({}, function(){})
 db.User.remove({}, function(){})
@@ -36,9 +36,9 @@ fixture `Control Panel`
       offsetY: 200
     })
 
-    const strokeLength = await db.Stroke.find({})
+    var stroke = await db.Stroke.find({})
     await time
-    .expect(strokeLength.length).eql(1)
+    .expect(stroke.length).eql(1)
   });
 
   test('"Undo" clears the whiteboard of the last stroke', async time => {
@@ -56,9 +56,15 @@ fixture `Control Panel`
 
     .click('#undo')
 
-    const strokeLength = await db.Stroke.find({})
+    var stroke = await db.Stroke.find({})
     await time
-    .expect(strokeLength.length).eql(1)
+    .expect(stroke.length).eql(1)
+
+    .click('#undo')
+
+    var stroke = await db.Stroke.find({})
+    await time
+    .expect(stroke.length).eql(0)
   });
 
   test('"Clear" clears the whiteboard of all strokes', async time => {
@@ -71,17 +77,19 @@ fixture `Control Panel`
 
     .click('#whiteboard', {
       offsetX: 300,
-      offsetY: 200
+      offsetY: 200,
+      speed: 0.1
     })
 
     .click('#whiteboard', {
       offsetX: 400,
-      offsetY: 200
+      offsetY: 200,
+      speed: 0.1
     })
 
     .click('#clear-whiteboard')
 
-    const strokeLength = await db.Stroke.find({})
+    var stroke = await db.Stroke.find({})
     await time
-    .expect(strokeLength.length).eql(0)
+    .expect(stroke.length).eql(0)
   });

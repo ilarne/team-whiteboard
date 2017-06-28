@@ -1,9 +1,9 @@
 process.env.NODE_ENV = 'test';
 
 import { Selector } from 'testcafe';
-const db = require('../../dbConfig.js')
+const db = require('../../app/config/database.js')
 
-db.User.remove({}, function(){}) 
+db.User.remove({}, function(){})
 
 fixture `Page renders successfully`
     .page('http://localhost:3000/board/home');

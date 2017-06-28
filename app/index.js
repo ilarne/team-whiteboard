@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 const session = require('client-sessions')
 const flash = require('connect-flash');
 const bcrypt = require('bcrypt-nodejs');
-const db = require('./dbConfig.js')
+const db = require('./config/database.js')
 const User = db.User;
 const Stroke = db.Stroke;
 const Postit = db.Postit;
@@ -34,7 +34,7 @@ app.get('/', function(req, res) {
 })
 
 function viewHomepage(req, res) {
-  res.render(__dirname + '/whiteboard.html', {
+  res.render('whiteboard.html', {
     currentUser: req.session.user.username
   })
 }
