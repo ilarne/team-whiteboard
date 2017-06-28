@@ -38,8 +38,25 @@ textarea {
   background-color: rgb(255,255,136);
   padding: 1em;
   z-index: 1;
-  box-shadow: 0 2px 2px 1px rgba(0,0,0,0.3);
-  border-style: none;
-  margin-top: 200px;
-  margin-left: 10px;
+  position:relative;
+  overflow:hidden;
+  padding:20px;
+  margin:2em 10%;
+}
+
+.postit-pad:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-width: 0 13px 13px 0;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.3) #96C7D4;
+  transform: rotate(90deg);
+}
+
+.postit-pad-container {
+  position: absolute;
+  margin-top: 160px;
+  margin-left: 5px;
 }
