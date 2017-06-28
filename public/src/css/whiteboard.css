@@ -75,10 +75,27 @@ html, body {
 }
 
 .menu-container {
-  background-color:white;
-  padding: 10px;
-  margin:0 auto;
+  background-color: #96C7D4;
+  box-shadow: 5px 5px 5px #438ea3;
+  border-radius: 25px;
+  position: fixed;
+  top: 20px;
+  left: 45%;
   text-align: center;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
+}
+
+.menu-button  {
+  text-align: center;
+  background: none;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
+  margin-top: 10px;
 }
 
 .wrap {
