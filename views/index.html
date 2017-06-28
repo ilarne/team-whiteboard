@@ -61,19 +61,19 @@
     <!-- User login/signup forms -->
     <div class='form-background'>
       <div class='form-container'>
-        <form class='form' id='login-form' action="/user/login" method="post">
+        <form class='form user-info-container' id='login-form' action="/user/login" method="post">
           <h3>Log in</h3>
-          Username: <input id='login-username' type="text" name="username" placeholder="Username" required><br />
-          Password: <input id='login-password' type="password" name="password" placeholder="Password" required><br />
-          <input id='login-submit' class="button" type="submit" value="Log In">
+          Username: <input class='input-field' id='login-username' name='username' type='text' required><br />
+          Password: <input class='input-field' id='login-password' type="password" name="password" placeholder="Password" required><br />
+          <input class='user-button' id='login-submit' class="button" type="submit" value="Log In">
         </form>
 
-        <form class='form' id='signup-form' method='post' action='/user/new'>
+        <form class='form user-info-container' id='signup-form' method='post' action='/user/new'>
           <h3>Sign up</h3>
-          Username: <input id='signup-username' name='username' type='text' required><br />
-          Email: <input id='signup-email' name='email' type='email' required><br />
-          Password: <input id='signup-password' name='password' type='password' required><br />
-          <input id='create-account' type='submit' value='Submit'>
+          Username: <input class='input-field' id='signup-username' name='username' type='text' required><br />
+          Email: <input class='input-field' id='signup-email' name='email' type='email' required><br />
+          Password: <input class='input-field' id='signup-password' name='password' type='password' required><br />
+          <input class='user-button' id='create-account' type='submit' value='Submit'>
         </form>
 
     <script src="/socket.io/socket.io.js"></script>
