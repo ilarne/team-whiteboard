@@ -61,6 +61,7 @@
       <% if (currentUser) { %>
         <button type='button' class="user-button" id='logout-button'>Log out</button>
         <p class='user-message'>Logged in as <%= currentUser %></p>
+        <p class='user-info'><%= message %></p>
       <% } else { %>
         <button type='button' class="user-button" id='signup-button'>Sign up</button>
         <button type='button' class="user-button" id='login-button'>Log in</button>
@@ -87,7 +88,7 @@
         </div>
       </div>
     </div>
-        
+
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
