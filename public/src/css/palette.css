@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:700');
+
 .colour-button {
   border-radius: 50%;
   width: 20px;
   height: 20px;
-  border: solid 1px black;
+  border: solid 1px #96C7D4;
   float: left;
 }
 
@@ -12,15 +14,43 @@
   height: 20px;
   border: solid 1px black;
   float: left;
+  background: none;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
 }
 
+#clear-whiteboard {
+  width: 40px;
+  margin-left: 5px;
+}
+
+#menu-button {
+  width: 40px;
+  margin-left: 5px;
+  background: none;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
+  float: left;
+}
+
+.user-message {
+  height: 10px;
+}
+
+
 #control-panel-container {
-  background-color: white;
-  border: solid 3px black;
+  background-color: #96C7D4;
+  box-shadow: 5px 5px 5px #438ea3;
   border-radius: 25px;
-  position: absolute;
+  position: fixed;
+  top: 20px;
+  left: 20px;
   width: 100px;
-  height: 200px;
+  height: 225px;
   float: left;
 }
 
@@ -61,4 +91,16 @@
   width: 50px;
   float: right;
   transform: rotate(-90deg);
+}
+
+input[type='range'] {
+    -webkit-appearance: none !important;
+    background:#438ea3;
+    height:7px;
+}
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background: white;
+    height:10px;
+    width:10px;
 }

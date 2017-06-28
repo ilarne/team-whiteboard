@@ -44,7 +44,7 @@
         </div>
 
         <div id='clear-whiteboard-container'>
-          <button class="palette-button" type='button' id='clear-whiteboard'>Clear Whiteboard</button>
+          <button class="palette-button" type='button' id='clear-whiteboard'>Clear</button>
           <button class="palette-button" type='button' id='undo'>Undo</button>
         </div>
 
@@ -59,11 +59,11 @@
 
     <div id='user-management' class='user-info-container'>
       <% if (currentUser) { %>
-        <button type='button' id='logout-button'>Log out</button>
+        <button type='button' class="user-button" id='logout-button'>Log out</button>
         <p class='user-message'>Logged in as <%= currentUser %></p>
       <% } else { %>
-        <button type='button' id='signup-button'>Sign up</button>
-        <button type='button' id='login-button'>Log in</button>
+        <button type='button' class="user-button" id='signup-button'>Sign up</button>
+        <button type='button' class="user-button" id='login-button'>Log in</button>
         <p class='user-message'>Sign up to Onbord!</p>
       <% } %>
     </div>
