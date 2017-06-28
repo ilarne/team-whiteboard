@@ -14,8 +14,8 @@ fixture `Menu`
     test('Search bar takes user to searched url', async time => {
       await time
       .click('#signup-button')
-      .typeText('#signup-username', 'JS')
-      .typeText('#signup-email', 'js@gmail.com')
+      .typeText('#signup-username', 'SH')
+      .typeText('#signup-email', 'sh@gmail.com')
       .typeText('#signup-password', '123')
       .click('#create-account')
       .click('#menu-button')
@@ -31,7 +31,7 @@ fixture `Menu`
       await time
 
       .click('#login-button')
-      .typeText('#login-username', 'JS')
+      .typeText('#login-username', 'SH')
       .typeText('#login-password', '123')
       .click('#login-submit')
       .click('#menu-button')
@@ -42,7 +42,7 @@ fixture `Menu`
       await time
 
       .click('#login-button')
-      .typeText('#login-username', 'JS')
+      .typeText('#login-username', 'SH')
       .typeText('#login-password', '123')
       .click('#login-submit')
       .click('#menu-button')
@@ -57,7 +57,7 @@ fixture `Menu`
       await time
 
       .click('#login-button')
-      .typeText('#login-username', 'JS')
+      .typeText('#login-username', 'SH')
       .typeText('#login-password', '123')
       .click('#login-submit')
       .click('#menu-button')

@@ -26,8 +26,8 @@ fixture `Control Panel`
     await time
 
     .click('#signup-button')
-    .typeText('#signup-username', 'JS')
-    .typeText('#signup-email', 'js@gmail.com')
+    .typeText('#signup-username', 'TH')
+    .typeText('#signup-email', 'th@gmail.com')
     .typeText('#signup-password', '123')
     .click('#create-account')
 
@@ -45,7 +45,7 @@ fixture `Control Panel`
     await time
 
     .click('#login-button')
-    .typeText('#login-username', 'JS')
+    .typeText('#login-username', 'TH')
     .typeText('#login-password', '123')
     .click('#login-submit')
 
@@ -65,7 +65,7 @@ fixture `Control Panel`
     await time
 
     .click('#login-button')
-    .typeText('#login-username', 'JS')
+    .typeText('#login-username', 'TH')
     .typeText('#login-password', '123')
     .click('#login-submit')
 
