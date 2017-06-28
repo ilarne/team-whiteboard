@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // is created and saved to the DB
 var pad = document.getElementById('pad');
 
-pad.addEventListener('click', function() {
+pad.addEventListener('mousedown', function() {
   var id = 'postit' + +new Date();
   createPostit(id);
   savePostit(id);
@@ -109,7 +109,7 @@ pad.addEventListener('click', function() {
 
 // The newly created postits (either in session on on load)
 // save their text and co-ords when clicked
-$(document.body).on('click mousemove mouseup', '.postit', function() {
+$(document.body).on('click mousemove mouseup input', '.postit', function() {
   savePostit(this.id);
   var position = $('#' + this.id).position()
   socket.emit('postit', {
@@ -122,11 +122,11 @@ $(document.body).on('click mousemove mouseup', '.postit', function() {
 })
 
 socket.on('postit', function(p) {
-  if (whiteboardID === whiteboardID) {
-    postit = document.getElementById(p.postitid)
-    if (postit === null) {
+  if (whiteboardID === p.whiteboardID) {
+    if (document.getElementById(p.postitid) === null) {
       createPostit(p.postitid)
     }
+    postit = document.getElementById(p.postitid)
     postit.value = p.text
     postit.style.left = p.positionX + 'px'
     postit.style.top = p.positionY + 'px'
@@ -136,7 +136,7 @@ socket.on('postit', function(p) {
 // createPostit creates postit divs using the id passed to it
 // either in session (brand new) on on page load (from DB)
 function createPostit(postitId, x, y, text) {
-  var text = text || 'write on me!';
+  var text = text || '';
   var $newPostit = $('<textarea>', {
     id: postitId,
     'class': 'postit',
@@ -144,7 +144,6 @@ function createPostit(postitId, x, y, text) {
     'style': 'left: ' + x + 'px; top: ' + y + 'px;'
   });
   $($newPostit).prependTo(document.body).draggable({
-    snap: true,
     cursor: "move",
     delay: 100,
     scroll: false,

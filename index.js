@@ -156,6 +156,12 @@ app.get('/loadpostit', function(req, res) {
   })
 })
 
+app.post('/deletepostits', function(req, res) {
+  Postit.remove({ whiteboardID: req.body.whiteboardID }, function(err, data) {
+    res.send();
+  });
+})
+
 app.post('/createorupdatepostit', function(req, res) {
   Postit.findOne({ postitid: req.body.postitid }).then( function(postit) {
     if (!postit) {

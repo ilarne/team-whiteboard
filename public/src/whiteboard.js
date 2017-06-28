@@ -48,6 +48,8 @@ Whiteboard.prototype.keepDrawing = function(e, board) {
 
 Whiteboard.prototype.clear = function() {
   this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+  $('.postit').remove();
+  $.post('/deletepostits', { whiteboardID: document.location.href.split('/').reverse()[0] });
 }
 
 Whiteboard.prototype.saveStroke = function() {
