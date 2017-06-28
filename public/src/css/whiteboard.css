@@ -57,14 +57,15 @@ html, body {
 }
 
 .wrap {
-    /*width: 320px;*/
+    width: 320px;
     height: 192px;
     padding: 0;
     overflow: hidden;
 }
+
 .frame {
-    /*width: 1280px;
-    height: 786px;*/
+    width: 1280px;
+    height: 786px;
     border: 0;
     -ms-transform: scale(0.25);
     -moz-transform: scale(0.25);
