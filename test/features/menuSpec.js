@@ -52,3 +52,15 @@ fixture `Menu`
       .click('#add-board')
       .expect(Selector('.frame').count).eql(1)
     });
+
+    test('"Clear Boards" clears the boards from the favourite', async time => {
+      await time
+
+      .click('#login-button')
+      .typeText('#login-username', 'JS')
+      .typeText('#login-password', '123')
+      .click('#login-submit')
+      .click('#menu-button')
+      .click('#clear-boards')
+      .expect(Selector('.frame').count).eql(0)
+    });
