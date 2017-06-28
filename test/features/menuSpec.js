@@ -4,9 +4,9 @@ import { Selector, ClientFunction } from 'testcafe';
 const db = require('../../dbConfig.js');
 const getWindowLocation = ClientFunction(() => window.location);
 
-db.Postit.remove({}, function(){}) // Empty test database of postits before start
-db.User.remove({}, function(){}) // Empty test database of postits before start
-db.UserWhiteboardRelationship.remove({}, function(){}) // Empty test database of postits before start
+db.Postit.remove({}, function(){})
+db.User.remove({}, function(){})
+db.UserWhiteboardRelationship.remove({}, function(){})
 
 fixture `Menu`
     .page('http://localhost:3000/board/home');
@@ -26,6 +26,8 @@ fixture `Menu`
       await time
       .expect(location.pathname).eql('/board/catsanddogs')
     });
+
+
 
     test('Menu starts with no favourite boards', async time => {
       await time

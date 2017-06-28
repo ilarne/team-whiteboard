@@ -3,8 +3,8 @@ process.env.NODE_ENV = 'test';
 import { Selector } from 'testcafe';
 const db = require('../../dbConfig.js')
 
-db.Postit.remove({}, function(){}) // Empty test database of postits before start
-db.User.remove({}, function(){}) // Empty test database of postits before start
+db.Postit.remove({}, function(){})
+db.User.remove({}, function(){})
 
 fixture `Postit Creation`
     .page('http://localhost:3000/board/home');

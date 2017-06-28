@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 import { Selector } from 'testcafe';
 const db = require('../../dbConfig.js')
 
-db.User.remove({}, function(){}) // Empty test database of users before start
+db.User.remove({}, function(){}) 
 
 fixture `Page renders successfully`
     .page('http://localhost:3000/board/home');
