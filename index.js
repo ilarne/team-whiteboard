@@ -35,7 +35,8 @@ app.get('/', function(req, res) {
 
 function viewHomepage(req, res) {
   res.render(__dirname + '/whiteboard.html', {
-    currentUser: req.session.user.username
+    currentUser: req.session.user.username,
+    message: req.flash('info')
   })
 }
 
@@ -104,6 +105,7 @@ app.post('/user/new', function(req, res) {
       });
       req.session.user = user;
       user.save();
+      req.flash('info', 'Welcome to your board!')
       res.redirect('/board/' + randomstring.generate(7));
     }
   })

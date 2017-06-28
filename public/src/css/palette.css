@@ -35,8 +35,8 @@
   box-shadow: 5px 5px 5px #438ea3;
   border-radius: 25px;
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  right: 10px;
   width: 100px;
   height: 270px;
   float: left;
