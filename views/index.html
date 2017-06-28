@@ -12,10 +12,9 @@
     <script>window.module = window.module || {}</script>
   </head>
   <body>
-    <span class='hidden' id='user'><%= currentUser %></span>
+    <span class='hidden' id='user'></span>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
 
-    <% if(!currentUser) { %> <div class='hidden'> <% } %>
       <div id="control-panel-container">
 
         <div id="colour-button-container-1">
@@ -44,25 +43,18 @@
 
         <div id='clear-whiteboard-container'>
           <button class="palette-button" type='button' id='clear-whiteboard'>Clear Whiteboard</button>
-          <button class="palette-button" type='button' id='undo'>Undo</button>
+          <button class="palette-button hidden" type='button' id='undo'>Undo</button>
         </div>
 
-        <div id='menu-management'>
+        <div id='menu-management' class="hidden">
           <button type='button' id='menu-button'>Menu</button>
         </div>
       </div>
 
-    <% if(!currentUser) { %> </div> <% } %>
-
     <div id='user-management' class='user-info-container'>
-      <% if (currentUser) { %>
-        <button type='button' id='logout-button'>Log out</button>
-        <p class='user-message'>Logged in as <%= currentUser %></p>
-      <% } else { %>
         <button type='button' id='signup-button'>Sign up</button>
         <button type='button' id='login-button'>Log in</button>
         <p class='user-message'>Sign up to Onbord!</p>
-      <% } %>
     </div>
 
     <!-- User login/signup forms -->
@@ -84,26 +76,11 @@
           <input id='create-account' type='submit' value='Submit'>
         </form>
 
-        <!-- Board Menu -->
-        <div class='menu-container'>
-          <h3>MENU</h3>
-          <form class="search" id='search-form' method='post' action='/search' >
-            SEARCH: <input id='search-term' name='search' type='text' required>
-            <input id='create-account' type='submit' value='Submit'>
-          </form>
-          <button type='button' id='add-board'>Add Board to Favourites</button>
-          <button type='button' id='clear-boards'>Clear Favourites</button>
-          <div class='favourites' id='favourites'>
-          <div>
-        </div>
-      </div>
-    </div>
-
     <script src="/socket.io/socket.io.js"></script>
-    <script type='text/javascript' src='/src/whiteboard.js'></script>
+    <script type='text/javascript' src='/src/welcome/welcomeWhiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
-    <script type='text/javascript' src='/src/eventListeners.js'></script>
     <script type='text/javascript' src='/src/formDisplay.js'></script>
+    <script type='text/javascript' src='/src/welcome/basicWhiteboardInterface.js'></script>
     <script type='text/javascript' src='/src/paletteEventListeners.js'></script>
   </body>
 </html>

@@ -34,13 +34,15 @@ function viewHomepage(req, res) {
   })
 }
 
+app.get('/welcome', function(req, res) {
+  res.render('index.html')
+})
+
 app.get('/board/home', function(req, res) {
   if (req.session.user) {
     viewHomepage(req, res)
   } else {
-    res.render(__dirname + '/whiteboard.html', {
-      currentUser: null
-    })
+    res.redirect('/welcome')
   }
 })
 
@@ -48,7 +50,7 @@ app.get('/board/:board', function(req, res) {
   if (req.session.user) {
     viewHomepage(req, res)
   } else {
-    res.redirect('/board/home')
+    res.redirect('/welcome')
   }
 })
 
