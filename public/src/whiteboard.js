@@ -87,5 +87,3 @@ Whiteboard.prototype.redraw = function(stroke) {
     }
   }
 }
-
-// module.exports = Whiteboard;

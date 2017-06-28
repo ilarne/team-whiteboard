@@ -1,27 +1,5 @@
 const socket = io();
 
-function loadStrokes() {
-  $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
-    whiteboard.clear();
-    data.forEach(function(stroke) {
-      whiteboard.redraw(stroke)
-    })
-  })
-}
-
-// loadPostits gets the postits that match the current board's
-// whiteboardID, creates and fills the corresponding divs on page load
-function loadPostits() {
-  $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
-    data.forEach(function(p) {
-      // console.log(p.postitclass)
-      if (document.getElementById(p.postitid) === null) {
-        createPostit(p.postitid, p.positionX, p.positionY, p.text, p.postitclass)
-      }
-    })
-  })
-}
-
 document.addEventListener('DOMContentLoaded', function() {
   board.addEventListener("mousemove", function() {
     socket.emit('paint', {
@@ -69,8 +47,7 @@ socket.on('clear-whiteboard', function(id){
   }
 });
 
-// The newly created postits (either in session on on load)
-// save their text and co-ords when clicked
+// The new postits (either in session or load) save text & co-ords when clicked
 $(document.body).on('click mousemove mouseup input', '.postit', function() {
   savePostit(this.id);
 

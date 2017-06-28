@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/css/postit.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>window.module = window.module || {}</script>
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <div id='newpostits'></div>
@@ -85,16 +85,14 @@
 
           <button type='button' class="menu-button" id='add-board'>Add Board to Favourites</button><br />
           <button type='button' class="menu-button" id='clear-boards'>Clear Favourites</button><br />
-          <div class='favourites' class="menu-button" id='favourites'>
-          <div>
-
+          <div class='favourites' class="menu-button" id='favourites'></div>
         </div>
       </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
+    <script type='text/javascript' src='/src/setup.js'></script>
     <script type='text/javascript' src='/src/eventListeners.js'></script>
     <script type='text/javascript' src='/src/webSockets.js'></script>
     <script type='text/javascript' src='/src/formDisplay.js'></script>

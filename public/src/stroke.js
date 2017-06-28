@@ -9,5 +9,3 @@ Stroke.prototype.addClick = function(x, y) {
   this.clickX.push(x)
   this.clickY.push(y)
 }
-
-module.exports = Stroke;
