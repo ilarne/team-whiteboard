@@ -71,7 +71,7 @@ app.post('/user/login', function(req, res) {
   User.find({ username: req.body.username }, function(e, user) {
     user = user[0];
     if (user === undefined) {
-      req.flash('info', 'Invalid login details')
+      req.flash('info', 'Sorry, those login details are invalid. Please try again!')
       res.redirect('/')
     } else {
       var result = bcrypt.compareSync(password, user.password);
@@ -79,6 +79,7 @@ app.post('/user/login', function(req, res) {
         req.session.user = user
         res.redirect('/');
       } else {
+        req.flash('info', 'Sorry, that password is not right. Please try again!')
         res.redirect('/');
       };
     }
