@@ -16,47 +16,48 @@
     <span class='hidden' id='user'></span>
     <canvas width='1000' height='500' class='whiteboard' id='whiteboard'></canvas>
     <div class="logo"></div>
-      <div id="control-panel-container">
+    <div id="control-panel-container">
 
-        <div id="colour-button-container-1">
-          <div class="colour-button" id="red" data-value="#FF0000"></div>
-          <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
-        </div>
-
-        <div id="colour-button-container-2">
-          <div class="colour-button" id="blue" data-value="#0000FF"></div>
-          <div class="colour-button" id="orange" data-value="#FF9900"></div>
-        </div>
-
-        <div id="colour-button-container-3">
-          <div class="colour-button" id="green" data-value="#00CC00"></div>
-          <div class="colour-button" id="purple" data-value="#660099"></div>
-        </div>
-
-        <div id="colour-button-container-4">
-          <div class="colour-button" id="black" data-value="#000000"></div>
-          <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
-        </div>
-
-        <div id="range-container">
-          <input type="range" id="font" value="5" min="1" max="50">
-        </div>
-
-        <div id='clear-whiteboard-container'>
-          <button class="palette-button" type='button' id='clear-whiteboard'>Clear</button>
-          <button class="palette-button hidden" type='button' id='undo'>Undo</button>
-        </div>
-
-        <div id='menu-management' class="hidden">
-          <button type='button' id='menu-button'>Menu</button>
-        </div>
+      <div id="colour-button-container-1">
+        <div class="colour-button" id="red" data-value="#FF0000"></div>
+        <div class="colour-button" id="yellow" data-value="#FFFF00"></div>
       </div>
 
+      <div id="colour-button-container-2">
+        <div class="colour-button" id="blue" data-value="#0000FF"></div>
+        <div class="colour-button" id="orange" data-value="#FF9900"></div>
+      </div>
+
+      <div id="colour-button-container-3">
+        <div class="colour-button" id="green" data-value="#00CC00"></div>
+        <div class="colour-button" id="purple" data-value="#660099"></div>
+      </div>
+
+      <div id="colour-button-container-4">
+        <div class="colour-button" id="black" data-value="#000000"></div>
+        <div class="colour-button" id="rubber" data-value="#FFFFFF"></div>
+      </div>
+
+      <div id="range-container">
+        <input type="range" id="font" value="5" min="1" max="50">
+      </div>
+
+      <div id='clear-whiteboard-container'>
+        <button class="palette-button" type='button' id='clear-whiteboard'>Clear</button>
+        <button class="palette-button hidden" type='button' id='undo'>Undo</button>
+      </div>
+
+      <div id='menu-management' class="hidden">
+        <button type='button' id='menu-button'>Menu</button>
+      </div>
+
+    </div>
+
     <div id='user-management' class='user-info-container'>
-        <button type='button' id='signup-button' class='user-button'>Sign up</button>
-        <button type='button' id='login-button' class='user-button'>Log in</button>
-        <p class='user-message'>Sign up to Onbord!</p>
-        <p class='user-info'><%= message %></p>
+      <button type='button' id='signup-button' class='user-button'>Sign up</button>
+      <button type='button' id='login-button' class='user-button'>Log in</button>
+      <p class='user-message'>Sign up to Onbord!</p>
+      <p class='user-info'><%= message %></p>
     </div>
 
     <!-- User login/signup forms -->
@@ -76,6 +77,8 @@
           Password: <input class='input-field' id='signup-password' name='password' type='password' required><br />
           <input class='user-button' id='create-account' type='submit' value='Submit'>
         </form>
+      </div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/welcome/welcomeWhiteboard.js'></script>
