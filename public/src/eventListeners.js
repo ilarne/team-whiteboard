@@ -130,6 +130,8 @@ socket.on('postit', function(p) {
       postit.style.left = p.positionX + 'px'
       postit.style.top = p.positionY + 'px'
       postit.className = p.postitclass
+    } else {
+      createPostit(p.postitid)
     }
   }
 });
