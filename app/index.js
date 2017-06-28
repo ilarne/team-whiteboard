@@ -7,7 +7,6 @@ const session = require('client-sessions');
 const flash = require('connect-flash');
 const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser');
-const randomstring = require("randomstring");
 const db = require('./config/database.js');
 const User = db.User;
 const Stroke = db.Stroke;
