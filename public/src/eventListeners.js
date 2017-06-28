@@ -4,7 +4,6 @@ board.height = window.innerHeight - 20;
 
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
-var socket = io();
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
@@ -15,11 +14,11 @@ var favourites = document.getElementById('favourites')
 var search = document.getElementById('searchButton')
 var pad = document.getElementById('pad');
 
-var fade_out = function() {
+function fadeOutWelcomeMessage() {
   $("#welcome-message").fadeOut()
 }
 
-setTimeout(fade_out, 5000);
+setTimeout(fadeOutWelcomeMessage, 5000);
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -97,26 +96,6 @@ board.addEventListener('mouseleave', function(element) {
 })
 
 document.addEventListener('DOMContentLoaded', function() {
-  board.addEventListener("mousemove", function() {
-    socket.emit('paint', {
-      stroke: whiteboard.currentStroke,
-      whiteboardID: whiteboardID
-    });
-  });
-  board.addEventListener('mousedown', function() {
-    socket.emit('paint', {
-      stroke: whiteboard.currentStroke,
-      whiteboardID: whiteboardID
-    });
-  });
-  socket.on('paint', function(strokeObject) {
-    if (whiteboardID === strokeObject.whiteboardID) {
-      whiteboard.redraw(strokeObject.stroke)
-    }
-  });
-})
-
-document.addEventListener('DOMContentLoaded', function() {
   loadStrokes();
 })
 
@@ -126,33 +105,6 @@ clear.addEventListener('click', function() {
       whiteboard.clear();
     })
 })
-
-undo.addEventListener('click', function() {
-  $.get('/undo', {userID: user}).done(function() {
-    loadStrokes();
-    loadPostits();
-    socket.emit('undo', 'reverted changes');
-  })
-})
-
-socket.on('undo', function(undo) {
-  loadStrokes();
-  loadPostits();
-})
-
-clear.addEventListener('click', function() {
-  socket.emit('clear-whiteboard', 'cleared');
-})
-
-clear.addEventListener('click', function() {
-  socket.emit('clear-whiteboard', whiteboardID);
-})
-
-socket.on('clear-whiteboard', function(id){
-  if (whiteboardID === id) {
-    whiteboard.clear(id);
-  }
-});
 
 // When the user refreshes the page, the postits matching
 // the relevant whiteboardIDs are created
@@ -168,35 +120,6 @@ pad.addEventListener('mousedown', function() {
   createPostit(id);
   savePostit(id);
 })
-
-// The newly created postits (either in session on on load)
-// save their text and co-ords when clicked
-$(document.body).on('click mousemove mouseup input', '.postit', function() {
-  savePostit(this.id);
-  var position = $('#' + this.id).position()
-  socket.emit('postit', {
-    postitid: this.id,
-    text: document.getElementById(this.id).value,
-    positionX: position.left,
-    positionY: position.top,
-    whiteboardID: whiteboardID,
-    postitclass: $('#' + this.id).attr('class')
-  });
-})
-
-socket.on('postit', function(p) {
-  if (whiteboardID === p.whiteboardID) {
-    if (document.getElementById(p.postitid) !== null) {
-      postit = document.getElementById(p.postitid)
-      postit.value = p.text
-      postit.style.left = p.positionX + 'px'
-      postit.style.top = p.positionY + 'px'
-      postit.className = p.postitclass
-    } else {
-      createPostit(p.postitid)
-    }
-  }
-});
 
 // createPostit creates postit divs using the id passed to it
 // either in session (brand new) on on page load (from DB)
