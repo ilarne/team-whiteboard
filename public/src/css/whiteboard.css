@@ -3,16 +3,22 @@ html, body {
   background-color: #96C7D4;
 }
 
+.logo {
+  background-image: url(/images/onbord-logo.png);
+  background-repeat: no-repeat;
+  height: 46px;
+  width: 250px;
+  position: fixed;
+  bottom: 0px;
+  left: 10px;
+}
+
 .whiteboard {
   border: none;
   float: left;
   background-color: #fff;
   border-radius: 10px;
   border: solid 2px #438ea3;
-}
-
-.form-background {
-
 }
 
 .user-message {

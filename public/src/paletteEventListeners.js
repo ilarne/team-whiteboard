@@ -43,3 +43,7 @@ $(function() {
 $(function() {
   $( ".user-info-container" ).draggable();
 });
+
+$(function() {
+  $( ".logo" ).draggable();
+});
