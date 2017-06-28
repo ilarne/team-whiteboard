@@ -1,15 +1,42 @@
 html, body {
   cursor: url(/images/cursors/blackmarker.png), pointer;
+  background-color: #96C7D4;
 }
 
 .whiteboard {
-  border:1px solid black;
+  border: none;
   float: left;
   background-color: #fff;
+  border-radius: 10px;
+  border: solid 2px #438ea3;
+}
+
+.user-button {
+  text-align: center;
+  background: none;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
+  margin-top: 10px;
 }
 
 .user-info-container {
-  background-color: #CCCCCC;
+  background-color: #96C7D4;
+  box-shadow: 5px 5px 5px #438ea3;
+  border-radius: 25px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 225px;
+  height: 100px;
+  float: right;
+  margin-left: 500px;
+  text-align: center;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
 }
 
 .form {
@@ -55,11 +82,12 @@ html, body {
 }
 
 .wrap {
-    /*width: 320px;*/
+    width: 320px;
     height: 192px;
     padding: 0;
     overflow: hidden;
 }
+
 .frame {
     width: 1280px;
     height: 786px;
