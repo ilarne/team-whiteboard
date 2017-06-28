@@ -1,12 +1,11 @@
 var board = document.getElementById('whiteboard')
-
 var whiteboard = new Whiteboard(board.getContext('2d'));
 var whiteboardID = document.location.href.split('/').reverse()[0];
 var socket = io();
-
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
+var pad = document.getElementById('pad');
 
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
@@ -99,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // When user clicks the pad, a postit with a unique id
 // is created and saved to the DB
-var pad = document.getElementById('pad');
 
 pad.addEventListener('mousedown', function() {
   var id = 'postit' + +new Date();
