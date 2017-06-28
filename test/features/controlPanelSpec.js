@@ -33,8 +33,7 @@ fixture `Control Panel`
 
     .click('#whiteboard', {
       offsetX: 200,
-      offsetY: 200,
-      speed: 0.1
+      offsetY: 200
     })
 
     const strokeLength = await db.Stroke.find({})
@@ -52,8 +51,7 @@ fixture `Control Panel`
 
     .click('#whiteboard', {
       offsetX: 300,
-      offsetY: 200,
-      speed: 0.1
+      offsetY: 200
     })
 
     .click('#undo')
@@ -73,14 +71,12 @@ fixture `Control Panel`
 
     .click('#whiteboard', {
       offsetX: 300,
-      offsetY: 200,
-      speed: 0.1
+      offsetY: 200
     })
 
     .click('#whiteboard', {
       offsetX: 400,
-      offsetY: 200,
-      speed: 0.1
+      offsetY: 200
     })
 
     .click('#clear-whiteboard')
