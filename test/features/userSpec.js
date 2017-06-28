@@ -63,7 +63,6 @@ fixture `Signing up`
   test('User name is recorded succesfully when signing in', async time => {
     await time
       .click('#signup-button')
-      .typeText('#signup-name', 'John Smith')
       .typeText('#signup-username', 'JSmith')
       .typeText('#signup-email', 'smith@gmail.com')
       .typeText('#signup-password', '123')
@@ -74,7 +73,6 @@ fixture `Signing up`
   test('Page confirms that the user is signed in', async time => {
     await time
       .click('#signup-button')
-      .typeText('#signup-name', 'Test User')
       .typeText('#signup-username', 'TestUser')
       .typeText('#signup-email', 'testuser@gmail.com')
       .typeText('#signup-password', '123')
@@ -85,7 +83,6 @@ fixture `Signing up`
   test('Cannot sign up with an existing username', async time => {
     await time
       .click('#signup-button')
-      .typeText('#signup-name', 'Jack Smith')
       .typeText('#signup-username', 'JSmith')
       .typeText('#signup-email', 'jack@gmail.com')
       .typeText('#signup-password', '123')
@@ -96,7 +93,6 @@ fixture `Signing up`
   test('Cannot sign up with an existing email', async time => {
     await time
       .click('#signup-button')
-      .typeText('#signup-name', 'Jack Smith')
       .typeText('#signup-username', 'Jack_Smith_1')
       .typeText('#signup-email', 'smith@gmail.com')
       .typeText('#signup-password', '123')
