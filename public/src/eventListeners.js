@@ -206,7 +206,7 @@ function createPostit(postitId, x, y, text, colour) {
     cursor: "move",
     scroll: false,
     cancel: "text",
-    containment: "parent"
+    containment: "html"
   });
   document.getElementById(postitId).value = text
 }
