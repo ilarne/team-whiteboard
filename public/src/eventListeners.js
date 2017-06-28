@@ -169,7 +169,9 @@ function savePostit(divID) {
 function loadPostits() {
   $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
     data.forEach(function(p) {
-      createPostit(p.postitid, p.positionX, p.positionY, p.text)
+      if (document.getElementById(p.postitid) === null) {
+        createPostit(p.postitid, p.positionX, p.positionY, p.text)
+      }
     })
   })
 }
