@@ -41,7 +41,6 @@
   height: 10px;
 }
 
-
 #control-panel-container {
   background-color: #96C7D4;
   box-shadow: 5px 5px 5px #438ea3;
@@ -52,6 +51,7 @@
   width: 100px;
   height: 225px;
   float: left;
+  z-index: 4;
 }
 
 #colour-button-container-1 {
