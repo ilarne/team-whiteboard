@@ -33,10 +33,59 @@ fixture `Control Panel`
 
     .click('#whiteboard', {
       offsetX: 200,
-      offsetY: 200
+      offsetY: 200,
+      speed: 0.1
     })
 
     const strokeLength = await db.Stroke.find({})
     await time
     .expect(strokeLength.length).eql(1)
+  });
+
+  test('"Undo" clears the whiteboard of the last stroke', async time => {
+    await time
+
+    .click('#login-button')
+    .typeText('#login-username', 'JS')
+    .typeText('#login-password', '123')
+    .click('#login-submit')
+
+    .click('#whiteboard', {
+      offsetX: 300,
+      offsetY: 200,
+      speed: 0.1
+    })
+
+    .click('#undo')
+
+    const strokeLength = await db.Stroke.find({})
+    await time
+    .expect(strokeLength.length).eql(1)
+  });
+
+  test('"Clear" clears the whiteboard of all strokes', async time => {
+    await time
+
+    .click('#login-button')
+    .typeText('#login-username', 'JS')
+    .typeText('#login-password', '123')
+    .click('#login-submit')
+
+    .click('#whiteboard', {
+      offsetX: 300,
+      offsetY: 200,
+      speed: 0.1
+    })
+
+    .click('#whiteboard', {
+      offsetX: 400,
+      offsetY: 200,
+      speed: 0.1
+    })
+
+    .click('#clear-whiteboard')
+
+    const strokeLength = await db.Stroke.find({})
+    await time
+    .expect(strokeLength.length).eql(0)
   });
