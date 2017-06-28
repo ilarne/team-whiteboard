@@ -5,13 +5,14 @@
     <title>Team Whiteboard App</title>
     <link rel="stylesheet" type="text/css" href="/src/css/whiteboard.css">
     <link rel="stylesheet" type="text/css" href="/src/css/palette.css">
+    <link rel="stylesheet" type="text/css" href="/src/css/postit.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <script>window.module = window.module || {}</script>
   </head>
   <body>
+    <div id='newpostits'></div>
+
     <span class='hidden' id='user'><%= currentUser %></span>
     <canvas class='whiteboard' id='whiteboard'></canvas>
 
@@ -50,6 +51,8 @@
         <div id='menu-management'>
           <button type='button' id='menu-button'>Menu</button>
         </div>
+
+        <div class='postit-pad' id='pad'></div>
       </div>
 
     <% if(!currentUser) { %> </div> <% } %>
@@ -68,21 +71,6 @@
     <!-- User login/signup forms -->
     <div class='form-background'>
       <div class='form-container'>
-        <form class='form' id='login-form' action="/user/login" method="post">
-          <h3>Log in</h3>
-          Username: <input id='login-username' type="text" name="username" placeholder="Username" required><br />
-          Password: <input id='login-password' type="password" name="password" placeholder="Password" required><br />
-          <input id='login-submit' class="button" type="submit" value="Log In">
-        </form>
-
-        <form class='form' id='signup-form' method='post' action='/user/new'>
-          <h3>Sign up</h3>
-          Username: <input id='signup-username' name='username' type='text' required><br />
-          Email: <input id='signup-email' name='email' type='email' required><br />
-          Password: <input id='signup-password' name='password' type='password' required><br />
-          <input id='create-account' type='submit' value='Submit'>
-        </form>
-
         <!-- Board Menu -->
         <div class='menu-container'>
           <h3>MENU</h3>
@@ -90,14 +78,16 @@
             Search: <input id='search-term' name='search' type='text' required>
             <input id='create-account' class="menu-button" type='submit' value='Submit'>
           </form>
+
           <button type='button' class="menu-button" id='add-board'>Add Board to Favourites</button><br />
           <button type='button' class="menu-button" id='clear-boards'>Clear Favourites</button><br />
           <div class='favourites' class="menu-button" id='favourites'>
           <div>
+
         </div>
       </div>
     </div>
-
+        
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>
