@@ -8,7 +8,7 @@ db.Postit.remove({}, function(){}) // Empty test database of postits before star
 db.User.remove({}, function(){}) // Empty test database of postits before start
 db.UserWhiteboardRelationship.remove({}, function(){}) // Empty test database of postits before start
 
-fixture `Search Bar`
+fixture `Menu`
     .page('http://localhost:3000/board/home');
 
     test('Search bar takes user to searched url', async time => {
@@ -25,4 +25,19 @@ fixture `Search Bar`
       const location = await getWindowLocation()
       await time
       .expect(location.pathname).eql('/board/catsanddogs')
+    });
+
+    test('"Add to Favourites" adds a board to the menu', async time => {
+      await time
+
+      .click('#login-button')
+      .typeText('#login-username', 'JS')
+      .typeText('#login-password', '123')
+      .click('#login-submit')
+      .click('#menu-button')
+      .typeText('#search-term', 'catsanddogs')
+      .click('#submit-search')
+      .click('#menu-button')
+      .click('#add-board')
+      .expect(Selector('.frame').count).eql(1)
     });
