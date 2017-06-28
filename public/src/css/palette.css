@@ -26,6 +26,17 @@
   margin-left: 5px;
 }
 
+#menu-button {
+  width: 40px;
+  margin-left: 5px;
+  background: none;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
+  float: left;
+}
+
 
 #control-panel-container {
   background-color: #96C7D4;
@@ -33,7 +44,7 @@
   border-radius: 25px;
   position: absolute;
   width: 100px;
-  height: 200px;
+  height: 225px;
   float: left;
 }
 
