@@ -140,8 +140,11 @@ app.get('/loadstroke', function(req, res) {
 
 app.get('/clear-whiteboard', function(req, res) {
   Stroke.remove({ whiteboardID: req.query.board }, function(){} ).then( function() {
-    res.send('Whiteboard cleared!')
+    res.send('Strokes cleared!')
   })
+  // Postit.remove({ whiteboardID: req.query.board }, function(){}).then( function() {
+  //   res.send('Postits cleared!')
+  // }) 
 });
 
 app.get('/undo', function(req, res) {
@@ -154,12 +157,6 @@ app.get('/loadpostit', function(req, res) {
   Postit.find({ whiteboardID: req.query.whiteboardID }, function(e, data){} ).then( function(data) {
     res.send(data);
   })
-})
-
-app.post('/deletepostits', function(req, res) {
-  Postit.remove({ whiteboardID: req.body.whiteboardID }, function(err, data) {
-    res.send();
-  });
 })
 
 app.post('/createorupdatepostit', function(req, res) {

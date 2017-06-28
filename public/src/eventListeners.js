@@ -35,14 +35,14 @@ board.addEventListener('mouseleave', function(element) {
   whiteboard.stopDrawing();
 })
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
   board.addEventListener("mousemove", function() {
     socket.emit('paint', {
       stroke: whiteboard.currentStroke,
       whiteboardID: whiteboardID
     });
   });
-  board.addEventListener("mousedown", function() {
+  board.addEventListener('mousedown', function() {
     socket.emit('paint', {
       stroke: whiteboard.currentStroke,
       whiteboardID: whiteboardID
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 })
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
   loadStrokes();
 })
 
@@ -123,13 +123,12 @@ $(document.body).on('click mousemove mouseup input', '.postit', function() {
 
 socket.on('postit', function(p) {
   if (whiteboardID === p.whiteboardID) {
-    if (document.getElementById(p.postitid) === null) {
-      createPostit(p.postitid)
+    if (document.getElementById(p.postitid) !== null) {
+      postit = document.getElementById(p.postitid)
+      postit.value = p.text
+      postit.style.left = p.positionX + 'px'
+      postit.style.top = p.positionY + 'px'
     }
-    postit = document.getElementById(p.postitid)
-    postit.value = p.text
-    postit.style.left = p.positionX + 'px'
-    postit.style.top = p.positionY + 'px'
   }
 });
 
@@ -145,7 +144,6 @@ function createPostit(postitId, x, y, text) {
   });
   $($newPostit).prependTo(document.body).draggable({
     cursor: "move",
-    delay: 100,
     scroll: false,
     cancel: "text",
     containment: "parent"
