@@ -3,7 +3,7 @@ var whiteboard = new Whiteboard(board.getContext('2d'))
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 board.width = window.innerWidth - 20;
-board.height = window.innerHeight - 80;
+board.height = window.innerHeight - 20;
 
 board.addEventListener('mousedown', function(element) {
   whiteboard.startDrawing(element, board);

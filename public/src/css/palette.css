@@ -46,7 +46,9 @@
   background-color: #96C7D4;
   box-shadow: 5px 5px 5px #438ea3;
   border-radius: 25px;
-  position: absolute;
+  position: fixed;
+  top: 20px;
+  left: 20px;
   width: 100px;
   height: 225px;
   float: left;
