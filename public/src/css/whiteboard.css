@@ -4,13 +4,13 @@ html, body {
 }
 
 .logo {
-  background-image: url(/images/onbord-logo.png);
+  background-image: url(/images/onbord-logo-soft.png);
   background-repeat: no-repeat;
   height: 46px;
   width: 250px;
   position: fixed;
   bottom: 0px;
-  left: 10px;
+  left: 15px;
 }
 
 .whiteboard {
