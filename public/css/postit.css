@@ -1,0 +1,46 @@
+textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+.postit {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  padding: 1em;
+  z-index: 2;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 2px 2px 1px rgba(0,0,0,0.3);
+  border-style: none;
+  outline: none;
+}
+
+.yellow {
+  background-color: rgb(255,255,136);
+}
+
+.pink {
+  background-color: rgb(255,237,254);
+}
+
+.green {
+  background-color: rgb(179,255,192);
+}
+
+.blue {
+  background-color: rgb(179,232,255);
+}
+
+.postit-pad {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255,255,136);
+  /*position: absolute;*/
+  padding: 1em;
+  z-index: 1;
+  box-shadow: 0 2px 2px 1px rgba(0,0,0,0.3);
+  border-style: none;
+  margin-top: 210px;
+  margin-left: 10px;
+}
