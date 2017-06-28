@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 import { Selector } from 'testcafe';
 const db = require('../../dbConfig.js')
 
-db.User.remove({}, function(){}) // Empty test database of users before start
+db.User.remove({}, function(){}) 
 
 fixture `Page renders successfully`
     .page('http://localhost:3000/board/home');
@@ -11,18 +11,6 @@ fixture `Page renders successfully`
   test('Page title displays correctly', async time => {
     await time
     .expect(Selector('title').innerText).eql('Team Whiteboard App');
-  });
-
-  test('Colour palette displays the correct colours', async time => {
-    await time
-    .expect(Selector('#red').getStyleProperty('background-color')).eql('rgb(255, 0, 0)')
-    .expect(Selector('#black').getStyleProperty('background-color')).eql('rgb(0, 0, 0)')
-    .expect(Selector('#blue').getStyleProperty('background-color')).eql('rgb(0, 0, 255)')
-    .expect(Selector('#yellow').getStyleProperty('background-color')).eql('rgb(255, 255, 0)')
-    .expect(Selector('#green').getStyleProperty('background-color')).eql('rgb(0, 204, 0)')
-    .expect(Selector('#orange').getStyleProperty('background-color')).eql('rgb(255, 153, 0)')
-    .expect(Selector('#purple').getStyleProperty('background-color')).eql('rgb(102, 0, 153)')
-    .expect(Selector('#rubber').getStyleProperty('background-color')).eql('rgb(255, 255, 255)')
   });
 
   test('Login form does not display by default', async time => {

@@ -26,21 +26,9 @@
   margin-left: 5px;
 }
 
-#menu-button {
-  width: 40px;
-  margin-left: 5px;
-  background: none;
-  border: none;
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 18px;
-  color: #438ea3;
-  float: left;
-}
-
 .user-message {
   height: 10px;
 }
-
 
 #control-panel-container {
   background-color: #96C7D4;
@@ -50,8 +38,9 @@
   top: 10px;
   right: 10px;
   width: 100px;
-  height: 225px;
-  float: right;
+  height: 270px;
+  float: left;
+  z-index: 4;
 }
 
 #colour-button-container-1 {
@@ -91,16 +80,24 @@
   width: 50px;
   float: right;
   transform: rotate(-90deg);
+  margin-top: 5px;
 }
 
 input[type='range'] {
-    -webkit-appearance: none !important;
-    background:#438ea3;
-    height:7px;
+  -webkit-appearance: none !important;
+  background:#438ea3;
+  height: 7px;
+  width: 125px;
+  border-radius: 5px;
+  outline: none;
 }
+
 input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none !important;
-    background: white;
-    height:10px;
-    width:10px;
+  background: white;
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1px;
+  -webkit-appearance: none !important;
 }
