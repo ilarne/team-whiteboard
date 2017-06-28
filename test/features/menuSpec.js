@@ -27,6 +27,17 @@ fixture `Menu`
       .expect(location.pathname).eql('/board/catsanddogs')
     });
 
+    test('Menu starts with no favourite boards', async time => {
+      await time
+
+      .click('#login-button')
+      .typeText('#login-username', 'JS')
+      .typeText('#login-password', '123')
+      .click('#login-submit')
+      .click('#menu-button')
+      .expect(Selector('.frame').count).eql(0)
+    });
+
     test('"Add to Favourites" adds a board to the menu', async time => {
       await time
 
