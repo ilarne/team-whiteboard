@@ -12,7 +12,6 @@ fixture `Postit Creation`
   test('Page starts with no postits', async time => {
     await time
     .click('#signup-button')
-    .typeText('#signup-name', 'John Smith')
     .typeText('#signup-username', 'JS')
     .typeText('#signup-email', 'js@gmail.com')
     .typeText('#signup-password', '123')
