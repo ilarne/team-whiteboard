@@ -5,3 +5,61 @@
   border: solid 1px black;
   float: left;
 }
+
+.palette-button {
+  border-radius: 25%;
+  width: 90px;
+  height: 20px;
+  border: solid 1px black;
+  float: left;
+}
+
+
+#control-panel-container {
+  background-color: white;
+  border: solid 3px black;
+  border-radius: 25px;
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  float: left;
+}
+
+#colour-button-container-1 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+  float: left;
+}
+
+#colour-button-container-2 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  float: left;
+}
+
+#colour-button-container-3 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  float: left;
+}
+
+#colour-button-container-4 {
+  width: 50px;
+  height: 20px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  float: left;
+}
+
+#range-container {
+  width: 50px;
+  float: right;
+  transform: rotate(-90deg);
+}

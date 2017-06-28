@@ -1,8 +1,8 @@
-function Stroke(colour = '#000000', font = 5) {
+function Stroke(colour, font) {
   this.clickX = []
   this.clickY = []
-  this.colour = colour;
-  this.fontSize = font;
+  this.colour = colour || '#000000';
+  this.fontSize = font || 5;
 }
 
 Stroke.prototype.addClick = function(x, y) {

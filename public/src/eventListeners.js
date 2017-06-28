@@ -5,6 +5,11 @@ var socket = io();
 var clear = document.getElementById('clear-whiteboard')
 var undo = document.getElementById('undo')
 var user = document.getElementById('user').innerHTML;
+var menu = document.getElementById('menu-button')
+var addBoard = document.getElementById('add-board')
+var clearBoards = document.getElementById('clear-boards')
+var favourites = document.getElementById('favourites')
+var search = document.getElementById('searchButton')
 var pad = document.getElementById('pad');
 
 function loadStrokes() {
@@ -15,6 +20,54 @@ function loadStrokes() {
     })
   })
 }
+
+function loadRelationships() {
+  $.get('/loadRelationships', { userID: user }).done(function(data) {
+    favourites.innerHTML = '';
+    data.forEach(function(link) {
+      $('#favourites').append(
+        $(`<div class="wrap">${link.whiteboardID}<iframe class="frame" style="pointer-events: none;" src="/board/${link.whiteboardID}"></iframe></div>`)
+      )
+    })
+  })
+}
+
+// loadPostits gets the postits that match the current board's
+// whiteboardID, creates and fills the corresponding divs on page load
+function loadPostits() {
+  $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
+    data.forEach(function(p) {
+      // console.log(p.postitclass)
+      if (document.getElementById(p.postitid) === null) {
+        createPostit(p.postitid, p.positionX, p.positionY, p.text, p.postitclass)
+      }
+    })
+  })
+}
+
+$('#favourites').on('click', '.wrap', function() {
+  document.location.href = $(this).children().attr('src')
+})
+
+
+menu.addEventListener('click', function() {
+  loadRelationships();
+})
+
+addBoard.addEventListener('click', function() {
+  $.post('/addboard', {
+    whiteboardID: whiteboardID,
+    userID: user
+  })
+  .done(function() {
+    loadRelationships();
+  })
+})
+
+clearBoards.addEventListener('click', function() {
+  $.get('/clearboards', { userID: user })
+  loadRelationships();
+})
 
 board.addEventListener('mousedown', function(element) {
   if (user) {
@@ -68,12 +121,14 @@ clear.addEventListener('click', function() {
 undo.addEventListener('click', function() {
   $.get('/undo', {userID: user}).done(function() {
     loadStrokes();
+    loadPostits();
     socket.emit('undo', 'reverted changes');
   })
 })
 
 socket.on('undo', function(undo) {
   loadStrokes();
+  loadPostits();
 })
 
 clear.addEventListener('click', function() {
@@ -169,42 +224,3 @@ function savePostit(divID) {
     postitClass: $('#' + divID).attr('class')
   })
 }
-
-// loadPostits gets the postits that match the current board's
-// whiteboardID, creates and fills the corresponding divs on page load
-function loadPostits() {
-  $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
-    data.forEach(function(p) {
-      // console.log(p.postitclass)
-      if (document.getElementById(p.postitid) === null) {
-        createPostit(p.postitid, p.positionX, p.positionY, p.text, p.postitclass)
-      }
-    })
-  })
-}
-
-// User login display logic - should start thinking about extracting sections out
-// of here into separate files.
-$('#signup-button').click( function() {
-  $('.form-background').fadeIn();
-  $('#signup-form').fadeIn();
-})
-
-$('#login-button').click( function() {
-  $('.form-background').fadeIn();
-  $('#login-form').fadeIn();
-})
-
-$('#logout-button').click( function(action) {
-  $.get('/logout')
-  location.reload();
-})
-
-$('.form-container').click( function(action) {
-  action.stopPropagation();
-})
-
-$('.form-background').click( function() {
-  $('.form-background').fadeOut();
-  $('.form').fadeOut();
-})
