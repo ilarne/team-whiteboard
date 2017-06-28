@@ -36,7 +36,8 @@ var postitSchema = new Schema({
   text: String,
   positionX: String,
   positionY: String,
-  whiteboardID: String
+  whiteboardID: String,
+  postitclass: String
 })
 
 app.use(session({
@@ -144,7 +145,7 @@ app.get('/clear-whiteboard', function(req, res) {
   })
   // Postit.remove({ whiteboardID: req.query.board }, function(){}).then( function() {
   //   res.send('Postits cleared!')
-  // }) 
+  // })
 });
 
 app.get('/undo', function(req, res) {
@@ -167,7 +168,8 @@ app.post('/createorupdatepostit', function(req, res) {
         text: req.body.text,
         positionX: req.body.positionX,
         positionY: req.body.positionY,
-        whiteboardID: req.body.whiteboardID
+        whiteboardID: req.body.whiteboardID,
+        postitclass: req.body.postitClass
       })
     } else {
         postit.text = req.body.text,

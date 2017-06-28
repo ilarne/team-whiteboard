@@ -117,7 +117,8 @@ $(document.body).on('click mousemove mouseup input', '.postit', function() {
     text: document.getElementById(this.id).value,
     positionX: position.left,
     positionY: position.top,
-    whiteboardID: whiteboardID
+    whiteboardID: whiteboardID,
+    postitclass: $('#' + this.id).attr('class')
   });
 })
 
@@ -128,17 +129,21 @@ socket.on('postit', function(p) {
       postit.value = p.text
       postit.style.left = p.positionX + 'px'
       postit.style.top = p.positionY + 'px'
+      postit.className = p.postitclass
     }
   }
 });
 
 // createPostit creates postit divs using the id passed to it
 // either in session (brand new) on on page load (from DB)
-function createPostit(postitId, x, y, text) {
+function createPostit(postitId, x, y, text, colour) {
   var text = text || '';
+  var colours = ['yellow', 'pink', 'green', 'blue']
+  var colour = colour || colours[Math.floor(Math.random()*colours.length)];
+
   var $newPostit = $('<textarea>', {
     id: postitId,
-    'class': 'postit',
+    'class': 'postit ' + colour,
     'contenteditable': 'true',
     'style': 'left: ' + x + 'px; top: ' + y + 'px;'
   });
@@ -160,7 +165,8 @@ function savePostit(divID) {
     text: document.getElementById(divID).value,
     positionX: position.left,
     positionY: position.top,
-    whiteboardID: whiteboardID
+    whiteboardID: whiteboardID,
+    postitClass: $('#' + divID).attr('class')
   })
 }
 
@@ -169,8 +175,9 @@ function savePostit(divID) {
 function loadPostits() {
   $.get('/loadpostit', { whiteboardID: whiteboardID }).done(function(data) {
     data.forEach(function(p) {
+      // console.log(p.postitclass)
       if (document.getElementById(p.postitid) === null) {
-        createPostit(p.postitid, p.positionX, p.positionY, p.text)
+        createPostit(p.postitid, p.positionX, p.positionY, p.text, p.postitclass)
       }
     })
   })
