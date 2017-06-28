@@ -143,9 +143,9 @@ app.get('/clear-whiteboard', function(req, res) {
   Stroke.remove({ whiteboardID: req.query.board }, function(){} ).then( function() {
     res.send('Strokes cleared!')
   })
-  // Postit.remove({ whiteboardID: req.query.board }, function(){}).then( function() {
-  //   res.send('Postits cleared!')
-  // })
+  Postit.remove({ whiteboardID: req.query.board }, function(){}).then( function() {
+    res.send('Postits cleared!')
+  })
 });
 
 app.get('/undo', function(req, res) {
