@@ -12,7 +12,6 @@ fixture `Postit Creation`
   test('Page starts with no postits', async time => {
     await time
     .click('#signup-button')
-    .typeText('#signup-name', 'John Smith')
     .typeText('#signup-username', 'JS')
     .typeText('#signup-email', 'js@gmail.com')
     .typeText('#signup-password', '123')
@@ -59,5 +58,5 @@ fixture `Postit Creation`
     .click('#login-submit')
     .click('#pad')
     .click('#pad')
-    .expect(Selector('.postit').count).eql(3)
+    .expect(Selector('.postit').count).eql(2)
   });
