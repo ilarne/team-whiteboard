@@ -9,15 +9,20 @@
 }
 
 .palette-button {
-  width: 30px;
+  border-radius: 25%;
+  width: 90px;
   height: 20px;
+  border: solid 1px black;
   float: left;
   background: none;
   border: none;
   font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   color: #438ea3;
-  outline: none;
+}
+
+#clear-whiteboard {
+  width: 40px;
   margin-left: 5px;
 }
 
@@ -27,11 +32,11 @@
 
 #control-panel-container {
   background-color: #96C7D4;
-  border: solid 4px #438ea3;
+  box-shadow: 5px 5px 5px #438ea3;
   border-radius: 25px;
   position: fixed;
-  top: 15px;
-  right: 15px;
+  top: 20px;
+  left: 20px;
   width: 100px;
   height: 270px;
   float: left;
@@ -76,10 +81,6 @@
   float: right;
   transform: rotate(-90deg);
   margin-top: 5px;
-}
-
-.input-field {
-  background-color: #FAFFBD;
 }
 
 input[type='range'] {

@@ -15,6 +15,12 @@ var favourites = document.getElementById('favourites')
 var search = document.getElementById('searchButton')
 var pad = document.getElementById('pad');
 
+var fade_out = function() {
+  $("#welcome-message").fadeOut()
+}
+
+setTimeout(fade_out, 5000);
+
 function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
     whiteboard.clear();

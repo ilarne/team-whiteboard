@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 import { Selector, ClientFunction } from 'testcafe';
-const db = require('../../dbConfig.js');
+const db = require('../../app/config/database.js')
 const getWindowLocation = ClientFunction(() => window.location);
 
 db.Postit.remove({}, function(){})

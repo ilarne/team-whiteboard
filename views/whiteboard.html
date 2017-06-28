@@ -16,7 +16,7 @@
 
     <span class='hidden' id='user'><%= currentUser %></span>
     <canvas class='whiteboard' id='whiteboard'></canvas>
-
+    <div class="logo"></div>
     <% if(!currentUser) { %> <div class='hidden'> <% } %>
       <div id="control-panel-container">
 
@@ -57,17 +57,20 @@
 
     <% if(!currentUser) { %> </div> <% } %>
 
-    <div id='user-management' class='user-info-container'>
+  <div id='user-management' class='user-info-container'>
       <% if (currentUser) { %>
         <button type='button' class="user-button" id='menu-button'>Menu</button>
         <button type='button' class="user-button" id='logout-button'>Log out</button>
         <p class='user-message'>Logged in as <%= currentUser %></p>
+        <%if (message != "") { %>
+        <div id="welcome-message" class='user-info'><%= message %></div>
+        <% } %>
       <% } else { %>
         <button type='button' class="user-button" id='signup-button'>Sign up</button>
         <button type='button' class="user-button" id='login-button'>Log in</button>
         <p class='user-message'>Sign up to Onbord!</p>
       <% } %>
-    </div>
+  </div>
 
     <!-- User login/signup forms -->
     <div class='form-background'>

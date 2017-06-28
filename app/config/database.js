@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
-const config = require('./config.js').get(process.env.NODE_ENV);
+const config = require('./environment.js').get(process.env.NODE_ENV);
 
 const Schema = mongoose.Schema;
 
