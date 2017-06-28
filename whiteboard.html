@@ -45,7 +45,7 @@
         </div>
 
         <div id='clear-whiteboard-container'>
-          <button class="palette-button" type='button' id='clear-whiteboard'>Clear Whiteboard</button>
+          <button class="palette-button" type='button' id='clear-whiteboard'>Clear</button>
           <button class="palette-button" type='button' id='undo'>Undo</button>
         </div>
 
@@ -60,11 +60,11 @@
 
     <div id='user-management' class='user-info-container'>
       <% if (currentUser) { %>
-        <button type='button' id='logout-button'>Log out</button>
+        <button type='button' class="user-button" id='logout-button'>Log out</button>
         <p class='user-message'>Logged in as <%= currentUser %></p>
       <% } else { %>
-        <button type='button' id='signup-button'>Sign up</button>
-        <button type='button' id='login-button'>Log in</button>
+        <button type='button' class="user-button" id='signup-button'>Sign up</button>
+        <button type='button' class="user-button" id='login-button'>Log in</button>
         <p class='user-message'>Sign up to Onbord!</p>
       <% } %>
     </div>
@@ -72,38 +72,23 @@
     <!-- User login/signup forms -->
     <div class='form-background'>
       <div class='form-container'>
-        <form class='form' id='login-form' action="/user/login" method="post">
-          <h3>Log in</h3>
-          Username: <input id='login-username' type="text" name="username" placeholder="Username" required><br />
-          Password: <input id='login-password' type="password" name="password" placeholder="Password" required><br />
-          <input id='login-submit' class="button" type="submit" value="Log In">
-        </form>
-
-        <form class='form' id='signup-form' method='post' action='/user/new'>
-          <h3>Sign up</h3>
-          Username: <input id='signup-username' name='username' type='text' required><br />
-          Email: <input id='signup-email' name='email' type='email' required><br />
-          Password: <input id='signup-password' name='password' type='password' required><br />
-          <input id='create-account' type='submit' value='Submit'>
-        </form>
-
         <!-- Board Menu -->
         <div class='menu-container'>
           <h3>MENU</h3>
           <form class="search" id='search-form' method='post' action='/search' >
             Search: <input id='search-term' name='search' type='text' required>
-            <input id='create-account' type='submit' value='Submit'>
+            <input id='create-account' class="menu-button" type='submit' value='Submit'>
           </form>
-          <button type='button' id='add-board'>Add Board to Favourites</button>
-          <button type='button' id='clear-boards'>Clear Favourites</button>
-          <div class='favourites' id='favourites'>
+
+          <button type='button' class="menu-button" id='add-board'>Add Board to Favourites</button><br />
+          <button type='button' class="menu-button" id='clear-boards'>Clear Favourites</button><br />
+          <div class='favourites' class="menu-button" id='favourites'>
           <div>
+
         </div>
       </div>
     </div>
-
-    <!-- <button type='button' id='new-postit'>Make a Post-it!</button> -->
-
+        
     <script src="/socket.io/socket.io.js"></script>
     <script type='text/javascript' src='/src/whiteboard.js'></script>
     <script type='text/javascript' src='/src/stroke.js'></script>

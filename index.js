@@ -4,17 +4,21 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
 const session = require('client-sessions')
+const flash = require('connect-flash');
 const bcrypt = require('bcrypt-nodejs');
 const db = require('./dbConfig.js')
 const User = db.User;
 const Stroke = db.Stroke;
 const Postit = db.Postit;
 const UserWhiteboardRelationship = db.UserWhiteboardRelationship;
+const randomstring = require("randomstring");
 
 app.use(session({
   cookieName: 'session',
   secret: 'super-secret'
 }))
+
+app.use(flash());
 
 var bodyParser = require('body-parser')
 
@@ -36,7 +40,9 @@ function viewHomepage(req, res) {
 }
 
 app.get('/welcome', function(req, res) {
-  res.render('index.html')
+  res.render('index.html', {
+    message: req.flash('info')
+  })
 })
 
 app.get('/board/home', function(req, res) {
@@ -66,6 +72,7 @@ app.post('/user/login', function(req, res) {
   User.find({ username: req.body.username }, function(e, user) {
     user = user[0];
     if (user === undefined) {
+      req.flash('info', 'Sorry, those login details are invalid. Please try again!')
       res.redirect('/')
     } else {
       var result = bcrypt.compareSync(password, user.password);
@@ -73,6 +80,7 @@ app.post('/user/login', function(req, res) {
         req.session.user = user
         res.redirect('/');
       } else {
+        req.flash('info', 'Sorry, that password is not right. Please try again!')
         res.redirect('/');
       };
     }
@@ -84,6 +92,7 @@ app.post('/user/new', function(req, res) {
     {$or:[{'username': req.body.username}, {'email': req.body.email }]}
   ).then( function(existingUser) {
     if (existingUser[0]) {
+      req.flash('info', 'Username or email already exists')
       res.redirect('/')
     } else {
       var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
@@ -95,7 +104,7 @@ app.post('/user/new', function(req, res) {
       });
       req.session.user = user;
       user.save();
-      res.redirect('/');
+      res.redirect('/board/' + randomstring.generate(7));
     }
   })
 })

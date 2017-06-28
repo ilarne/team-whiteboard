@@ -21,7 +21,7 @@ var range = document.getElementById("font");
 
 range.addEventListener("mousemove", function () {
   var size = range.value;
-  whiteboard.adjustFontSize(size)
+  whiteboard.adjustFontSize(size);
   $('.range').attr('value', this.value);
   var styleElement = document.querySelector('#forslider')
 
@@ -38,4 +38,8 @@ range.addEventListener("mousemove", function () {
 
 $(function() {
   $( "#control-panel-container" ).draggable();
+});
+
+$(function() {
+  $( ".user-info-container" ).draggable();
 });
