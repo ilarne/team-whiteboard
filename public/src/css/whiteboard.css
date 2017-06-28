@@ -1,15 +1,17 @@
 html, body {
   cursor: url(/images/cursors/blackmarker.png), pointer;
+  background-color: #96C7D4;
 }
 
 .whiteboard {
-  border:1px solid black;
+  border: none;
   float: left;
   background-color: #fff;
+  border-radius: 10px;
 }
 
 .user-info-container {
-  background-color: #CCCCCC;
+  background-color: #96C7D4;
 }
 
 .form {
@@ -61,8 +63,8 @@ html, body {
     overflow: hidden;
 }
 .frame {
-    width: 1280px;
-    height: 786px;
+    /*width: 1280px;
+    height: 786px;*/
     border: 0;
     -ms-transform: scale(0.25);
     -moz-transform: scale(0.25);
