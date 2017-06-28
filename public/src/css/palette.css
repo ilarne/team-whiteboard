@@ -37,6 +37,10 @@
   float: left;
 }
 
+.user-message {
+  height: 10px;
+}
+
 
 #control-panel-container {
   background-color: #96C7D4;

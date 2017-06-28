@@ -27,3 +27,7 @@ range.addEventListener("change", function () {
   $(function() {
     $( "#control-panel-container" ).draggable();
   });
+
+  $(function() {
+    $( ".user-info-container" ).draggable();
+  });

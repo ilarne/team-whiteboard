@@ -11,8 +11,30 @@ html, body {
   border: solid 2px #438ea3;
 }
 
+.user-button {
+  text-align: center;
+  background: none;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
+  margin-top: 10px;
+}
+
 .user-info-container {
   background-color: #96C7D4;
+  box-shadow: 5px 5px 5px #438ea3;
+  border-radius: 25px;
+  position: absolute;
+  width: 225px;
+  height: 100px;
+  float: right;
+  margin-left: 500px;
+  text-align: center;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
+  color: #438ea3;
 }
 
 .form {
