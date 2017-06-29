@@ -22,6 +22,7 @@ Simply navigate to http://makers-whiteboard.herokuapp.com, sign up and draw!
  
  - Node.js
  - Javascript
+ - Socket.io
  - MongoDB & Mongoose
  - Testcafe
  - Mocha & Chai
