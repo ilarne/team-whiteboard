@@ -48,5 +48,5 @@ fixture `Postit Creation`
     .click('#login-submit')
     .click('#pad')
     .click('#pad')
-    .expect(Selector('.postit').count).eql(2)
+    .expect(Selector('.postit').count).eql(3)
   });
