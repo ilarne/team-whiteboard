@@ -47,8 +47,13 @@ html, body {
 }
 
 .input-field {
-  background: red;
-  border: none;
+  background-color: #FAFFBD;
+  border:none;
+}
+
+.email-field {
+  position: relative;
+  left: 18px;
 }
 
 .user-info-container {
