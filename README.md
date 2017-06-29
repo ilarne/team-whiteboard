@@ -4,7 +4,7 @@ An online, collaborative whiteboard space for generating ideas.
 
 ## How to use
 
-Simply navigate to http://makers-whiteboard.herokuapp.com, sign up and draw!
+Simply navigate to http://www.onbord.live, sign up and draw!
 
 **Menu**
 - Search for new boards
