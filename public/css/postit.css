@@ -39,6 +39,8 @@ textarea {
   padding: 1em;
   z-index: 1;
   position:relative;
+  left:15px;
+  top:10px;
   overflow:hidden;
   padding:20px;
   margin:2em 10%;

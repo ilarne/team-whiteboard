@@ -12,13 +12,13 @@ fixture `Control Panel`
 
   test('Colour palette displays the correct colours', async time => {
     await time
-    .expect(Selector('#red').getStyleProperty('background-color')).eql('rgb(255, 0, 0)')
-    .expect(Selector('#black').getStyleProperty('background-color')).eql('rgb(0, 0, 0)')
-    .expect(Selector('#blue').getStyleProperty('background-color')).eql('rgb(0, 0, 255)')
-    .expect(Selector('#yellow').getStyleProperty('background-color')).eql('rgb(255, 255, 0)')
-    .expect(Selector('#green').getStyleProperty('background-color')).eql('rgb(0, 204, 0)')
-    .expect(Selector('#orange').getStyleProperty('background-color')).eql('rgb(255, 153, 0)')
-    .expect(Selector('#purple').getStyleProperty('background-color')).eql('rgb(102, 0, 153)')
+    .expect(Selector('#red').getStyleProperty('background-color')).eql('rgb(241, 140, 127)')
+    .expect(Selector('#black').getStyleProperty('background-color')).eql('rgb(20, 20, 20)')
+    .expect(Selector('#blue').getStyleProperty('background-color')).eql('rgb(121, 188, 234)')
+    .expect(Selector('#yellow').getStyleProperty('background-color')).eql('rgb(255, 253, 152)')
+    .expect(Selector('#green').getStyleProperty('background-color')).eql('rgb(112, 223, 162)')
+    .expect(Selector('#orange').getStyleProperty('background-color')).eql('rgb(249, 192, 92)')
+    .expect(Selector('#purple').getStyleProperty('background-color')).eql('rgb(192, 146, 211)')
     .expect(Selector('#rubber').getStyleProperty('background-color')).eql('rgb(255, 255, 255)')
   });
 

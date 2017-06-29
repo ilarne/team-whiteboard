@@ -31,7 +31,11 @@
   color: #438ea3;
 }
 
-.palette-message {
+.palette-button:last-child {
+  top:5px;
+}
+
+.user-message {
   height: 10px;
 }
 
