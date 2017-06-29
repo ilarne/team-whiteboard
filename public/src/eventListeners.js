@@ -1,5 +1,7 @@
 setTimeout(fadeOutWelcomeMessage, 5000);
 
+setTimeout(loadPostits(), 2000);
+
 $('#favourites').on('click', '.wrap', function() {
   document.location.href = $(this).children().attr('src')
 })
