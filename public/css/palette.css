@@ -23,6 +23,18 @@
   z-index: 10;
 }
 
+.palette-button:hover {
+  color: #FFFFFF;
+}
+
+.palette-button:active {
+  color: #438ea3;
+}
+
+.palette-button:last-child {
+  top:5px;
+}
+
 .user-message {
   height: 10px;
 }

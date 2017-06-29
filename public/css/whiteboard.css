@@ -1,6 +1,7 @@
 html, body {
   cursor: url(/images/cursors/blackmarker.png), pointer;
   background-color: #96C7D4;
+  user-select: none;
 }
 
 .logo {
