@@ -35,6 +35,15 @@ html, body {
   font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   color: white;
+  outline: none;
+}
+
+.user-button:hover {
+  color: #438ea3;
+}
+
+.user-button:active {
+  color: #FFFFFF;
 }
 
 .input-field {
@@ -131,6 +140,15 @@ html, body {
   font-size: 18px;
   color: #438ea3;
   margin-top: 10px;
+  outline: none;
+}
+
+.menu-button:hover {
+  color: #FFFFFF;
+}
+
+.menu-button:active {
+  color: #438ea3;
 }
 
 .wrap {
