@@ -1,6 +1,6 @@
 ![Onbord](https://github.com/ilarne/team-whiteboard/blob/master/public/images/onbord-logo.png "Onbord")
 
-An online, collaborative whiteboard and interactive space for generating ideas.
+An online, collaborative whiteboard space for generating ideas.
 
 ## How to use
 
