@@ -92,10 +92,6 @@
   margin-top: 5px;
 }
 
-.input-field {
-  background-color: #FAFFBD;
-}
-
 input[type='range'] {
   -webkit-appearance: none !important;
   background:#438ea3;
