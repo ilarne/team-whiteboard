@@ -23,7 +23,7 @@ range.addEventListener("mousemove", function () {
   var size = range.value;
   whiteboard.adjustFontSize(size);
   $('.range').attr('value', this.value);
-  var styleElement = document.querySelector('#forslider')
+  var styleElement = document.getElementById('slider-style')
 
   if (this.value > 24) {
     var size = 50 * (this.value / 130)

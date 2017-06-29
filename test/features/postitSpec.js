@@ -40,17 +40,6 @@ fixture `Postit Creation`
     .expect(Selector('.postit').value).eql('Hello I am typing on a postit go team')
   });
 
-  test('Users can drag postits around', async time => {
-    await time
-      .click('#login-button')
-      .typeText('#login-username', 'JS')
-      .typeText('#login-password', '123')
-      .click('#login-submit')
-      .click('.postit')
-      .drag('.postit', 180, 0, { offsetX: 20, offsetY: 0 })
-      .expect(Selector('.postit').getStyleProperty('left')).eql('368px')
-  });
-
   test('User can create multiple postits', async time => {
     await time
     .click('#login-button')
