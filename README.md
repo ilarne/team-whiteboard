@@ -16,7 +16,7 @@ Simply navigate to http://makers-whiteboard.herokuapp.com, sign up and draw!
 - Clear the entire board with 'Clear'
 - Undo your most recent brush stroke with 'Undo'
 - Add Post-its with the yellow Post-it icon. These can be dragged around the page and edited at will.
-- If you leave the page, don't worry - your Post-its and drawings with remain! (As long as no one's clears the board!)
+- If you leave the page, don't worry - your Post-its and drawings with remain! (As long as no one clears the board!)
 
 ### Tech Stack
  
