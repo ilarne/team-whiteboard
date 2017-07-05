@@ -43,8 +43,11 @@ board.addEventListener('mouseleave', function(element) {
   whiteboard.stopDrawing();
 })
 
+// When the user refreshes the page, the postits matching
+// the relevant whiteboardIDs are created
 document.addEventListener('DOMContentLoaded', function() {
   loadStrokes();
+  loadPostits();
 })
 
 clear.addEventListener('click', function() {
@@ -52,12 +55,6 @@ clear.addEventListener('click', function() {
     .done(function() {
       whiteboard.clear();
     })
-})
-
-// When the user refreshes the page, the postits matching
-// the relevant whiteboardIDs are created
-document.addEventListener('DOMContentLoaded', function() {
-  loadPostits();
 })
 
 // When user clicks the pad, a postit with a unique id
