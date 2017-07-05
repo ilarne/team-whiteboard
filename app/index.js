@@ -8,6 +8,8 @@ const flash = require('connect-flash');
 const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser');
 const db = require('./config/database.js');
+const favicon = require('serve-favicon');
+const path = require('path');
 const User = db.User;
 const Stroke = db.Stroke;
 const Postit = db.Postit;
@@ -23,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.engine('.html', require('ejs').renderFile);
 app.use(express.static('public'));
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 require('./sockets.js')(io);
 require('./routes/account.js')(app, User);
