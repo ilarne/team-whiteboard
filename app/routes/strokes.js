@@ -5,6 +5,7 @@ module.exports = (app, Stroke) => {
       clickY: req.body.clickY,
       colour: req.body.colour,
       fontSize: req.body.fontSize,
+      createdAt: req.body.date,
       whiteboardID: req.body.whiteboardID,
       userID: req.session.user.username
     });
@@ -13,8 +14,8 @@ module.exports = (app, Stroke) => {
   })
 
   app.get('/loadstroke', function(req, res) {
-    var whiteboardID = req.query.whiteboardID
-    Stroke.find({ whiteboardID: whiteboardID }, function(e, data){} ).then( function(data) {
+    var whiteboardID = req.query.whiteboardID;
+    Stroke.find({ whiteboardID: whiteboardID }, null, {sort: {createdAt: 1}}, function(err, data) {
       res.send(data)
     })
   })

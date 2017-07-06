@@ -26,6 +26,7 @@ function loadStrokes() {
   $.get('/loadstroke', { whiteboardID: whiteboardID }).done(function(data) {
     whiteboard.clear();
     data.forEach(function(stroke) {
+      console.log(stroke)
       whiteboard.redraw(stroke)
     })
   })
