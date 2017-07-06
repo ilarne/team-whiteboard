@@ -4,7 +4,7 @@ var config = {
       key: 'the.express.session.id',
       secret: 'something.super.secret'
     },
-    database: process.env.MONGOLAB_URI,
+    database: 'mongodb://admin:whiteboardtest@ds151082.mlab.com:51082/whiteboardsandbox',
   },
   test: {
     session: {

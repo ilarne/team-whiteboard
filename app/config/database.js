@@ -4,7 +4,7 @@ const config = require('./environment.js').get(process.env.NODE_ENV);
 
 const Schema = mongoose.Schema;
 
-mongoose.connect(config.database)
+mongoose.connect(config.database);
 const db = mongoose.connection;
 
 const userSchema = new Schema({
@@ -19,6 +19,7 @@ const strokeSchema = new Schema({
   clickY: Array,
   colour: String,
   fontSize: Number,
+  createdAt: Date,
   whiteboardID: String,
   userID: String
 })
