@@ -20,7 +20,7 @@ Simply navigate to http://www.onbord.live, sign up and draw!
 
 ### Tech Stack
  
- - Node.js
+ - Node.js & Express
  - Javascript
  - Socket.io
  - MongoDB & Mongoose
