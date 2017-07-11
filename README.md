@@ -27,3 +27,9 @@ Simply navigate to http://www.onbord.live, sign up and draw!
  - Testcafe
  - Mocha & Chai
  - Canteen
+ 
+ ### Demo
+ 
+ ![Demo](https://github.com/ilarne/team-whiteboard/blob/master/onbord_colour_frames.gif?raw=true)
+ 
+ 
