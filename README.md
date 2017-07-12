@@ -7,6 +7,8 @@ An online, collaborative whiteboard space for generating ideas.
 Simply navigate to http://www.onbord.live, sign up and draw!
 
 **Menu**
+- Sign up
+- Log in
 - Search for new boards
 - Save your favourite boards 
 
