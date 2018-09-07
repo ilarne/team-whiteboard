@@ -4,7 +4,8 @@ An online, collaborative whiteboard space for generating ideas.
 
 ## How to use
 
-Simply navigate to https://makers-whiteboard.herokuapp.com/welcome, sign up and draw!
+- Simply navigate to https://makers-whiteboard.herokuapp.com/welcome, sign up and draw! 
+- Don't draw alone - share board URLs with your friends and draw together!
 
 **Menu**
 - Sign up
